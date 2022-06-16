@@ -99,6 +99,23 @@ def static_binomial_sampling(rng_key, proposal, new_proposal):
 
 
 # --------------------------------------------------------------------
+#                   NON-REVERSIVLE SLICE SAMPLING
+# --------------------------------------------------------------------
+
+
+def nonreversible_slice_sampling(slice, proposal, new_proposal):
+    """TODO: Add biblio Neal"""
+    delta_energy = new_proposal.weight
+    do_accept = jnp.log(jnp.abs(slice)) <= delta_energy
+    return jax.lax.cond(
+        do_accept,
+        lambda _: (new_proposal, do_accept, slice * jnp.exp(-delta_energy)),
+        lambda _: (proposal, do_accept, slice),
+        operand=None,
+    )
+
+
+# --------------------------------------------------------------------
 #                        PROGRESSIVE SAMPLING
 #
 # To avoid keeping the entire trajectory in memory, we only memorize the
