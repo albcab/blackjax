@@ -219,7 +219,7 @@ class hmc:
         step = cls.kernel(integrator, divergence_threshold)
 
         def init_fn(position: PyTree):
-            return cls.init(position, logprob_fn)
+            return cls.init(position, logprob_fn, logprob_grad_fn)
 
         def step_fn(rng_key: PRNGKey, state):
             return step(
@@ -956,6 +956,109 @@ class elliptical_slice:
             )
 
         return SamplingAlgorithm(init_fn, step_fn)
+
+
+class ghmc:
+
+    init = staticmethod(mcmc.ghmc.init)
+    kernel = staticmethod(mcmc.ghmc.kernel)
+
+    def __new__(  # type: ignore[misc]
+        cls,
+        logprob_fn: Callable,
+        step_size: PyTree,
+        alpha: float,
+        delta: float,
+        *,
+        divergence_threshold: int = 1000,
+        noise_gn: Callable = lambda _: 0.0,
+        logprob_grad_fn: Optional[Callable] = None,
+    ) -> SamplingAlgorithm:
+
+        step = cls.kernel(noise_gn, divergence_threshold)
+
+        def init_fn(rng_key: PRNGKey, position: PyTree):
+            return cls.init(rng_key, position, logprob_fn, logprob_grad_fn)
+
+        def step_fn(rng_key: PRNGKey, state):
+            return step(
+                rng_key, state, logprob_fn, step_size, alpha, delta, logprob_grad_fn
+            )
+
+        return SamplingAlgorithm(init_fn, step_fn)  # type: ignore[arg-type]
+
+
+def meads(
+    logprob_fn: Callable,
+    num_batch: int,
+    batch_size: int,
+    num_steps: int = 1000,
+    *,
+    divergence_threshold: int = 1000,
+    logprob_grad_fn: Optional[Callable] = None,
+    eca: bool = True,
+    batch_fn: Callable = jax.vmap,
+) -> AdaptationAlgorithm:
+
+    kernel = ghmc.kernel(divergence_threshold=divergence_threshold)
+
+    def kernel_factory(step_size: PyTree, alpha: float, delta: float):
+        def kernel_fn(rng_key, state):
+            return kernel(
+                rng_key,
+                state,
+                logprob_fn,
+                step_size,
+                alpha,
+                delta,
+                logprob_grad_fn=logprob_grad_fn,
+            )
+
+        return kernel_fn
+
+    init, update, final = adaptation.meads.base(
+        kernel_factory,
+        logprob_grad_fn or jax.grad(logprob_fn),
+        num_batch,
+        batch_size,
+        eca,
+        batch_fn,
+    )
+
+    batch_init = batch_fn(lambda r, p: ghmc.init(r, p, logprob_fn, logprob_grad_fn))
+
+    if eca:
+
+        @batch_fn
+        def init_batch(rng, batch_position):
+            rng_keys = jax.random.split(rng, batch_size)
+            batch_state = batch_init(rng_keys, batch_position)
+            return batch_state
+
+    else:
+        init_batch = batch_init
+        num_batch = num_batch * batch_size
+
+    def one_step(state, rng_key):
+        state, parameters, infos = update(rng_key, state)
+        return state, (state, parameters, infos)
+
+    def run(rng_key: PRNGKey, positions: PyTree):
+
+        key_init, key_warm = jax.random.split(rng_key)
+        rng_keys = jax.random.split(key_init, num_batch)
+        states = init_batch(rng_keys, positions)
+        init_state = init(states)
+
+        keys = jax.random.split(key_warm, num_steps)
+        last_state, (warmup_states, parameters, info) = jax.lax.scan(
+            one_step, init_state, keys
+        )
+        kernel = final(last_state)
+
+        return last_state, kernel, warmup_states
+
+    return AdaptationAlgorithm(run)  # type: ignore[arg-type]
 
 
 # -----------------------------------------------------------------------------
