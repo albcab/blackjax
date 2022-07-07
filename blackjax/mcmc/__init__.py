@@ -8,6 +8,7 @@ from . import (
     nuts,
     periodic_orbital,
     rmh,
+    tess,
 )
 
 __all__ = [
@@ -20,4 +21,5 @@ __all__ = [
     "rmh",
     "marginal_latent_gaussian",
     "irmh",
+    "tess",
 ]

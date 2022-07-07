@@ -988,6 +988,105 @@ class ghmc:
         return SamplingAlgorithm(init_fn, step_fn)  # type: ignore[arg-type]
 
 
+class tess:
+
+    init = staticmethod(mcmc.tess.init)
+    kernel = staticmethod(mcmc.tess.kernel)
+
+    def __new__(  # type: ignore[misc]
+        cls,
+        logprob_fn: Callable,
+        flow: Callable,
+    ) -> SamplingAlgorithm:
+
+        step = cls.kernel()
+
+        def init_fn(position: PyTree):
+            return cls.init(position)
+
+        def step_fn(rng_key: PRNGKey, state):
+            return step(rng_key, state, logprob_fn, flow)
+
+        return SamplingAlgorithm(init_fn, step_fn)
+
+
+def atess(
+    logprob_fn: Callable,
+    optim,
+    init_param,
+    flow,
+    loss,
+    num_batch: int,
+    batch_size: int,
+    num_steps: int = 1000,
+    n_iter: int = 1,
+    *,
+    eca: bool = False,
+    batch_fn: Callable = jax.pmap,
+) -> AdaptationAlgorithm:
+
+    kernel = tess.kernel()
+
+    def kernel_factory(param: PyTree, opt_state: PyTree):
+        def kernel_fn(rng_key, state):
+            return kernel(
+                rng_key,
+                state,
+                logprob_fn,
+                lambda u: flow(u, param),
+            )
+
+        return kernel_fn
+
+    init, update, final = adaptation.atess.base(
+        kernel_factory,
+        optim,
+        loss,
+        num_batch,
+        batch_size,
+        n_iter,
+        eca,
+        batch_fn,
+    )
+
+    batch_init = batch_fn(lambda pp: tess.init(pp))
+
+    if eca:
+
+        @batch_fn
+        def init_batch(batch_pposition):
+            batch_state = batch_init(batch_pposition)
+            return batch_state
+
+        params = batch_fn(lambda _: (init_param, optim.init(init_param)))(
+            jnp.zeros(num_batch)
+        )
+
+    else:
+        init_batch = batch_init
+        params = (init_param, optim.init(init_param))
+
+    def one_step(carry, rng_key):
+        state, params = carry
+        state, parameters, infos = update(rng_key, state, *params)
+        return (state, parameters), (state, infos)
+
+    def run(rng_key: PRNGKey, pullback_positions: PyTree):
+
+        states = init_batch(pullback_positions)
+        init_state = init(states)
+
+        keys = jax.random.split(rng_key, num_steps)
+        (last_state, parameters), (warmup_states, info) = jax.lax.scan(
+            one_step, (init_state, params), keys
+        )
+        kernel = final(last_state, parameters)
+
+        return last_state, kernel, warmup_states
+
+    return AdaptationAlgorithm(run)  # type: ignore[arg-type]
+
+
 def meads(
     logprob_fn: Callable,
     num_batch: int,
