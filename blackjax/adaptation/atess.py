@@ -49,7 +49,7 @@ def base(
             last_state.current_iter,
             *param_state,
         )
-        return kernel_factory(*param_state)
+        return kernel_factory(*param_state), param_state[0]
 
     return init, update, final
 

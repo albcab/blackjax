@@ -1080,9 +1080,9 @@ def atess(
         (last_state, parameters), (warmup_states, info) = jax.lax.scan(
             one_step, (init_state, params), keys
         )
-        kernel = final(last_state, parameters)
+        kernel, param = final(last_state, parameters)
 
-        return last_state, kernel, warmup_states
+        return last_state, kernel, param#warmup_states
 
     return AdaptationAlgorithm(run)  # type: ignore[arg-type]
 
