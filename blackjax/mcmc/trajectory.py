@@ -110,12 +110,22 @@ def static_integration(
             lambda step_size: direction * step_size, step_size
         )
 
-        def one_step(state, _):
-            state = integrator(state, directed_step_size)
-            return state, state
+        # def one_step(state, _):
+        #     state = integrator(state, directed_step_size)
+        #     return state, state
 
-        last_state, _ = jax.lax.scan(
-            one_step, initial_state, jnp.arange(num_integration_steps)
+        # last_state, _ = jax.lax.scan(
+        #     one_step, initial_state, jnp.arange(num_integration_steps)
+        # )
+
+        def one_step(state_iter):
+            state, iter = state_iter
+            state = integrator(state, directed_step_size)
+            return (state, iter+1)
+
+        last_state, _ = jax.lax.while_loop(
+            lambda state_iter: state_iter[1] < num_integration_steps,
+            one_step, (initial_state, 0)
         )
 
         return last_state

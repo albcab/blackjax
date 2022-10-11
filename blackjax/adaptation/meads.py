@@ -4,6 +4,7 @@ from typing import Callable
 
 import jax
 import jax.numpy as jnp
+from jax.flatten_util import ravel_pytree
 
 import blackjax.adaptation.chain_adaptation as chain_adaptation
 from blackjax.types import PyTree
@@ -18,9 +19,10 @@ def base(
     batch_fn: Callable = jax.vmap,
 ):
     def maximum_eigenvalue(matrix: PyTree):
-        X = jnp.vstack(
-            [leaf.reshape(leaf.shape[0], -1).T for leaf in jax.tree_leaves(matrix)]
-        ).T
+        # X = jnp.vstack(
+        #     [leaf.reshape(leaf.shape[0], -1).T for leaf in jax.tree_leaves(matrix)]
+        # ).T
+        X = batch_fn(lambda m: ravel_pytree(m)[0])(matrix)
         n, _ = X.shape
         S = X @ X.T
         diag_S = jnp.diag(S)

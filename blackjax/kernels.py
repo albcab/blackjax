@@ -1160,6 +1160,160 @@ def meads(
     return AdaptationAlgorithm(run)  # type: ignore[arg-type]
 
 
+def chess(
+    logprob_fn: Callable,
+    optim,
+    num_chain: int,
+    halton_sequence: Array,
+    num_steps: int,
+    init_step_size: float,
+    *,
+    logprob_grad_fn: Optional[Callable] = None,
+    batch_fn: Callable = jax.vmap,
+) -> AdaptationAlgorithm:
+
+    halton_sequence = jnp.array(halton_sequence)
+
+    def run(rng_key: PRNGKey, positions: PyTree):
+
+        num_dim = 0
+        for d in jax.tree_util.tree_leaves(
+            jax.tree_map(lambda p: p.reshape(num_chain, -1).shape[1], positions)
+        ):
+            num_dim += d
+
+        hmc_kernel = hmc.kernel()
+        def kernel_factory(parameters, moving_averages, halton_number, opt_state):
+            # step_size, trajectory_length = parameters
+            # trajectory_length *= halton_number
+            # num_integration_steps = jnp.ceil(trajectory_length / step_size)
+            def kernel_fn(rng_key, state):
+                step_size, trajectory_length = parameters
+                trajectory_length *= halton_sequence[state.current_iter]
+                num_integration_steps = jnp.ceil(trajectory_length / step_size)
+                # return hmc_kernel(
+                hmc_state, info = hmc_kernel(
+                    rng_key,
+                    state.state,
+                    logprob_fn,
+                    step_size,
+                    inverse_mass_matrix=jnp.ones(num_dim),
+                    num_integration_steps=num_integration_steps,
+                    logprob_grad_fn=logprob_grad_fn,
+                )
+                return adaptation.chess.ChESSState(hmc_state, state.current_iter+1), info
+
+            return kernel_fn
+
+        init, update = adaptation.chess.base(
+            kernel_factory,
+            optim,
+            num_chain,
+            halton_sequence,
+            batch_fn,
+        )
+
+        # batch_init = batch_fn(lambda p: hmc.init(p, logprob_fn, logprob_grad_fn))
+        batch_init = batch_fn(lambda p: 
+            adaptation.chess.ChESSState(hmc.init(p, logprob_fn, logprob_grad_fn), 0)
+        )
+
+        def one_step(carry_state, rng_key):
+            init_state, infos, prev_states, parameters = carry_state
+            state, parameters, infos = update(
+                rng_key, init_state, 
+                infos, prev_states,
+                *parameters,
+            )
+            return (state, infos, init_state, parameters), (state, parameters, infos)
+
+        states = batch_init(positions)
+        init_state, init_infos, init_prev_state = init(states, positions)
+        init_param = (init_step_size, init_step_size)
+        init_moving_averages = (0.0, 0.0)
+        init_parameters = (
+            init_param, init_moving_averages,
+            0.0, optim.init(init_step_size)
+        )
+
+        keys = jax.random.split(rng_key, num_steps)
+        last_carry_state, (warmup_states, parameters, info) = jax.lax.scan(
+            one_step, (init_state, init_infos, init_prev_state, init_parameters), keys
+        )
+
+        last_state, *_, parameters = last_carry_state
+        _, parameters_ma, halton_number, optim_state = parameters
+        kernel = kernel_factory(parameters_ma, parameters_ma, halton_number, optim_state)
+
+        return last_state, kernel, warmup_states
+
+    return AdaptationAlgorithm(run)  # type: ignore[arg-type]
+
+
+def nuts_adaptation(
+    logprob_fn: Callable,
+    num_chain: int,
+    init_step_size: float,
+    num_steps: int = 1000,
+    *,
+    logprob_grad_fn: Optional[Callable] = None,
+    batch_fn: Callable = jax.vmap,
+) -> AdaptationAlgorithm:
+
+    def run(rng_key: PRNGKey, positions: PyTree):
+
+        num_dim = 0
+        for d in jax.tree_util.tree_leaves(
+            jax.tree_map(lambda p: p.reshape(num_chain, -1).shape[1], positions)
+        ):
+            num_dim += d
+
+        nuts_kernel = nuts.kernel()
+        def kernel_factory(step_size):
+            def kernel_fn(rng_key, state):
+                return nuts_kernel(
+                    rng_key,
+                    state,
+                    logprob_fn,
+                    step_size,
+                    inverse_mass_matrix=jnp.ones(num_dim),
+                    logprob_grad_fn=logprob_grad_fn,
+                )
+
+            return kernel_fn
+
+        init, update = adaptation.nuts.base(
+            kernel_factory,
+            num_chain,
+            batch_fn,
+        )
+
+        batch_init = batch_fn(lambda p: hmc.init(p, logprob_fn, logprob_grad_fn))
+
+        def one_step(carry_state, rng_key):
+            init_state, infos, parameters = carry_state
+            state, parameters, infos = update(
+                rng_key, init_state, 
+                infos, *parameters
+            )
+            return (state, infos, parameters), (state, parameters, infos)
+
+        states = batch_init(positions)
+        init_state, init_infos = init(states, positions)
+
+        keys = jax.random.split(rng_key, num_steps)
+        last_carry_state, (warmup_states, parameters, info) = jax.lax.scan(
+            one_step, (init_state, init_infos, (init_step_size,)), keys
+        )
+
+        last_state, _, parameters = last_carry_state
+        kernel = kernel_factory(*parameters)
+
+        return last_state, kernel, warmup_states
+
+    return AdaptationAlgorithm(run)  # type: ignore[arg-type]
+
+
 # -----------------------------------------------------------------------------
 #                           VARIATIONAL INFERENCE
 # -----------------------------------------------------------------------------

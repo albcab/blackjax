@@ -3,6 +3,7 @@ from .diagnostics import potential_scale_reduction as rhat
 from .kernels import (
     adaptive_tempered_smc,
     atess,
+    chess,
     elliptical_slice,
     ghmc,
     hmc,
@@ -11,6 +12,7 @@ from .kernels import (
     meads,
     mgrad_gaussian,
     nuts,
+    nuts_adaptation,
     orbital_hmc,
     pathfinder_adaptation,
     rmh,
@@ -31,6 +33,7 @@ __all__ = [
     "mala",
     "mgrad_gaussian",
     "nuts",
+    "nuts_adaptation",
     "orbital_hmc",
     "rmh",
     "irmh",
@@ -39,6 +42,7 @@ __all__ = [
     "meads",
     "tess",
     "atess",
+    "chess",
     "sgld",  # stochastic gradient mcmc
     "sghmc",
     "window_adaptation",  # mcmc adaptation
