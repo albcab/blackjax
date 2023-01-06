@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Adaptation &#8212; Blackjax</title>
+    <title>Adaptation</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -22,9 +22,9 @@
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
-    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
     
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
@@ -33,16 +33,12 @@
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
-    <script>let toggleHintShow = 'Click to show';</script>
-    <script>let toggleHintHide = 'Click to hide';</script>
-    <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js"></script>
     <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Diagnostics" href="diagnostics.html" />
-    <link rel="prev" title="Sampling" href="sampling.html" />
+    <link rel="prev" title="Variational Inference" href="vi.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -86,8 +82,6 @@
       <img src="_static/blackjax.png" class="logo" alt="logo">
       
       
-      <h1 class="site-logo" id="site-title">Blackjax</h1>
-      
     </a>
 </div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
   <i class="icon fas fa-search"></i>
@@ -96,7 +90,61 @@
     <div class="bd-toc-item active">
         <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Blackjax by example
+  PPL INTEGRATION
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="examples/howto_use_aesara.html">
+   Aesara
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="examples/howto_use_numpyro.html">
+   Numpyro
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="examples/howto_use_oryx.html">
+   Oryx
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="examples/howto_use_pymc.html">
+   PyMC
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="examples/howto_use_tfp.html">
+   Tensorflow-Probability
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  HOW TO
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="examples/howto_sample_multiple_chains.html">
+   Sample with multiple chains?
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="examples/howto_custom_gradients.html">
+   Use custom gradients?
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="examples/howto_other_frameworks.html">
+   Use non-JAX log-prob functions?
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  LEARN BY EXAMPLE
  </span>
 </p>
 <ul class="nav bd-sidenav">
@@ -126,13 +174,13 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="examples/TemperedSMC.html">
-     Use Tempered SMC to Improve Exploration of MCMC Methods.
+    <a class="reference internal" href="examples/SparseLogisticRegression.html">
+     Sparse logistic regression
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="examples/HierarchicalBNN.html">
-     Hierarchical Bayesian Neural Networks
+    <a class="reference internal" href="examples/TemperedSMC.html">
+     Use Tempered SMC to Improve Exploration of MCMC Methods.
     </a>
    </li>
    <li class="toctree-l2">
@@ -146,8 +194,8 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="examples/SGMCMC.html">
-     MNIST Digit Recognition With a 3-Layer Perceptron
+    <a class="reference internal" href="examples/GP_Marginal.html">
+     Bayesian Regression With Latent Gaussian Sampler
     </a>
    </li>
    <li class="toctree-l2">
@@ -160,18 +208,53 @@
      Pathfinder
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="examples/RegimeSwitchingModel.html">
+     Regime switching Hidden Markov model
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="examples/HierarchicalBNN.html">
+     Hierarchical Bayesian Neural Networks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="examples/SGMCMC.html">
+     MNIST Digit Recognition With a 3-Layer Perceptron
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="examples/contour_sgld.html">
+     Contour stochastic gradient Langevin dynamics
+    </a>
+   </li>
   </ul>
  </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  API Documentation
+  API
  </span>
 </p>
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="sampling.html">
-   Sampling
+  <a class="reference internal" href="mcmc.html">
+   MCMC
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="sgmcmc.html">
+   Stochastic gradient MCMC
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="smc.html">
+   Sequential Monte Carlo
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="vi.html">
+   Variational Inference
   </a>
  </li>
  <li class="toctree-l1 current active">
@@ -288,6 +371,16 @@ title="Source repository"
    Window adaptation
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pathfinder-adaptation">
+   Pathfinder adaptation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#meads">
+   MEADS
+  </a>
+ </li>
 </ul>
 
     </nav>
@@ -312,6 +405,16 @@ title="Source repository"
    Window adaptation
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pathfinder-adaptation">
+   Pathfinder adaptation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#meads">
+   MEADS
+  </a>
+ </li>
 </ul>
 
                         </nav>
@@ -328,8 +431,9 @@ title="Source repository"
 <h2>Window adaptation<a class="headerlink" href="#window-adaptation" title="Permalink to this headline">#</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="blackjax.window_adaptation">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">window_adaptation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">algorithm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logprob_fn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_steps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_mass_matrix_diagonal</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_step_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_acceptance_rate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.8</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">progress_bar</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logprob_grad_fn</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">parameters</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/blackjax/kernels.html#window_adaptation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#blackjax.window_adaptation" title="Permalink to this definition">#</a></dt>
-<dd><p>Adapt the parameters of algorithms in the HMC family.</p>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">window_adaptation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">algorithm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logdensity_fn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_mass_matrix_diagonal</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_step_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_acceptance_rate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.8</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">progress_bar</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">extra_parameters</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/blackjax/kernels.html#window_adaptation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#blackjax.window_adaptation" title="Permalink to this definition">#</a></dt>
+<dd><p>Adapt the value of the inverse mass matrix and step size parameters of
+algorithms in the HMC fmaily.</p>
 <p>Algorithms in the HMC family on a euclidean manifold depend on the value of
 at least two parameters: the step size, related to the trajectory
 integrator, and the mass matrix, linked to the euclidean metric.</p>
@@ -341,21 +445,95 @@ improve performance and quality.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>algorithm</strong> (<em>Union</em><em>[</em><a class="reference internal" href="sampling.html#blackjax.hmc" title="blackjax.kernels.hmc"><em>blackjax.kernels.hmc</em></a><em>, </em><a class="reference internal" href="sampling.html#blackjax.nuts" title="blackjax.kernels.nuts"><em>blackjax.kernels.nuts</em></a><em>]</em>) – The algorithm whose parameters are being tuned.</p></li>
-<li><p><strong>logprob_fn</strong> (<em>Callable</em>) – The log density probability density function from which we wish to sample.</p></li>
-<li><p><strong>num_steps</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The number of adaptation steps.</p></li>
-<li><p><strong>is_mass_matrix_diagonal</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – Whether we should adapt a diagonal mass matrix.</p></li>
-<li><p><strong>initial_step_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – The initial step size used in the algorithm.</p></li>
-<li><p><strong>target_acceptance_rate</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – The acceptance rate that we target during step size adaptation.</p></li>
-<li><p><strong>progress_bar</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – Whether we should display a progress bar.</p></li>
-<li><p><strong>logprob_grad_fn</strong> (<em>Optional</em><em>[</em><em>Callable</em><em>]</em>) – The gradient of logprob_fn.  If it’s not provided, it will be computed
-by jax using reverse mode autodiff (jax.grad).</p></li>
-<li><p><strong>**parameters</strong> – The extra parameters to pass to the algorithm, e.g. the number of
+<li><p><strong>algorithm</strong> (<em>Union</em><em>[</em><a class="reference internal" href="mcmc.html#blackjax.hmc" title="blackjax.kernels.hmc"><em>blackjax.kernels.hmc</em></a><em>, </em><a class="reference internal" href="mcmc.html#blackjax.nuts" title="blackjax.kernels.nuts"><em>blackjax.kernels.nuts</em></a><em>]</em>) – The algorithm whose parameters are being tuned.</p></li>
+<li><p><strong>logdensity_fn</strong> (<em>Callable</em>) – The log density probability density function from which we wish to
+sample.</p></li>
+<li><p><strong>is_mass_matrix_diagonal</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a>) – Whether we should adapt a diagonal mass matrix.</p></li>
+<li><p><strong>initial_step_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – The initial step size used in the algorithm.</p></li>
+<li><p><strong>target_acceptance_rate</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – The acceptance rate that we target during step size adaptation.</p></li>
+<li><p><strong>progress_bar</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a>) – Whether we should display a progress bar.</p></li>
+<li><p><strong>**extra_parameters</strong> – The extra parameters to pass to the algorithm, e.g. the number of
 integration steps for HMC.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p>A function that returns the last chain state and a sampling kernel with the tuned parameter values from an initial state.</p>
+<dd class="field-even"><p>A function that runs the adaptation and returns an <cite>AdaptationResult</cite> object.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="pathfinder-adaptation">
+<h2>Pathfinder adaptation<a class="headerlink" href="#pathfinder-adaptation" title="Permalink to this headline">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="blackjax.pathfinder_adaptation">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">pathfinder_adaptation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">algorithm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logdensity_fn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_step_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_acceptance_rate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.8</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">extra_parameters</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/blackjax/kernels.html#pathfinder_adaptation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#blackjax.pathfinder_adaptation" title="Permalink to this definition">#</a></dt>
+<dd><p>Adapt the value of the inverse mass matrix and step size parameters of
+algorithms in the HMC fmaily.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>algorithm</strong> (<em>Union</em><em>[</em><a class="reference internal" href="mcmc.html#blackjax.hmc" title="blackjax.kernels.hmc"><em>blackjax.kernels.hmc</em></a><em>, </em><a class="reference internal" href="mcmc.html#blackjax.nuts" title="blackjax.kernels.nuts"><em>blackjax.kernels.nuts</em></a><em>]</em>) – The algorithm whose parameters are being tuned.</p></li>
+<li><p><strong>logdensity_fn</strong> (<em>Callable</em>) – The log density probability density function from which we wish to sample.</p></li>
+<li><p><strong>initial_step_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – The initial step size used in the algorithm.</p></li>
+<li><p><strong>target_acceptance_rate</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – The acceptance rate that we target during step size adaptation.</p></li>
+<li><p><strong>**extra_parameters</strong> – The extra parameters to pass to the algorithm, e.g. the number of
+integration steps for HMC.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>A function that returns the last chain state and a sampling kernel with the</em></p></li>
+<li><p><em>tuned parameter values from an initial state.</em></p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>blackjax.base.AdaptationAlgorithm</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="meads">
+<h2>MEADS<a class="headerlink" href="#meads" title="Permalink to this headline">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="blackjax.meads">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">meads</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">logdensity_fn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_chains</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/blackjax/kernels.html#meads"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#blackjax.meads" title="Permalink to this definition">#</a></dt>
+<dd><p>Adapt the parameters of the Generalized HMC algorithm.</p>
+<p>The Generalized HMC algorithm depends on three parameters, each controlling
+one element of its behaviour: step size controls the integrator’s dynamics,
+alpha controls the persistency of the momentum variable, and delta controls
+the deterministic transformation of the slice variable used to perform the
+non-reversible Metropolis-Hastings accept/reject step.</p>
+<p>The step size parameter is chosen to ensure the stability of the velocity
+verlet integrator, the alpha parameter to make the influence of the current
+state on future states of the momentum variable to decay exponentially, and
+the delta parameter to maximize the acceptance of proposal but with good
+mixing properties for the slice variable. These characteristics are targeted
+by controlling heuristics based on the maximum eigenvalues of the correlation
+and gradient matrices of the cross-chain samples, under simpifyng assumptions.</p>
+<p>Good tuning is fundamental for the non-reversible Generalized HMC sampling
+algorithm to explore the target space efficienty and output uncorrelated, or
+as uncorrelated as possible, samples from the target space. Furthermore, the
+single integrator step of the algorithm lends itself for fast sampling
+on parallel computer architectures.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>logdensity_fn</strong> (<em>Callable</em>) – The log density probability density function from which we wish to sample.</p></li>
+<li><p><strong>num_chains</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Number of chains used for cross-chain warm-up training.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>A function that returns the last cross-chain state, a sampling kernel with the</em></p></li>
+<li><p><em>tuned parameter values, and all the warm-up states for diagnostics.</em></p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>blackjax.base.AdaptationAlgorithm</p>
 </dd>
 </dl>
 </dd></dl>
@@ -371,11 +549,11 @@ integration steps for HMC.</p></li>
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="sampling.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="vi.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Sampling</p>
+            <p class="prev-next-title">Variational Inference</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="diagnostics.html" title="next page">
@@ -394,7 +572,7 @@ integration steps for HMC.</p></li>
   
     By The Blackjax developers<br/>
   
-      &copy; Copyright 2022, The Blackjax developers.<br/>
+      &copy; Copyright 2023, The Blackjax developers.<br/>
 </p>
         </footer>
     </div>

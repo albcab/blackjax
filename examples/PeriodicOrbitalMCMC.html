@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Periodic Orbital MCMC &#8212; Blackjax</title>
+    <title>Periodic Orbital MCMC</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -22,9 +22,9 @@
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
     
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
@@ -33,17 +33,13 @@
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script>let toggleHintShow = 'Click to show';</script>
-    <script>let toggleHintHide = 'Click to hide';</script>
-    <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js"></script>
     <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Gaussian Regression with the Elliptical Slice Sampler" href="GP_EllipticalSliceSampler.html" />
-    <link rel="prev" title="Hierarchical Bayesian Neural Networks" href="HierarchicalBNN.html" />
+    <link rel="prev" title="Use Tempered SMC to Improve Exploration of MCMC Methods." href="TemperedSMC.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -87,8 +83,6 @@
       <img src="../_static/blackjax.png" class="logo" alt="logo">
       
       
-      <h1 class="site-logo" id="site-title">Blackjax</h1>
-      
     </a>
 </div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
   <i class="icon fas fa-search"></i>
@@ -97,7 +91,61 @@
     <div class="bd-toc-item active">
         <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Blackjax by example
+  PPL INTEGRATION
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="howto_use_aesara.html">
+   Aesara
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="howto_use_numpyro.html">
+   Numpyro
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="howto_use_oryx.html">
+   Oryx
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="howto_use_pymc.html">
+   PyMC
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="howto_use_tfp.html">
+   Tensorflow-Probability
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  HOW TO
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="howto_sample_multiple_chains.html">
+   Sample with multiple chains?
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="howto_custom_gradients.html">
+   Use custom gradients?
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="howto_other_frameworks.html">
+   Use non-JAX log-prob functions?
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  LEARN BY EXAMPLE
  </span>
 </p>
 <ul class="current nav bd-sidenav">
@@ -127,13 +175,13 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="TemperedSMC.html">
-     Use Tempered SMC to Improve Exploration of MCMC Methods.
+    <a class="reference internal" href="SparseLogisticRegression.html">
+     Sparse logistic regression
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="HierarchicalBNN.html">
-     Hierarchical Bayesian Neural Networks
+    <a class="reference internal" href="TemperedSMC.html">
+     Use Tempered SMC to Improve Exploration of MCMC Methods.
     </a>
    </li>
    <li class="toctree-l2 current active">
@@ -147,8 +195,8 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="SGMCMC.html">
-     MNIST Digit Recognition With a 3-Layer Perceptron
+    <a class="reference internal" href="GP_Marginal.html">
+     Bayesian Regression With Latent Gaussian Sampler
     </a>
    </li>
    <li class="toctree-l2">
@@ -161,18 +209,53 @@
      Pathfinder
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="RegimeSwitchingModel.html">
+     Regime switching Hidden Markov model
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="HierarchicalBNN.html">
+     Hierarchical Bayesian Neural Networks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="SGMCMC.html">
+     MNIST Digit Recognition With a 3-Layer Perceptron
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="contour_sgld.html">
+     Contour stochastic gradient Langevin dynamics
+    </a>
+   </li>
   </ul>
  </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  API Documentation
+  API
  </span>
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="../sampling.html">
-   Sampling
+  <a class="reference internal" href="../mcmc.html">
+   MCMC
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sgmcmc.html">
+   Stochastic gradient MCMC
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../smc.html">
+   Sequential Monte Carlo
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../vi.html">
+   Variational Inference
   </a>
  </li>
  <li class="toctree-l1">
@@ -285,11 +368,6 @@ title="Source repository"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#useful-functions">
-   Useful Functions
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#banana-density">
    Banana Density
   </a>
@@ -351,11 +429,6 @@ title="Source repository"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#useful-functions">
-   Useful Functions
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#banana-density">
    Banana Density
   </a>
@@ -410,23 +483,27 @@ title="Source repository"
   <section id="periodic-orbital-mcmc">
 <h1>Periodic Orbital MCMC<a class="headerlink" href="#periodic-orbital-mcmc" title="Permalink to this headline">#</a></h1>
 <p>Illustrating the usage of Algorithm 2 of <a class="reference external" href="https://arxiv.org/abs/2010.08047">Neklyudov &amp; Welling, (2021)</a> on the Banana density</p>
-<p><div class="math notranslate nohighlight">
-\[p(x) = p(x_1, x_2) = N(x_1|0, 8)N(x_2|1/4x_1^2, 1).\]</div>
-</p>
+<p>$$
+p(x) = p(x_1, x_2) = N(x_1|0, 8)N(x_2|1/4x_1^2, 1).
+$$</p>
 <p>Bijection functions <span class="math notranslate nohighlight">\(f(x, v)\)</span> used for sampling are the velocity Verlet, McLachlan and Yoshida integrators for the Hamiltonian function</p>
-<p>$$ H(x, v) = \frac{1}{2}\left(\frac{x_1^2}{8} + \left(x_2 - \frac{1}{4}x_1^2\right)^2\right) + \frac{1}{2}v^Tv. $$</p>
+<p>$$
+H(x, v) = \frac{1}{2}\left(\frac{x_1^2}{8} + \left(x_2 - \frac{1}{4}x_1^2\right)^2\right) + \frac{1}{2}v^Tv.
+$$</p>
 <p>Using any of these integrators amounts to doing vanilla HMC (traditionally done with the velocity Verlet integrator) but sampling various points from an orbit that discretizes the Hamiltonian dynamics to then weigh these samples in order to ensure we target the correct distribution (where in vanilla HMC we would choose a sample from the discretized orbit and perform a Metropolis-Hastings acceptance step on that sample to ensure the target distribution is left invariant).</p>
 <p>The benefits of sampling the whole orbit instead of a single point in it are: efficiency, since we build a trajectory around an orbit and use all if it instead of discarding most of it; and wider reach, since even unlikely points will be sampled and given small weights, making the sampler more likely to explore the tails of our target. This at the cost of higher memory consumption since we have <code class="docutils literal notranslate"><span class="pre">period</span></code> samples per iteration, instead of only one, and the lack of diagnostics, theoretical guarantees and heuristic methods developed for traditional HMC and its adaptive mechanisms (such as NUTS) during the past decades.</p>
 <p>It is also illustrated the usage of normalizing flows, specifically the Masked Autoregressive flow (<a class="reference external" href="https://arxiv.org/abs/1705.07057">MAF</a>), as a preconditioning step for the algorithm; using as a bijection function the ellipsis</p>
-<p>$$
-x(t) = x(0) \cos(t) + v(t) \sin(t) \
-v(t) = v(0) \cos(t) - x(t) \sin(t),
-$$</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align*}
+    x(t) &amp;= x(0) \cos(t) + v(t) \sin(t) \\
+    v(t) &amp;= v(0) \cos(t) - x(t) \sin(t),
+\end{align*}\end{split}\]</div>
 <p>i.e. the solution of Hamilton’s equations for <span class="math notranslate nohighlight">\(p(x,v) = N(x|0,I)N(v|0,I)\)</span>,</p>
-<p>$$
-\frac{d x}{d t} = v \
-\frac{d v}{d t} = -x.
-$$</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align*}
+    \frac{d x}{d t} &amp;= v \\
+    \frac{d v}{d t} &amp;= -x.
+\end{align*}\end{split}\]</div>
 <p>As it is later demonstrated, these dynamics alone fail to capture all the volume of our banana density. They are, however, cheap and easy to use, since these dynamics are both gradient-free (don’t require the computation of gradients of our target distribution) and tuning-free (have no tuning parameters); in contrast with the integrators mentioned above, which need to compute gradients at each iteration and require tuning of the discretization step size and number of steps (when used for periodic orbital MCMC, these values are represented by the <code class="docutils literal notranslate"><span class="pre">step_size</span></code> and <code class="docutils literal notranslate"><span class="pre">period</span></code>). Paired with a preconditioning step which transforms our target to approximate <span class="math notranslate nohighlight">\(N(x|0,I)\)</span>, our cheap and easy dynamics can efficienty sample from the whole volume of our banana density while delegating the expensive gradients and cumbersome tuning to an optimization problem performed pre-sampling.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -441,59 +518,20 @@ $$</p>
 </div>
 </div>
 </div>
-<div class="cell docutils container">
+<div class="cell tag_hide-cell docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell content</span>
+<span class="expanded">Hide code cell content</span>
+</summary>
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> watermark
-<span class="o">%</span><span class="k">watermark</span> -d -m -v -p jax,jaxlib,blackjax
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Python implementation: CPython
-Python version       : 3.9.13
-IPython version      : 8.5.0
-
-jax     : 0.3.17
-jaxlib  : 0.3.15
-blackjax: 0.8.3
-
-Compiler    : GCC 9.4.0
-OS          : Linux
-Release     : 5.15.0-1019-azure
-Machine     : x86_64
-Processor   : x86_64
-CPU cores   : 2
-Architecture: 64bit
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">jax</span><span class="o">.</span><span class="n">devices</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:absl:No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for more info.)
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[CpuDevice(id=0)]
-</pre></div>
-</div>
-</div>
-</div>
-<section id="useful-functions">
-<h2>Useful Functions<a class="headerlink" href="#useful-functions" title="Permalink to this headline">#</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_contour</span><span class="p">(</span><span class="n">logprob</span><span class="p">,</span> <span class="n">orbits</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Contour plots for density w/ or w/o samples.&quot;&quot;&quot;</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_contour</span><span class="p">(</span><span class="n">logdensity</span><span class="p">,</span> <span class="n">orbits</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Contour plots for density w/ or w/o samples.&quot;&quot;&quot;</span>
     <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span> <span class="o">=</span> <span class="o">-</span><span class="mf">7.5</span><span class="p">,</span> <span class="mf">7.5</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mf">12.5</span>
     <span class="n">x1</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
     <span class="n">x2</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
     <span class="n">y</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">vmap</span><span class="p">(</span>
-        <span class="n">jax</span><span class="o">.</span><span class="n">vmap</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">logprob</span><span class="p">({</span><span class="s2">&quot;x1&quot;</span><span class="p">:</span> <span class="n">x1</span><span class="p">,</span> <span class="s2">&quot;x2&quot;</span><span class="p">:</span> <span class="n">x2</span><span class="p">})),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
+        <span class="n">jax</span><span class="o">.</span><span class="n">vmap</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">logdensity</span><span class="p">({</span><span class="s2">&quot;x1&quot;</span><span class="p">:</span> <span class="n">x1</span><span class="p">,</span> <span class="s2">&quot;x2&quot;</span><span class="p">:</span> <span class="n">x2</span><span class="p">})),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
         <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
     <span class="p">)(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">)</span>
     <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">17</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
@@ -509,11 +547,17 @@ Architecture: 64bit
 </pre></div>
 </div>
 </div>
+</details>
 </div>
-<div class="cell docutils container">
+<div class="cell tag_hide-cell docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell content</span>
+<span class="expanded">Hide code cell content</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">inference_loop</span><span class="p">(</span><span class="n">rng_key</span><span class="p">,</span> <span class="n">kernel</span><span class="p">,</span> <span class="n">initial_state</span><span class="p">,</span> <span class="n">num_samples</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Sequantially draws samples given the kernel of choice.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Sequantially draws samples given the kernel of choice.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">one_step</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">rng_key</span><span class="p">):</span>
         <span class="n">state</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">kernel</span><span class="p">(</span><span class="n">rng_key</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span>
@@ -526,26 +570,36 @@ Architecture: 64bit
 </pre></div>
 </div>
 </div>
+</details>
 </div>
-</section>
 <section id="banana-density">
 <h2>Banana Density<a class="headerlink" href="#banana-density" title="Permalink to this headline">#</a></h2>
-<div class="cell docutils container">
+<p>We will be sampling from the banana density:</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">logprob_fn</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Banana density&quot;&quot;&quot;</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">logdensity_fn</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Banana density&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">logpdf</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">jnp</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">8.0</span><span class="p">))</span> <span class="o">+</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">logpdf</span><span class="p">(</span>
         <span class="n">x2</span><span class="p">,</span> <span class="mi">1</span> <span class="o">/</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">x1</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="mf">1.0</span>
     <span class="p">)</span>
 
 
-<span class="n">logprob</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">logprob_fn</span><span class="p">(</span><span class="o">**</span><span class="n">x</span><span class="p">)</span>
-<span class="n">plot_contour</span><span class="p">(</span><span class="n">logprob</span><span class="p">)</span>
+<span class="n">logdensity</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">logdensity_fn</span><span class="p">(</span><span class="o">**</span><span class="n">x</span><span class="p">)</span>
+<span class="n">plot_contour</span><span class="p">(</span><span class="n">logdensity</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+</details>
 <div class="cell_output docutils container">
-<img alt="../_images/c5cb5238a11b34998852b621154390514ff150662f3bf8d9fbbb66a472248dee.png" src="../_images/c5cb5238a11b34998852b621154390514ff150662f3bf8d9fbbb66a472248dee.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:absl:No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for more info.)
+</pre></div>
+</div>
+<img alt="../_images/3ca82a836b0cb647546c753f035985557621f80308c36c187574ddcd35abf897.png" src="../_images/3ca82a836b0cb647546c753f035985557621f80308c36c187574ddcd35abf897.png" />
 </div>
 </div>
 </section>
@@ -573,13 +627,15 @@ Architecture: 64bit
 <section id="velocity-verlet">
 <h2>Velocity Verlet<a class="headerlink" href="#velocity-verlet" title="Permalink to this headline">#</a></h2>
 <p>The integrator usually found in implementations of HMC. It creates an orbit by discretizing the solution to Hamilton’s equations of the Hamiltonian function</p>
-<p>$$ H(x, v) = \frac{1}{2}\left(\frac{x_1^2}{8} + \left(x_2 - \frac{1}{4}x_1^2\right)^2\right) + \frac{1}{2}v^Tv .$$</p>
+<p>$$
+H(x, v) = \frac{1}{2}\left(\frac{x_1^2}{8} + \left(x_2 - \frac{1}{4}x_1^2\right)^2\right) + \frac{1}{2}v^Tv.
+$$</p>
 <p>The plots include the unweighted samples to get an idea of how the integrator is exploring the sample space before the weight’s “correction”.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
 <span class="n">init_fn</span><span class="p">,</span> <span class="n">vv_kernel</span> <span class="o">=</span> <span class="n">orbital</span><span class="p">(</span>
-    <span class="n">logprob</span><span class="p">,</span> <span class="n">step_size</span><span class="p">,</span> <span class="n">inv_mass_matrix</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">bijection</span><span class="o">=</span><span class="n">integrators</span><span class="o">.</span><span class="n">velocity_verlet</span>
+    <span class="n">logdensity</span><span class="p">,</span> <span class="n">step_size</span><span class="p">,</span> <span class="n">inv_mass_matrix</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">bijection</span><span class="o">=</span><span class="n">integrators</span><span class="o">.</span><span class="n">velocity_verlet</span>
 <span class="p">)</span>
 <span class="n">initial_state</span> <span class="o">=</span> <span class="n">init_fn</span><span class="p">(</span><span class="n">initial_position</span><span class="p">)</span>
 <span class="n">vv_kernel</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">jit</span><span class="p">(</span><span class="n">vv_kernel</span><span class="p">)</span>
@@ -587,8 +643,8 @@ Architecture: 64bit
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 291 ms, sys: 112 µs, total: 291 ms
-Wall time: 289 ms
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 226 ms, sys: 142 µs, total: 226 ms
+Wall time: 225 ms
 </pre></div>
 </div>
 </div>
@@ -605,20 +661,20 @@ Wall time: 289 ms
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 947 ms, sys: 7.52 ms, total: 954 ms
-Wall time: 952 ms
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 991 ms, sys: 19.6 ms, total: 1.01 s
+Wall time: 1.01 s
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_contour</span><span class="p">(</span><span class="n">logprob</span><span class="p">,</span> <span class="n">orbits</span><span class="o">=</span><span class="n">samples</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">weights</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_contour</span><span class="p">(</span><span class="n">logdensity</span><span class="p">,</span> <span class="n">orbits</span><span class="o">=</span><span class="n">samples</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">weights</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/1c9690355d8837ca9d6a9b54feb430f6edb0f9d5ee5fc5cf4fec933fcbee23e6.png" src="../_images/1c9690355d8837ca9d6a9b54feb430f6edb0f9d5ee5fc5cf4fec933fcbee23e6.png" />
+<img alt="../_images/73dfd17a24d0572d245d5cf75f45979a34dae0615a3f123b02d91376af065e6e.png" src="../_images/73dfd17a24d0572d245d5cf75f45979a34dae0615a3f123b02d91376af065e6e.png" />
 </div>
 </div>
 </section>
@@ -629,7 +685,7 @@ Wall time: 952 ms
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
 <span class="n">init_fn</span><span class="p">,</span> <span class="n">ml_kernel</span> <span class="o">=</span> <span class="n">orbital</span><span class="p">(</span>
-    <span class="n">logprob</span><span class="p">,</span> <span class="n">step_size</span><span class="p">,</span> <span class="n">inv_mass_matrix</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">bijection</span><span class="o">=</span><span class="n">integrators</span><span class="o">.</span><span class="n">mclachlan</span>
+    <span class="n">logdensity</span><span class="p">,</span> <span class="n">step_size</span><span class="p">,</span> <span class="n">inv_mass_matrix</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">bijection</span><span class="o">=</span><span class="n">integrators</span><span class="o">.</span><span class="n">mclachlan</span>
 <span class="p">)</span>
 <span class="n">initial_state</span> <span class="o">=</span> <span class="n">init_fn</span><span class="p">(</span><span class="n">initial_position</span><span class="p">)</span>
 <span class="n">ml_kernel</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">jit</span><span class="p">(</span><span class="n">ml_kernel</span><span class="p">)</span>
@@ -637,8 +693,8 @@ Wall time: 952 ms
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 13.3 ms, sys: 106 µs, total: 13.4 ms
-Wall time: 13.2 ms
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 16.3 ms, sys: 20 µs, total: 16.3 ms
+Wall time: 16 ms
 </pre></div>
 </div>
 </div>
@@ -655,20 +711,26 @@ Wall time: 13.2 ms
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 934 ms, sys: 0 ns, total: 934 ms
-Wall time: 928 ms
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 1 s, sys: 47 µs, total: 1 s
+Wall time: 1 s
 </pre></div>
 </div>
 </div>
 </div>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_contour</span><span class="p">(</span><span class="n">logprob</span><span class="p">,</span> <span class="n">orbits</span><span class="o">=</span><span class="n">samples</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">weights</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_contour</span><span class="p">(</span><span class="n">logdensity</span><span class="p">,</span> <span class="n">orbits</span><span class="o">=</span><span class="n">samples</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">weights</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+</details>
 <div class="cell_output docutils container">
-<img alt="../_images/5fefc8dcdf0378a02e0518f5ed9a1677f5dd44788407b1786458857e619e78a8.png" src="../_images/5fefc8dcdf0378a02e0518f5ed9a1677f5dd44788407b1786458857e619e78a8.png" />
+<img alt="../_images/97857dd45f38a95e665bebc1cd525a01e7709c06740038c6c9d1a59bfcca769f.png" src="../_images/97857dd45f38a95e665bebc1cd525a01e7709c06740038c6c9d1a59bfcca769f.png" />
 </div>
 </div>
 </section>
@@ -679,7 +741,7 @@ Wall time: 928 ms
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
 <span class="n">init_fn</span><span class="p">,</span> <span class="n">yo_kernel</span> <span class="o">=</span> <span class="n">orbital</span><span class="p">(</span>
-    <span class="n">logprob</span><span class="p">,</span> <span class="n">step_size</span><span class="p">,</span> <span class="n">inv_mass_matrix</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">bijection</span><span class="o">=</span><span class="n">integrators</span><span class="o">.</span><span class="n">yoshida</span>
+    <span class="n">logdensity</span><span class="p">,</span> <span class="n">step_size</span><span class="p">,</span> <span class="n">inv_mass_matrix</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">bijection</span><span class="o">=</span><span class="n">integrators</span><span class="o">.</span><span class="n">yoshida</span>
 <span class="p">)</span>
 <span class="n">initial_state</span> <span class="o">=</span> <span class="n">init_fn</span><span class="p">(</span><span class="n">initial_position</span><span class="p">)</span>
 <span class="n">yo_kernel</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">jit</span><span class="p">(</span><span class="n">yo_kernel</span><span class="p">)</span>
@@ -687,8 +749,8 @@ Wall time: 928 ms
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 13.5 ms, sys: 0 ns, total: 13.5 ms
-Wall time: 13.1 ms
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 8.1 ms, sys: 7.73 ms, total: 15.8 ms
+Wall time: 15.6 ms
 </pre></div>
 </div>
 </div>
@@ -705,30 +767,37 @@ Wall time: 13.1 ms
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 867 ms, sys: 0 ns, total: 867 ms
-Wall time: 866 ms
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 920 ms, sys: 0 ns, total: 920 ms
+Wall time: 916 ms
 </pre></div>
 </div>
 </div>
 </div>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_contour</span><span class="p">(</span><span class="n">logprob</span><span class="p">,</span> <span class="n">orbits</span><span class="o">=</span><span class="n">samples</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">weights</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_contour</span><span class="p">(</span><span class="n">logdensity</span><span class="p">,</span> <span class="n">orbits</span><span class="o">=</span><span class="n">samples</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">weights</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+</details>
 <div class="cell_output docutils container">
-<img alt="../_images/e539d08e64460998fac48ced98158d8ec7c118245152a4f5f1341a493cd15d76.png" src="../_images/e539d08e64460998fac48ced98158d8ec7c118245152a4f5f1341a493cd15d76.png" />
+<img alt="../_images/81d61d221bd3645c70184eb46dff12e9d32b677e9d0c84e35bbbb3f617bb86a9.png" src="../_images/81d61d221bd3645c70184eb46dff12e9d32b677e9d0c84e35bbbb3f617bb86a9.png" />
 </div>
 </div>
 </section>
 <section id="ellipsis">
 <h2>Ellipsis<a class="headerlink" href="#ellipsis" title="Permalink to this headline">#</a></h2>
 <p>We now create and use a bijection given by an ellipsis using the <code class="docutils literal notranslate"><span class="pre">IntegratorState</span></code> class. The bijection must have as inputs the potential and kinetic energy functions, which are the negative log densities of our target posterior and the auxiliary distribution used for the momentum variable. In the case of our banana density, we are targeting the “posterior” <span class="math notranslate nohighlight">\(N(x_1|0, 8)N(x_2|1/4x_1^2, 1)\)</span> and using a standard normal distribution for our momentum variable, hence our potential and kinetic energies are <span class="math notranslate nohighlight">\(1/2\left(x_1^2/8 + \left(x_2 - 1/4x_1^2\right)^2\right)\)</span> and <span class="math notranslate nohighlight">\(1/2v^Tv\)</span>, respectively. However, the orbit we build now is independent of these two energies and moves around an ellipsis given by</p>
-<p>$$
-x(t) = x(0) \cos(t) + v(t) \sin(t) \
-v(t) = v(0) \cos(t) - x(t) \sin(t),
-$$</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align*}
+x(t) &amp;= x(0) \cos(t) + v(t) \sin(t) \\
+v(t) &amp;= v(0) \cos(t) - x(t) \sin(t),
+\end{align*}\end{split}\]</div>
 <p>which returns to its initial position every <span class="math notranslate nohighlight">\(t=2\pi\)</span> radians. The <code class="docutils literal notranslate"><span class="pre">step_size</span></code> for this orbit is set to cover the entire ellipsis. This ellipsis actually targets a potential and kinetic energy given by the product measure of two standard normal distributions, hence its inefficiency at exploring the real target measure.</p>
 <p>The bijection must output a function which takes as input an <code class="docutils literal notranslate"><span class="pre">IntegratorState</span></code>, composed of a position, momentum, potential energy (negative log density of our target evaluated at position) and the gradient of the potential energy, and a step size; and outputs a proposed <code class="docutils literal notranslate"><span class="pre">IntegratorState</span></code>. Even if the dynamics of our bijection are independent of the real potential energy, we need to return the potential energy at the proposed position for the computation of the sampler’s weights. But, as our dynamics are gradient-free, we can return the same gradient as the previous state to avoid unnecessary computations.</p>
 <div class="cell docutils container">
@@ -772,7 +841,7 @@ $$</p>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
 <span class="n">init_fn</span><span class="p">,</span> <span class="n">ellip_kernel</span> <span class="o">=</span> <span class="n">orbital</span><span class="p">(</span>
-    <span class="n">logprob</span><span class="p">,</span> <span class="n">step_size</span><span class="p">,</span> <span class="n">inv_mass_matrix</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">bijection</span><span class="o">=</span><span class="n">elliptical_bijection</span>
+    <span class="n">logdensity</span><span class="p">,</span> <span class="n">step_size</span><span class="p">,</span> <span class="n">inv_mass_matrix</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">bijection</span><span class="o">=</span><span class="n">elliptical_bijection</span>
 <span class="p">)</span>
 <span class="n">initial_state</span> <span class="o">=</span> <span class="n">init_fn</span><span class="p">(</span><span class="n">initial_position</span><span class="p">)</span>
 <span class="n">ellip_kernel</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">jit</span><span class="p">(</span><span class="n">ellip_kernel</span><span class="p">)</span>
@@ -780,8 +849,8 @@ $$</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 14.6 ms, sys: 0 ns, total: 14.6 ms
-Wall time: 15.3 ms
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 15.1 ms, sys: 150 µs, total: 15.3 ms
+Wall time: 15.1 ms
 </pre></div>
 </div>
 </div>
@@ -798,20 +867,26 @@ Wall time: 15.3 ms
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 783 ms, sys: 292 µs, total: 783 ms
-Wall time: 778 ms
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 923 ms, sys: 0 ns, total: 923 ms
+Wall time: 923 ms
 </pre></div>
 </div>
 </div>
 </div>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_contour</span><span class="p">(</span><span class="n">logprob</span><span class="p">,</span> <span class="n">orbits</span><span class="o">=</span><span class="n">samples</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">weights</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_contour</span><span class="p">(</span><span class="n">logdensity</span><span class="p">,</span> <span class="n">orbits</span><span class="o">=</span><span class="n">samples</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">weights</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+</details>
 <div class="cell_output docutils container">
-<img alt="../_images/6b614b07d5b9962c8d863015a182ca1f3942eefe81c63fa297764f84f073d8a0.png" src="../_images/6b614b07d5b9962c8d863015a182ca1f3942eefe81c63fa297764f84f073d8a0.png" />
+<img alt="../_images/938e41a26b7afdf5102af10919e764e7fc9bd0a3213bef8bb4193bfbeb41a335.png" src="../_images/938e41a26b7afdf5102af10919e764e7fc9bd0a3213bef8bb4193bfbeb41a335.png" />
 </div>
 </div>
 </section>
@@ -828,10 +903,11 @@ $$</p>
 \phi(z) \approx \pi(T(z)) |\det \nabla T(z)|,
 $$</p>
 <p>where the right hand side of the equation is what we call the pullback density of our target. Thus, letting the bijection <span class="math notranslate nohighlight">\(f(x,v) = (x(t), v(t))\)</span> for</p>
-<p>$$
-x(t) = x(0) \cos(t) + v(t) \sin(t) \
-v(t) = v(0) \cos(t) - x(t) \sin(t),
-$$</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align*}
+x(t) &amp;= x(0) \cos(t) + v(t) \sin(t) \\
+v(t) &amp;= v(0) \cos(t) - x(t) \sin(t),
+\end{align*}\end{split}\]</div>
 <p>we have that using the periodic orbital MCMC on the pullback with bijection <span class="math notranslate nohighlight">\(f(x,v)\)</span> is equivalent to using the periodic orbital MCMC on our target density with bijection <span class="math notranslate nohighlight">\(T \circ f \circ T^{-1}\)</span>.</p>
 <p>First we define our parametrized MAF bijection using autoregressive neural networks.</p>
 <div class="cell docutils container">
@@ -842,13 +918,8 @@ $$</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span> <span class="p">[</span><span class="mi">22</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">optax</span>
-<span class="ne">----&gt; </span><span class="mi">2</span> <span class="kn">from</span> <span class="nn">numpyro.nn</span> <span class="kn">import</span> <span class="n">AutoregressiveNN</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;numpyro&#39;
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.9.16/x64/lib/python3.9/site-packages/tqdm/auto.py:22: TqdmWarning: IProgress not found. Please update jupyter and ipywidgets. See https://ipywidgets.readthedocs.io/en/stable/user_install.html
+  from .autonotebook import tqdm as notebook_tqdm
 </pre></div>
 </div>
 </div>
@@ -888,7 +959,7 @@ $$</p>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">logpullback</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">z</span><span class="p">):</span>
     <span class="n">mean</span><span class="p">,</span> <span class="n">log_sd</span> <span class="o">=</span> <span class="n">apply_fun</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">log_sd</span><span class="p">)</span> <span class="o">*</span> <span class="n">z</span> <span class="o">+</span> <span class="n">mean</span>
-    <span class="k">return</span> <span class="n">logprob</span><span class="p">(</span><span class="n">unraveler</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="o">+</span> <span class="n">jnp</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">log_sd</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">logdensity</span><span class="p">(</span><span class="n">unraveler</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="o">+</span> <span class="n">jnp</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">log_sd</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -948,12 +1019,33 @@ $$</p>
     <span class="n">n_atoms</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
     <span class="n">n_epochs</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 1.51 s, sys: 28.2 ms, total: 1.53 s
+Wall time: 1.53 s
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Negative ELBO (KL divergence) over iterations&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">nelbo</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="../_images/38b4489356c8dfb318a4c65217056be9e65b1957455f4275728995c2cb92d0d3.png" src="../_images/38b4489356c8dfb318a4c65217056be9e65b1957455f4275728995c2cb92d0d3.png" />
 </div>
 </div>
 <p>We define our log pullback given the learned parameters of the transformation and use the periodic orbital MCMC with an ellipsis to sample from this log pullback density.</p>
@@ -976,6 +1068,12 @@ $$</p>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 630 ms, sys: 14 µs, total: 630 ms
+Wall time: 630 ms
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -985,6 +1083,12 @@ $$</p>
 
 <span class="n">pullback_samples</span> <span class="o">=</span> <span class="n">states</span><span class="o">.</span><span class="n">positions</span>
 <span class="n">weights</span> <span class="o">=</span> <span class="n">states</span><span class="o">.</span><span class="n">weights</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 1.07 s, sys: 114 µs, total: 1.07 s
+Wall time: 1.06 s
 </pre></div>
 </div>
 </div>
@@ -1012,11 +1116,20 @@ $$</p>
 </div>
 </div>
 <p>The pushed samples are much better at targeting the banana density than the algorithm without a preconditioning step. The transformation helps the sampler stay close to the same density level when moving around the ellipsis, thus reducing the variance of the step’s weights along it. This preconditioning serves, in a way, as an adaptive step that tunes the parameters of the sampler through a transformation. Notice that if we move around the whole ellipsis there are no tuning parameters, only the number of samples we choose to extract at each iteration, in contrast with choosing step sizes and number of steps in the case of the other numerical integrators. Of course, we still need to choose a gradient descent algorithm, learning rates, number of iterations, and epochs for the optimization!</p>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_contour</span><span class="p">(</span><span class="n">logprob</span><span class="p">,</span> <span class="n">orbits</span><span class="o">=</span><span class="n">samples</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">weights</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_contour</span><span class="p">(</span><span class="n">logdensity</span><span class="p">,</span> <span class="n">orbits</span><span class="o">=</span><span class="n">samples</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">weights</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="../_images/41384fd251345eaacb83b91d000ba6ebc7448aa1bbe5ab7aae1e5185d98995d7.png" src="../_images/41384fd251345eaacb83b91d000ba6ebc7448aa1bbe5ab7aae1e5185d98995d7.png" />
 </div>
 </div>
 </section>
@@ -1031,11 +1144,11 @@ $$</p>
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="HierarchicalBNN.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="TemperedSMC.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Hierarchical Bayesian Neural Networks</p>
+            <p class="prev-next-title">Use Tempered SMC to Improve Exploration of MCMC Methods.</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="GP_EllipticalSliceSampler.html" title="next page">
@@ -1054,7 +1167,7 @@ $$</p>
   
     By The Blackjax developers<br/>
   
-      &copy; Copyright 2022, The Blackjax developers.<br/>
+      &copy; Copyright 2023, The Blackjax developers.<br/>
 </p>
         </footer>
     </div>

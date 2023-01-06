@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Examples &#8212; Blackjax</title>
+    <title>Examples</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -22,9 +22,9 @@
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
     
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
@@ -33,12 +33,8 @@
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script>let toggleHintShow = 'Click to show';</script>
-    <script>let toggleHintHide = 'Click to hide';</script>
-    <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js"></script>
     <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -84,8 +80,6 @@
       <img src="../_static/blackjax.png" class="logo" alt="logo">
       
       
-      <h1 class="site-logo" id="site-title">Blackjax</h1>
-      
     </a>
 </div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
   <i class="icon fas fa-search"></i>
@@ -94,7 +88,61 @@
     <div class="bd-toc-item active">
         <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Blackjax by example
+  PPL INTEGRATION
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="howto_use_aesara.html">
+   Aesara
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="howto_use_numpyro.html">
+   Numpyro
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="howto_use_oryx.html">
+   Oryx
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="howto_use_pymc.html">
+   PyMC
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="howto_use_tfp.html">
+   Tensorflow-Probability
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  HOW TO
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="howto_sample_multiple_chains.html">
+   Sample with multiple chains?
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="howto_custom_gradients.html">
+   Use custom gradients?
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="howto_other_frameworks.html">
+   Use non-JAX log-prob functions?
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  LEARN BY EXAMPLE
  </span>
 </p>
 <ul class="nav bd-sidenav">
@@ -124,13 +172,13 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="TemperedSMC.html">
-     Use Tempered SMC to Improve Exploration of MCMC Methods.
+    <a class="reference internal" href="SparseLogisticRegression.html">
+     Sparse logistic regression
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="HierarchicalBNN.html">
-     Hierarchical Bayesian Neural Networks
+    <a class="reference internal" href="TemperedSMC.html">
+     Use Tempered SMC to Improve Exploration of MCMC Methods.
     </a>
    </li>
    <li class="toctree-l2">
@@ -144,8 +192,8 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="SGMCMC.html">
-     MNIST Digit Recognition With a 3-Layer Perceptron
+    <a class="reference internal" href="GP_Marginal.html">
+     Bayesian Regression With Latent Gaussian Sampler
     </a>
    </li>
    <li class="toctree-l2">
@@ -158,18 +206,53 @@
      Pathfinder
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="RegimeSwitchingModel.html">
+     Regime switching Hidden Markov model
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="HierarchicalBNN.html">
+     Hierarchical Bayesian Neural Networks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="SGMCMC.html">
+     MNIST Digit Recognition With a 3-Layer Perceptron
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="contour_sgld.html">
+     Contour stochastic gradient Langevin dynamics
+    </a>
+   </li>
   </ul>
  </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  API Documentation
+  API
  </span>
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="../sampling.html">
-   Sampling
+  <a class="reference internal" href="../mcmc.html">
+   MCMC
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sgmcmc.html">
+   Stochastic gradient MCMC
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../smc.html">
+   Sequential Monte Carlo
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../vi.html">
+   Variational Inference
   </a>
  </li>
  <li class="toctree-l1">
@@ -390,7 +473,7 @@ title="Source repository"
 <section id="load-examples-in-a-jupyter-notebook">
 <h3>Load examples in a Jupyter notebook<a class="headerlink" href="#load-examples-in-a-jupyter-notebook" title="Permalink to this headline">#</a></h3>
 <p>To convert any example file to a Jupyter notebook you can use:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>jupytext examples/your_example_file.md --to notebook
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>jupytext<span class="w"> </span>examples/your_example_file.md<span class="w"> </span>--to<span class="w"> </span>notebook
 </pre></div>
 </div>
 <p>you can then interact with the resulting notebook just like with any notebook.</p>
@@ -401,29 +484,29 @@ title="Source repository"
 <section id="convert-my-jupyter-notebook-to-markdown">
 <h3>Convert my Jupyter notebook to markdown<a class="headerlink" href="#convert-my-jupyter-notebook-to-markdown" title="Permalink to this headline">#</a></h3>
 <p>If you implemented your example in a Jupyter notebook you can convert your <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> file to Markdown using the command below:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>jupytext example/your_example_notebook.ipynb --to myst
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>jupytext<span class="w"> </span>examples/your_example_notebook.ipynb<span class="w"> </span>--to<span class="w"> </span>myst
 </pre></div>
 </div>
 <p>Once the example file is converted to a Markdown file, you have two options for editing:</p>
 <ol class="arabic simple">
 <li><p>Edit the Markdown version as it is a regular Markdown file.</p></li>
-<li><p>Edit the Notebook version then convert it to a Markdown file once you finish editing with the command above. Jupytext can handle the change if the example has the same file name.</p></li>
+<li><p>Edit the Notebook version, then convert it to a Markdown file once you finish editing with the command above. Jupytext can handle the change if the example has the same file name.</p></li>
 </ol>
-<p><strong>Please make sure to only commit the  Markdown file.</strong></p>
+<p><strong>Please make sure to only commit the Markdown file.</strong></p>
 </section>
 </section>
 <section id="composing-documentation-on-sphinx-doc">
 <h2>Composing Documentation on Sphinx-Doc<a class="headerlink" href="#composing-documentation-on-sphinx-doc" title="Permalink to this headline">#</a></h2>
-<p>We use <code class="docutils literal notranslate"><span class="pre">Sphinx</span></code> to generate document for this repo. We highly encourage you to check how your changes to the examples are rendered in the documentation:</p>
+<p>We use <code class="docutils literal notranslate"><span class="pre">Sphinx</span></code> to generate documents for this repo. We highly encourage you to check how your changes to the examples are rendered in the documentation:</p>
 <ol class="arabic simple">
 <li><p>Add your documentation to <code class="docutils literal notranslate"><span class="pre">docs/examples.rst</span></code></p></li>
 <li><p>Run the command below:</p></li>
 </ol>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span> make build-docs
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="w"> </span>make<span class="w"> </span>build-docs
 </pre></div>
 </div>
 <ol class="arabic simple" start="3">
-<li><p>Check the generated documentation in <code class="docutils literal notranslate"><span class="pre">docs/builds</span></code></p></li>
+<li><p>Check the generated HTML documentation in <code class="docutils literal notranslate"><span class="pre">docs/_build</span></code></p></li>
 </ol>
 <section id="execution-times">
 <h3>Execution Times<a class="headerlink" href="#execution-times" title="Permalink to this headline">#</a></h3>
@@ -436,37 +519,55 @@ title="Source repository"
 </thead>
 <tbody>
 <tr class="row-even"><td><p>GP_EllipticalSliceSampler</p></td>
-<td><p>235.20</p></td>
+<td><p>277.96</p></td>
 </tr>
 <tr class="row-odd"><td><p>HierarchicalBNN</p></td>
-<td><p>84.45</p></td>
+<td><p>187.60</p></td>
 </tr>
 <tr class="row-even"><td><p>Introduction</p></td>
-<td><p>108.55</p></td>
+<td><p>19.10</p></td>
 </tr>
 <tr class="row-odd"><td><p>LogisticRegression</p></td>
-<td><p>7.06</p></td>
+<td><p>9.06</p></td>
 </tr>
 <tr class="row-even"><td><p>LogisticRegressionWithLatentGaussianSampler</p></td>
-<td><p>7.10</p></td>
+<td><p>9.06</p></td>
 </tr>
-<tr class="row-odd"><td><p>Pathfinder</p></td>
-<td><p>18.11</p></td>
+<tr class="row-odd"><td><p>MultipleChains</p></td>
+<td><p>94.21</p></td>
 </tr>
-<tr class="row-even"><td><p>PeriodicOrbitalMCMC</p></td>
-<td><p>15.09</p></td>
+<tr class="row-even"><td><p>Pathfinder</p></td>
+<td><p>26.13</p></td>
+</tr>
+<tr class="row-odd"><td><p>PeriodicOrbitalMCMC</p></td>
+<td><p>27.13</p></td>
+</tr>
+<tr class="row-even"><td><p>RegimeSwitchingModel</p></td>
+<td><p>113.41</p></td>
 </tr>
 <tr class="row-odd"><td><p>SGMCMC</p></td>
-<td><p>316.38</p></td>
+<td><p>406.82</p></td>
 </tr>
-<tr class="row-even"><td><p>TemperedSMC</p></td>
-<td><p>16.09</p></td>
+<tr class="row-even"><td><p>SparseLogisticRegression</p></td>
+<td><p>248.71</p></td>
 </tr>
-<tr class="row-odd"><td><p>change_of_variable_hmc</p></td>
-<td><p>45.23</p></td>
+<tr class="row-odd"><td><p>TemperedSMC</p></td>
+<td><p>23.10</p></td>
 </tr>
-<tr class="row-even"><td><p>use_with_numpyro</p></td>
-<td><p>14.11</p></td>
+<tr class="row-even"><td><p>change_of_variable_hmc</p></td>
+<td><p>106.32</p></td>
+</tr>
+<tr class="row-odd"><td><p>aesara</p></td>
+<td><p>19.07</p></td>
+</tr>
+<tr class="row-even"><td><p>numpyro</p></td>
+<td><p>18.07</p></td>
+</tr>
+<tr class="row-odd"><td><p>pymc</p></td>
+<td><p>72.25</p></td>
+</tr>
+<tr class="row-even"><td><p>tfp</p></td>
+<td><p>33.18</p></td>
 </tr>
 </tbody>
 </table>
@@ -491,7 +592,7 @@ title="Source repository"
   
     By The Blackjax developers<br/>
   
-      &copy; Copyright 2022, The Blackjax developers.<br/>
+      &copy; Copyright 2023, The Blackjax developers.<br/>
 </p>
         </footer>
     </div>

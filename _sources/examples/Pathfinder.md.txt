@@ -4,9 +4,9 @@ jupytext:
     extension: .md
     format_name: myst
     format_version: 0.13
-    jupytext_version: 1.14.0
+    jupytext_version: 1.13.1
 kernelspec:
-  display_name: Python 3.9.7 ('blackjax')
+  display_name: Python 3 (ipykernel)
   language: python
   name: python3
 ---
@@ -15,7 +15,7 @@ kernelspec:
 
 In this notebook we introduce the pathfinder algorithm and we show how to use it as a variational inference method or as an initialization tool for MCMC kernels.
 
-```{code-cell} ipython3
+```{code-cell} python
 import jax
 import jax.numpy as jnp
 import jax.random as random
@@ -26,23 +26,19 @@ from sklearn.datasets import make_biclusters
 import blackjax
 ```
 
-```{code-cell} ipython3
-%config InlineBackend.figure_format = "retina"
+```{code-cell} python
+:tags: [hide-cell]
+
 plt.rcParams["axes.spines.right"] = False
 plt.rcParams["axes.spines.top"] = False
 plt.rcParams["figure.figsize"] = (10, 6)
-```
-
-```{code-cell} ipython3
-%load_ext watermark
-%watermark -d -m -v -p jax,jaxlib,blackjax
 ```
 
 ## The Data
 
 We create two clusters of points using [scikit-learn's `make_bicluster` function](https://scikit-learn.org/stable/modules/generated/sklearn.datasets.make_biclusters.html?highlight=bicluster%20data#sklearn.datasets.make_biclusters).
 
-```{code-cell} ipython3
+```{code-cell} python
 num_points = 50
 X, rows, cols = make_biclusters(
     (num_points, 2), 2, noise=0.6, random_state=314, minval=-3, maxval=3
@@ -50,7 +46,9 @@ X, rows, cols = make_biclusters(
 y = rows[0] * 1.0  # y[i] = whether point i belongs to cluster 1
 ```
 
-```{code-cell} ipython3
+```{code-cell} python
+:tags: [hide-input]
+
 colors = ["tab:red" if el else "tab:blue" for el in rows[0]]
 plt.scatter(*X.T, edgecolors=colors, c="none")
 plt.xlabel(r"$X_0$")
@@ -80,7 +78,7 @@ $$
 
 And $\Phi$ is the matrix that contains the data, so each row $\Phi_{i,:}$ is the vector $\left[X_0^i, X_1^i\right]$
 
-```{code-cell} ipython3
+```{code-cell} python
 Phi = X
 N, M = Phi.shape
 
@@ -93,7 +91,7 @@ def log_sigmoid(z):
     return z - jnp.log(1 + jnp.exp(z))
 
 
-def logprob_fn(w, alpha=1.0):
+def logdensity_fn(w, alpha=1.0):
     """The log-probability density function of the posterior distribution of the model."""
     log_an = log_sigmoid(Phi @ w)
     an = Phi @ w
@@ -113,13 +111,16 @@ The optimizer is the limited memory BFGS algorithm.
 
 To help understand the approximations that pathfinder evaluates during its run, here we plot for each step of the L-BFGS optimizer the approximation of the posterior distribution of the model derived by pathfinder and its ELBO:
 
-```{code-cell} ipython3
+```{code-cell} python
 rng_key = random.PRNGKey(314)
 w0 = random.multivariate_normal(rng_key, 2.0 + jnp.zeros(M), jnp.eye(M))
-path = blackjax.vi.pathfinder.init(rng_key, logprob_fn, w0, return_path=True, ftol=1e-4)
+_, info = blackjax.vi.pathfinder.approximate(rng_key, logdensity_fn, w0, ftol=1e-4)
+path = info.path
 ```
 
-```{code-cell} ipython3
+```{code-cell} python
+:tags: [hide-input]
+
 def ellipse_confidence(mu, cov, ax, c, n_std=2.0):
     import numpy as np
 
@@ -141,7 +142,7 @@ step = 0.1
 x_, y_ = jnp.mgrid[-1:3:step, -1:3:step]
 pos_ = jnp.dstack((x_, y_))
 logp_ = jnp.nan_to_num(
-    jax.vmap(logprob_fn)(pos_.reshape(-1, M)).reshape(pos_.shape[0], pos_.shape[1]),
+    jax.vmap(logdensity_fn)(pos_.reshape(-1, M)).reshape(pos_.shape[0], pos_.shape[1]),
     nan=-1e10,
 )
 levels_ = jnp.percentile(logp_.flatten(), jnp.linspace(60, 100, 10))
@@ -155,7 +156,7 @@ for i, ax in zip(range(1, steps + 1), axs.flatten()):
 
     ax.contour(x_, y_, logp_, levels=levels_)
     state = jax.tree_map(lambda x: x[i], path)
-    sample_state, _ = blackjax.vi.pathfinder.sample_from_state(rng_key, state, 10_000)
+    sample_state, _ = blackjax.vi.pathfinder.sample(rng_key, state, 10_000)
     position_path = path.position[: i + 1]
     ax.plot(
         position_path[:, 0],
@@ -174,34 +175,23 @@ fig.show()
 
 Pathfinder can be used as a variational inference method, using its kernel API:
 
-```{code-cell} ipython3
-pathfinder = blackjax.kernels.pathfinder(rng_key, logprob_fn, ftol=1e-4)
-state = pathfinder.init(w0)
+```{code-cell} python
+pathfinder = blackjax.kernels.pathfinder(logdensity_fn)
+state, _ = pathfinder.approximate(rng_key, w0, ftol=1e-4)
 ```
 
-Since `blackjax` does not provide an inference loop we need to implement one ourselves:
+We can now get samples from the approximation:
 
-```{code-cell} ipython3
-def inference_loop(rng_key, kernel, initial_state, num_samples):
-    @jax.jit
-    def one_step(state, rng_key):
-        state, info = kernel(rng_key, state)
-        return state, (state, info)
-
-    keys = jax.random.split(rng_key, num_samples)
-    return jax.lax.scan(one_step, initial_state, keys)
-```
-
-We can now run the inference:
-
-```{code-cell} ipython3
+```{code-cell} python
 _, rng_key = random.split(rng_key)
-_, (_, samples) = inference_loop(rng_key, pathfinder.step, state, 5_000)
+samples, _ = pathfinder.sample(rng_key, state, 5_000)
 ```
 
 And display the trace:
 
-```{code-cell} ipython3
+```{code-cell} python
+:tags: [hide-input]
+
 fig, ax = plt.subplots(1, 2, figsize=(8, 2), sharey=True)
 for i, axi in enumerate(ax):
     axi.plot(samples[:, i])
@@ -216,20 +206,33 @@ Please note that pathfinder is implemented as follows:
 
 hence it makes sense to `jit` the `init` function and then use the `blackjax.vi.pathfinder.sample_from_state` helper function instead of implementing the inference loop:
 
-```{code-cell} ipython3
-state = jax.jit(pathfinder.init)(w0)
-samples, _ = blackjax.vi.pathfinder.sample_from_state(rng_key, state, 5_000)
+```{code-cell} python
+%%time
+
+state, _ = jax.jit(pathfinder.approximate)(rng_key, w0)
+samples, _ = pathfinder.sample(rng_key, state, 5_000)
 ```
 
 Quick comparison against `rmh` kernel:
 
-```{code-cell} ipython3
-rmh = blackjax.kernels.rmh(logprob_fn, sigma=jnp.ones(M) * 0.7)
+```{code-cell} python
+def inference_loop(rng_key, kernel, initial_state, num_samples):
+    @jax.jit
+    def one_step(state, rng_key):
+        state, info = kernel(rng_key, state)
+        return state, (state, info)
+
+    keys = jax.random.split(rng_key, num_samples)
+    return jax.lax.scan(one_step, initial_state, keys)
+
+rmh = blackjax.kernels.rmh(logdensity_fn, sigma=jnp.ones(M) * 0.7)
 state_rmh = rmh.init(w0)
 _, (samples_rmh, _) = inference_loop(rng_key, rmh.step, state_rmh, 5_000)
 ```
 
-```{code-cell} ipython3
+```{code-cell} python
+:tags: [hide-input]
+
 fig, ax = plt.subplots(2, 2, figsize=(10, 4), sharey=True)
 for i in range(2):
     ax[i, 0].plot(samples_rmh.position[:, i])
@@ -248,7 +251,7 @@ Pathfinder uses internally the inverse hessian estimation of the L-BFGS optimize
 
 We can calculate explicitly this inverse hessian matrix for a step of the optimization path using the `blackjax.vi.pathfinder.lbfgs_inverse_hessian_formula_1` function:
 
-```{code-cell} ipython3
+```{code-cell} python
 from blackjax.optimizers.lbfgs import lbfgs_inverse_hessian_formula_1
 
 inverse_mass_matrix = lbfgs_inverse_hessian_formula_1(
@@ -261,9 +264,9 @@ This estimation of the inverse mass matrix, coupled with Nesterov's dual averagi
 
 This scheme is implemented in `blackjax.kernel.pathfinder_adaptation` function:
 
-```{code-cell} ipython3
-adapt = blackjax.kernels.pathfinder_adaptation(blackjax.nuts, logprob_fn)
-state, kernel, info = adapt.run(rng_key, w0)
+```{code-cell} python
+adapt = blackjax.kernels.pathfinder_adaptation(blackjax.nuts, logdensity_fn)
+state, kernel, info = adapt.run(rng_key, w0, 400)
 ```
 
 ## Some Caveats
