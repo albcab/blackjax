@@ -44,7 +44,7 @@ with pm.Model() as model:
 
     theta = pm.Normal("theta", mu=0, sigma=1, shape=J)
     theta_1 = mu + tau * theta
-    obs = pm.Normal("obs", mu=theta, sigma=sigma, shape=J, observed=y)
+    obs = pm.Normal("obs", mu=theta_1, sigma=sigma, shape=J, observed=y)
 ```
 
 
@@ -70,7 +70,8 @@ init_position = [init_position_dict[rv] for rv in rvs]
 rng_key = jax.random.PRNGKey(1234)
 
 adapt = blackjax.window_adaptation(blackjax.nuts, logdensity_fn)
-last_state, kernel, _ = adapt.run(rng_key, init_position, 1000)
+(last_state, parameters), _ = adapt.run(rng_key, init_position, 1000)
+kernel = blackjax.nuts(logdensity_fn, **parameters).step
 ```
 
 Let us now perform inference with the tuned kernel:

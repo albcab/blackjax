@@ -38,7 +38,7 @@
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Sparse logistic regression" href="SparseLogisticRegression.html" />
+    <link rel="next" title="Use Tempered SMC to Improve Exploration of MCMC Methods." href="TemperedSMC.html" />
     <link rel="prev" title="Bayesian Logistic Regression" href="LogisticRegression.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -142,6 +142,11 @@
    Use non-JAX log-prob functions?
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="howto_metropolis_within_gibbs.html">
+   Build a Metropolis-Within-Gibbs sampler?
+  </a>
+ </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
@@ -175,11 +180,6 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="SparseLogisticRegression.html">
-     Sparse logistic regression
-    </a>
-   </li>
-   <li class="toctree-l2">
     <a class="reference internal" href="TemperedSMC.html">
      Use Tempered SMC to Improve Exploration of MCMC Methods.
     </a>
@@ -205,28 +205,8 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="Pathfinder.html">
-     Pathfinder
-    </a>
-   </li>
-   <li class="toctree-l2">
     <a class="reference internal" href="RegimeSwitchingModel.html">
      Regime switching Hidden Markov model
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="HierarchicalBNN.html">
-     Hierarchical Bayesian Neural Networks
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="SGMCMC.html">
-     MNIST Digit Recognition With a 3-Layer Perceptron
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="contour_sgld.html">
-     Contour stochastic gradient Langevin dynamics
     </a>
    </li>
   </ul>
@@ -502,7 +482,7 @@ title="Source repository"
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/2e0d34e130b286bc1e73fc129d7b64494c687a53b3a65dfa980f1e9aeefc2599.png" src="../_images/2e0d34e130b286bc1e73fc129d7b64494c687a53b3a65dfa980f1e9aeefc2599.png" />
+<img alt="../_images/8cc4ae1ad1788c874adf21b1d0c1bf6ea9e287b50f1de5daae5c878e6af1e5cf.png" src="../_images/8cc4ae1ad1788c874adf21b1d0c1bf6ea9e287b50f1de5daae5c878e6af1e5cf.png" />
 </div>
 </div>
 </section>
@@ -548,7 +528,7 @@ $$</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:absl:No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for more info.)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for more info.)
 </pre></div>
 </div>
 </div>
@@ -661,7 +641,7 @@ $$</p>
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/20d707dbfd84bd3e892162c454e058bb7f4b53ed9aa95cad3c8627fc5827ef90.png" src="../_images/20d707dbfd84bd3e892162c454e058bb7f4b53ed9aa95cad3c8627fc5827ef90.png" />
+<img alt="../_images/9d4ab8bdde29ebdd061dbd9ec10ec643c623056f083049d26aca391f77adb794.png" src="../_images/9d4ab8bdde29ebdd061dbd9ec10ec643c623056f083049d26aca391f77adb794.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -709,7 +689,7 @@ $$</p>
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/43fe37320f3e96ae978da3fb17f82ff06a575c8752befe1f362d8c60049f3145.png" src="../_images/43fe37320f3e96ae978da3fb17f82ff06a575c8752befe1f362d8c60049f3145.png" />
+<img alt="../_images/dd7859e2627f35a5ad678f2cc138368b3d8e36fc213300a58b8152cfc67e864d.png" src="../_images/dd7859e2627f35a5ad678f2cc138368b3d8e36fc213300a58b8152cfc67e864d.png" />
 </div>
 </div>
 <p>We essentially recover the same contours as with the standard random walk approach.</p>
@@ -732,10 +712,10 @@ $$</p>
             <p class="prev-next-title">Bayesian Logistic Regression</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="SparseLogisticRegression.html" title="next page">
+    <a class='right-next' id="next-link" href="TemperedSMC.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Sparse logistic regression</p>
+        <p class="prev-next-title">Use Tempered SMC to Improve Exploration of MCMC Methods.</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

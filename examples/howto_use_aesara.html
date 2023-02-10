@@ -142,6 +142,11 @@
    Use non-JAX log-prob functions?
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="howto_metropolis_within_gibbs.html">
+   Build a Metropolis-Within-Gibbs sampler?
+  </a>
+ </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
@@ -175,11 +180,6 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="SparseLogisticRegression.html">
-     Sparse logistic regression
-    </a>
-   </li>
-   <li class="toctree-l2">
     <a class="reference internal" href="TemperedSMC.html">
      Use Tempered SMC to Improve Exploration of MCMC Methods.
     </a>
@@ -205,28 +205,8 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="Pathfinder.html">
-     Pathfinder
-    </a>
-   </li>
-   <li class="toctree-l2">
     <a class="reference internal" href="RegimeSwitchingModel.html">
      Regime switching Hidden Markov model
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="HierarchicalBNN.html">
-     Hierarchical Bayesian Neural Networks
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="SGMCMC.html">
-     MNIST Digit Recognition With a 3-Layer Perceptron
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="contour_sgld.html">
-     Contour stochastic gradient Langevin dynamics
     </a>
    </li>
   </ul>
@@ -371,7 +351,7 @@ title="Source repository"
                 
   <section id="use-with-aesara-models">
 <h1>Use with Aesara models<a class="headerlink" href="#use-with-aesara-models" title="Permalink to this headline">#</a></h1>
-<p>Blackjax accepts any log-probability function as long as it is compatible with <code class="docutils literal notranslate"><span class="pre">jax.jit</span></code>, <code class="docutils literal notranslate"><span class="pre">jax.grad</span></code> (for gradient-based samplers) and <code class="docutils literal notranslate"><span class="pre">jax.vmap</span></code>. In this example we will show ho we can use <a class="reference external" href="https://github.com/aesara-devs/aesara">Aesara</a> as a modeling language and Blackjax as an inference library.</p>
+<p>Blackjax accepts any log-probability function as long as it is compatible with <code class="docutils literal notranslate"><span class="pre">jax.jit</span></code>, <code class="docutils literal notranslate"><span class="pre">jax.grad</span></code> (for gradient-based samplers) and <code class="docutils literal notranslate"><span class="pre">jax.vmap</span></code>. In this example we will show how we can use <a class="reference external" href="https://github.com/aesara-devs/aesara">Aesara</a> as a modeling language and Blackjax as an inference library.</p>
 <div class="admonition-before-you-start admonition">
 <p class="admonition-title">Before you start</p>
 <p>You will need <a class="reference external" href="https://github.com/aesara-devs/aesara">Aesara</a> and <a class="reference external" href="https://github.com/aesara-devs/aeppl">AePPL</a> to run this example. Please follow the installation instructions on their respective repository.</p>
@@ -488,168 +468,166 @@ Y &amp;\sim \operatorname{Binomial}(N, \theta)\\
  |Sum{acc_dtype=float64} [id H]
    |MakeVector{dtype=&#39;float64&#39;} [id I]
      |Sum{acc_dtype=float64} [id J]
-     | |Elemwise{add,no_inplace} [id K]
-     |   |Check{0 &lt;= value &lt;= 1, alpha &gt; 0, beta &gt; 0} [id L]
-     |   | |Elemwise{switch,no_inplace} [id M]
-     |   | | |Elemwise{and_,no_inplace} [id N]
-     |   | | | |Elemwise{ge,no_inplace} [id O]
-     |   | | | | |TransformedVariable [id P]
-     |   | | | | | |Elemwise{sigmoid,no_inplace} [id Q]
-     |   | | | | | | |&lt;TensorType(float64, (71,))&gt; [id R]
-     |   | | | | | |&lt;TensorType(float64, (71,))&gt; [id R]
-     |   | | | | |InplaceDimShuffle{x} [id S]
-     |   | | | |   |TensorConstant{0.0} [id T]
-     |   | | | |Elemwise{le,no_inplace} [id U]
-     |   | | |   |TransformedVariable [id P]
-     |   | | |   |InplaceDimShuffle{x} [id V]
-     |   | | |     |TensorConstant{1.0} [id W]
-     |   | | |Elemwise{sub,no_inplace} [id X]
-     |   | | | |Elemwise{add,no_inplace} [id Y]
-     |   | | | | |Elemwise{switch,no_inplace} [id Z]
-     |   | | | | | |InplaceDimShuffle{x} [id BA]
-     |   | | | | | | |Elemwise{eq,no_inplace} [id BB]
-     |   | | | | | |   |a [id F]
-     |   | | | | | |   |TensorConstant{1.0} [id BC]
-     |   | | | | | |InplaceDimShuffle{x} [id BD]
-     |   | | | | | | |TensorConstant{0.0} [id BE]
-     |   | | | | | |Elemwise{mul,no_inplace} [id BF]
-     |   | | | | |   |InplaceDimShuffle{x} [id BG]
-     |   | | | | |   | |Elemwise{sub,no_inplace} [id BH]
-     |   | | | | |   |   |a [id F]
-     |   | | | | |   |   |TensorConstant{1.0} [id BI]
-     |   | | | | |   |Elemwise{log,no_inplace} [id BJ]
-     |   | | | | |     |TransformedVariable [id P]
-     |   | | | | |Elemwise{switch,no_inplace} [id BK]
-     |   | | | |   |InplaceDimShuffle{x} [id BL]
-     |   | | | |   | |Elemwise{eq,no_inplace} [id BM]
-     |   | | | |   |   |b [id G]
-     |   | | | |   |   |TensorConstant{1.0} [id BN]
-     |   | | | |   |InplaceDimShuffle{x} [id BO]
-     |   | | | |   | |TensorConstant{0.0} [id BP]
-     |   | | | |   |Elemwise{mul,no_inplace} [id BQ]
-     |   | | | |     |InplaceDimShuffle{x} [id BR]
-     |   | | | |     | |Elemwise{sub,no_inplace} [id BS]
-     |   | | | |     |   |b [id G]
-     |   | | | |     |   |TensorConstant{1.0} [id BT]
-     |   | | | |     |Elemwise{log1p,no_inplace} [id BU]
-     |   | | | |       |Elemwise{neg,no_inplace} [id BV]
-     |   | | | |         |TransformedVariable [id P]
-     |   | | | |InplaceDimShuffle{x} [id BW]
-     |   | | |   |Elemwise{sub,no_inplace} [id BX]
-     |   | | |     |Elemwise{add,no_inplace} [id BY]
-     |   | | |     | |Elemwise{gammaln,no_inplace} [id BZ]
-     |   | | |     | | |a [id F]
-     |   | | |     | |Elemwise{gammaln,no_inplace} [id CA]
-     |   | | |     |   |b [id G]
-     |   | | |     |Elemwise{gammaln,no_inplace} [id CB]
-     |   | | |       |Elemwise{add,no_inplace} [id CC]
-     |   | | |         |a [id F]
-     |   | | |         |b [id G]
-     |   | | |InplaceDimShuffle{x} [id CD]
-     |   | |   |TensorConstant{-inf} [id CE]
-     |   | |All [id CF]
-     |   | | |Elemwise{gt,no_inplace} [id CG]
-     |   | |   |a [id F]
-     |   | |   |TensorConstant{0.0} [id CH]
-     |   | |All [id CI]
-     |   |   |Elemwise{gt,no_inplace} [id CJ]
-     |   |     |b [id G]
-     |   |     |TensorConstant{0.0} [id CK]
-     |   |Elemwise{add,no_inplace} [id CL]
-     |     |Elemwise{log,no_inplace} [id CM]
-     |     | |Elemwise{sigmoid,no_inplace} [id CN]
-     |     |   |&lt;TensorType(float64, (71,))&gt; [id R]
-     |     |Elemwise{log1p,no_inplace} [id CO]
-     |       |Elemwise{neg,no_inplace} [id CP]
-     |         |Elemwise{sigmoid,no_inplace} [id CN]
-     |Sum{acc_dtype=float64} [id CQ]
-       |Check{0 &lt;= p, p &lt;= 1} [id CR]
-         |Elemwise{switch,no_inplace} [id CS]
-         | |Elemwise{and_,no_inplace} [id CT]
-         | | |Elemwise{le,no_inplace} [id CU]
-         | | | |InplaceDimShuffle{x} [id CV]
-         | | | | |TensorConstant{0} [id CW]
-         | | | |&lt;TensorType(int64, (71,))&gt; [id CX]
-         | | |Elemwise{le,no_inplace} [id CY]
-         | |   |&lt;TensorType(int64, (71,))&gt; [id CX]
-         | |   |TensorConstant{[20 20 20 .. 47 24 14]} [id CZ]
-         | |Elemwise{add,no_inplace} [id DA]
-         | | |Elemwise{add,no_inplace} [id DB]
-         | | | |Elemwise{sub,no_inplace} [id DC]
-         | | | | |Elemwise{sub,no_inplace} [id DD]
-         | | | | | |Elemwise{gammaln,no_inplace} [id DE]
-         | | | | | | |Elemwise{add,no_inplace} [id DF]
-         | | | | | |   |TensorConstant{[20 20 20 .. 47 24 14]} [id CZ]
-         | | | | | |   |InplaceDimShuffle{x} [id DG]
-         | | | | | |     |TensorConstant{1} [id DH]
-         | | | | | |Elemwise{gammaln,no_inplace} [id DI]
-         | | | | |   |Elemwise{add,no_inplace} [id DJ]
-         | | | | |     |&lt;TensorType(int64, (71,))&gt; [id CX]
-         | | | | |     |InplaceDimShuffle{x} [id DK]
-         | | | | |       |TensorConstant{1} [id DL]
-         | | | | |Elemwise{gammaln,no_inplace} [id DM]
-         | | | |   |Elemwise{add,no_inplace} [id DN]
-         | | | |     |Elemwise{sub,no_inplace} [id DO]
-         | | | |     | |TensorConstant{[20 20 20 .. 47 24 14]} [id CZ]
-         | | | |     | |&lt;TensorType(int64, (71,))&gt; [id CX]
-         | | | |     |InplaceDimShuffle{x} [id DP]
-         | | | |       |TensorConstant{1} [id DQ]
-         | | | |Elemwise{switch,no_inplace} [id DR]
-         | | |   |Elemwise{eq,no_inplace} [id DS]
-         | | |   | |TransformedVariable [id P]
-         | | |   | |InplaceDimShuffle{x} [id DT]
-         | | |   |   |TensorConstant{0} [id DU]
-         | | |   |Elemwise{switch,no_inplace} [id DV]
-         | | |   | |Elemwise{eq,no_inplace} [id DW]
-         | | |   | | |&lt;TensorType(int64, (71,))&gt; [id CX]
-         | | |   | | |InplaceDimShuffle{x} [id DX]
-         | | |   | |   |TensorConstant{0} [id DY]
-         | | |   | |InplaceDimShuffle{x} [id DZ]
-         | | |   | | |TensorConstant{0.0} [id EA]
-         | | |   | |InplaceDimShuffle{x} [id EB]
-         | | |   |   |TensorConstant{-inf} [id EC]
-         | | |   |Elemwise{mul,no_inplace} [id ED]
-         | | |     |&lt;TensorType(int64, (71,))&gt; [id CX]
-         | | |     |Elemwise{log,no_inplace} [id EE]
-         | | |       |TransformedVariable [id P]
-         | | |Elemwise{switch,no_inplace} [id EF]
-         | |   |Elemwise{eq,no_inplace} [id EG]
-         | |   | |Elemwise{sub,no_inplace} [id EH]
-         | |   | | |InplaceDimShuffle{x} [id EI]
-         | |   | | | |TensorConstant{1.0} [id EJ]
-         | |   | | |TransformedVariable [id P]
-         | |   | |InplaceDimShuffle{x} [id EK]
-         | |   |   |TensorConstant{0} [id EL]
-         | |   |Elemwise{switch,no_inplace} [id EM]
-         | |   | |Elemwise{eq,no_inplace} [id EN]
-         | |   | | |Elemwise{sub,no_inplace} [id EO]
-         | |   | | | |TensorConstant{[20 20 20 .. 47 24 14]} [id CZ]
-         | |   | | | |&lt;TensorType(int64, (71,))&gt; [id CX]
-         | |   | | |InplaceDimShuffle{x} [id EP]
-         | |   | |   |TensorConstant{0} [id EQ]
-         | |   | |InplaceDimShuffle{x} [id ER]
-         | |   | | |TensorConstant{0.0} [id ES]
-         | |   | |InplaceDimShuffle{x} [id ET]
-         | |   |   |TensorConstant{-inf} [id EU]
-         | |   |Elemwise{mul,no_inplace} [id EV]
-         | |     |Elemwise{sub,no_inplace} [id EO]
-         | |     |Elemwise{log,no_inplace} [id EW]
-         | |       |Elemwise{sub,no_inplace} [id EH]
-         | |InplaceDimShuffle{x} [id EX]
-         |   |TensorConstant{-inf} [id EY]
-         |All [id EZ]
-         | |Elemwise{le,no_inplace} [id FA]
-         |   |InplaceDimShuffle{x} [id FB]
-         |   | |TensorConstant{0.0} [id FC]
-         |   |TransformedVariable [id P]
-         |All [id FD]
-           |Elemwise{le,no_inplace} [id FE]
-             |TransformedVariable [id P]
-             |InplaceDimShuffle{x} [id FF]
-               |TensorConstant{1.0} [id FG]
+     | |Check{0 &lt;= p, p &lt;= 1} [id K]
+     |   |Elemwise{switch,no_inplace} [id L]
+     |   | |Elemwise{and_,no_inplace} [id M]
+     |   | | |Elemwise{le,no_inplace} [id N]
+     |   | | | |InplaceDimShuffle{x} [id O]
+     |   | | | | |TensorConstant{0} [id P]
+     |   | | | |&lt;TensorType(int64, (71,))&gt; [id Q]
+     |   | | |Elemwise{le,no_inplace} [id R]
+     |   | |   |&lt;TensorType(int64, (71,))&gt; [id Q]
+     |   | |   |TensorConstant{[20 20 20 .. 47 24 14]} [id S]
+     |   | |Elemwise{add,no_inplace} [id T]
+     |   | | |Elemwise{add,no_inplace} [id U]
+     |   | | | |Elemwise{sub,no_inplace} [id V]
+     |   | | | | |Elemwise{sub,no_inplace} [id W]
+     |   | | | | | |Elemwise{gammaln,no_inplace} [id X]
+     |   | | | | | | |Elemwise{add,no_inplace} [id Y]
+     |   | | | | | |   |TensorConstant{[20 20 20 .. 47 24 14]} [id S]
+     |   | | | | | |   |InplaceDimShuffle{x} [id Z]
+     |   | | | | | |     |TensorConstant{1} [id BA]
+     |   | | | | | |Elemwise{gammaln,no_inplace} [id BB]
+     |   | | | | |   |Elemwise{add,no_inplace} [id BC]
+     |   | | | | |     |&lt;TensorType(int64, (71,))&gt; [id Q]
+     |   | | | | |     |InplaceDimShuffle{x} [id BD]
+     |   | | | | |       |TensorConstant{1} [id BE]
+     |   | | | | |Elemwise{gammaln,no_inplace} [id BF]
+     |   | | | |   |Elemwise{add,no_inplace} [id BG]
+     |   | | | |     |Elemwise{sub,no_inplace} [id BH]
+     |   | | | |     | |TensorConstant{[20 20 20 .. 47 24 14]} [id S]
+     |   | | | |     | |&lt;TensorType(int64, (71,))&gt; [id Q]
+     |   | | | |     |InplaceDimShuffle{x} [id BI]
+     |   | | | |       |TensorConstant{1} [id BJ]
+     |   | | | |Elemwise{switch,no_inplace} [id BK]
+     |   | | |   |Elemwise{eq,no_inplace} [id BL]
+     |   | | |   | |Elemwise{sigmoid,no_inplace} [id BM]
+     |   | | |   | | |&lt;TensorType(float64, (71,))&gt; [id BN]
+     |   | | |   | |InplaceDimShuffle{x} [id BO]
+     |   | | |   |   |TensorConstant{0} [id BP]
+     |   | | |   |Elemwise{switch,no_inplace} [id BQ]
+     |   | | |   | |Elemwise{eq,no_inplace} [id BR]
+     |   | | |   | | |&lt;TensorType(int64, (71,))&gt; [id Q]
+     |   | | |   | | |InplaceDimShuffle{x} [id BS]
+     |   | | |   | |   |TensorConstant{0} [id BT]
+     |   | | |   | |InplaceDimShuffle{x} [id BU]
+     |   | | |   | | |TensorConstant{0.0} [id BV]
+     |   | | |   | |InplaceDimShuffle{x} [id BW]
+     |   | | |   |   |TensorConstant{-inf} [id BX]
+     |   | | |   |Elemwise{mul,no_inplace} [id BY]
+     |   | | |     |&lt;TensorType(int64, (71,))&gt; [id Q]
+     |   | | |     |Elemwise{log,no_inplace} [id BZ]
+     |   | | |       |Elemwise{sigmoid,no_inplace} [id BM]
+     |   | | |Elemwise{switch,no_inplace} [id CA]
+     |   | |   |Elemwise{eq,no_inplace} [id CB]
+     |   | |   | |Elemwise{sub,no_inplace} [id CC]
+     |   | |   | | |InplaceDimShuffle{x} [id CD]
+     |   | |   | | | |TensorConstant{1.0} [id CE]
+     |   | |   | | |Elemwise{sigmoid,no_inplace} [id BM]
+     |   | |   | |InplaceDimShuffle{x} [id CF]
+     |   | |   |   |TensorConstant{0} [id CG]
+     |   | |   |Elemwise{switch,no_inplace} [id CH]
+     |   | |   | |Elemwise{eq,no_inplace} [id CI]
+     |   | |   | | |Elemwise{sub,no_inplace} [id CJ]
+     |   | |   | | | |TensorConstant{[20 20 20 .. 47 24 14]} [id S]
+     |   | |   | | | |&lt;TensorType(int64, (71,))&gt; [id Q]
+     |   | |   | | |InplaceDimShuffle{x} [id CK]
+     |   | |   | |   |TensorConstant{0} [id CL]
+     |   | |   | |InplaceDimShuffle{x} [id CM]
+     |   | |   | | |TensorConstant{0.0} [id CN]
+     |   | |   | |InplaceDimShuffle{x} [id CO]
+     |   | |   |   |TensorConstant{-inf} [id CP]
+     |   | |   |Elemwise{mul,no_inplace} [id CQ]
+     |   | |     |Elemwise{sub,no_inplace} [id CJ]
+     |   | |     |Elemwise{log,no_inplace} [id CR]
+     |   | |       |Elemwise{sub,no_inplace} [id CC]
+     |   | |InplaceDimShuffle{x} [id CS]
+     |   |   |TensorConstant{-inf} [id CT]
+     |   |All [id CU]
+     |   | |Elemwise{le,no_inplace} [id CV]
+     |   |   |InplaceDimShuffle{x} [id CW]
+     |   |   | |TensorConstant{0.0} [id CX]
+     |   |   |Elemwise{sigmoid,no_inplace} [id BM]
+     |   |All [id CY]
+     |     |Elemwise{le,no_inplace} [id CZ]
+     |       |Elemwise{sigmoid,no_inplace} [id BM]
+     |       |InplaceDimShuffle{x} [id DA]
+     |         |TensorConstant{1.0} [id DB]
+     |Sum{acc_dtype=float64} [id DC]
+       |Elemwise{add,no_inplace} [id DD]
+         |Check{0 &lt;= value &lt;= 1, alpha &gt; 0, beta &gt; 0} [id DE]
+         | |Elemwise{switch,no_inplace} [id DF]
+         | | |Elemwise{and_,no_inplace} [id DG]
+         | | | |Elemwise{ge,no_inplace} [id DH]
+         | | | | |Elemwise{sigmoid,no_inplace} [id BM]
+         | | | | |InplaceDimShuffle{x} [id DI]
+         | | | |   |TensorConstant{0.0} [id DJ]
+         | | | |Elemwise{le,no_inplace} [id DK]
+         | | |   |Elemwise{sigmoid,no_inplace} [id BM]
+         | | |   |InplaceDimShuffle{x} [id DL]
+         | | |     |TensorConstant{1.0} [id DM]
+         | | |Elemwise{sub,no_inplace} [id DN]
+         | | | |Elemwise{add,no_inplace} [id DO]
+         | | | | |Elemwise{switch,no_inplace} [id DP]
+         | | | | | |InplaceDimShuffle{x} [id DQ]
+         | | | | | | |Elemwise{eq,no_inplace} [id DR]
+         | | | | | |   |a [id F]
+         | | | | | |   |TensorConstant{1.0} [id DS]
+         | | | | | |InplaceDimShuffle{x} [id DT]
+         | | | | | | |TensorConstant{0.0} [id DU]
+         | | | | | |Elemwise{mul,no_inplace} [id DV]
+         | | | | |   |InplaceDimShuffle{x} [id DW]
+         | | | | |   | |Elemwise{sub,no_inplace} [id DX]
+         | | | | |   |   |a [id F]
+         | | | | |   |   |TensorConstant{1.0} [id DY]
+         | | | | |   |Elemwise{log,no_inplace} [id DZ]
+         | | | | |     |Elemwise{sigmoid,no_inplace} [id BM]
+         | | | | |Elemwise{switch,no_inplace} [id EA]
+         | | | |   |InplaceDimShuffle{x} [id EB]
+         | | | |   | |Elemwise{eq,no_inplace} [id EC]
+         | | | |   |   |b [id G]
+         | | | |   |   |TensorConstant{1.0} [id ED]
+         | | | |   |InplaceDimShuffle{x} [id EE]
+         | | | |   | |TensorConstant{0.0} [id EF]
+         | | | |   |Elemwise{mul,no_inplace} [id EG]
+         | | | |     |InplaceDimShuffle{x} [id EH]
+         | | | |     | |Elemwise{sub,no_inplace} [id EI]
+         | | | |     |   |b [id G]
+         | | | |     |   |TensorConstant{1.0} [id EJ]
+         | | | |     |Elemwise{log1p,no_inplace} [id EK]
+         | | | |       |Elemwise{neg,no_inplace} [id EL]
+         | | | |         |Elemwise{sigmoid,no_inplace} [id BM]
+         | | | |InplaceDimShuffle{x} [id EM]
+         | | |   |Elemwise{sub,no_inplace} [id EN]
+         | | |     |Elemwise{add,no_inplace} [id EO]
+         | | |     | |Elemwise{gammaln,no_inplace} [id EP]
+         | | |     | | |a [id F]
+         | | |     | |Elemwise{gammaln,no_inplace} [id EQ]
+         | | |     |   |b [id G]
+         | | |     |Elemwise{gammaln,no_inplace} [id ER]
+         | | |       |Elemwise{add,no_inplace} [id ES]
+         | | |         |a [id F]
+         | | |         |b [id G]
+         | | |InplaceDimShuffle{x} [id ET]
+         | |   |TensorConstant{-inf} [id EU]
+         | |All [id EV]
+         | | |Elemwise{gt,no_inplace} [id EW]
+         | |   |a [id F]
+         | |   |TensorConstant{0.0} [id EX]
+         | |All [id EY]
+         |   |Elemwise{gt,no_inplace} [id EZ]
+         |     |b [id G]
+         |     |TensorConstant{0.0} [id FA]
+         |Elemwise{add,no_inplace} [id FB]
+           |Elemwise{log,no_inplace} [id FC]
+           | |Elemwise{sigmoid,no_inplace} [id FD]
+           |   |&lt;TensorType(float64, (71,))&gt; [id BN]
+           |Elemwise{log1p,no_inplace} [id FE]
+             |Elemwise{neg,no_inplace} [id FF]
+               |Elemwise{sigmoid,no_inplace} [id FD]
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ipykernel.iostream.OutStream at 0x7f2f4d190130&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ipykernel.iostream.OutStream at 0x7ff8eae360a0&gt;
 </pre></div>
 </div>
 </div>
@@ -735,7 +713,8 @@ Y &amp;\sim \operatorname{Binomial}(N, \theta)\\
 <span class="n">n_samples</span> <span class="o">=</span> <span class="mi">1000</span>
 
 <span class="n">adapt</span> <span class="o">=</span> <span class="n">blackjax</span><span class="o">.</span><span class="n">window_adaptation</span><span class="p">(</span><span class="n">blackjax</span><span class="o">.</span><span class="n">nuts</span><span class="p">,</span> <span class="n">logdensity_fn</span><span class="p">)</span>
-<span class="n">state</span><span class="p">,</span> <span class="n">kernel</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">adapt</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">rng_key</span><span class="p">,</span> <span class="n">init_position</span><span class="p">,</span> <span class="n">n_adapt</span><span class="p">)</span>
+<span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">parameters</span><span class="p">),</span> <span class="n">_</span> <span class="o">=</span> <span class="n">adapt</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">rng_key</span><span class="p">,</span> <span class="n">init_position</span><span class="p">,</span> <span class="n">n_adapt</span><span class="p">)</span>
+<span class="n">kernel</span> <span class="o">=</span> <span class="n">blackjax</span><span class="o">.</span><span class="n">nuts</span><span class="p">(</span><span class="n">logdensity_fn</span><span class="p">,</span> <span class="o">**</span><span class="n">parameters</span><span class="p">)</span><span class="o">.</span><span class="n">step</span>
 
 <span class="n">states</span><span class="p">,</span> <span class="n">infos</span> <span class="o">=</span> <span class="n">inference_loop</span><span class="p">(</span>
     <span class="n">rng_key</span><span class="p">,</span> <span class="n">kernel</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">n_samples</span>

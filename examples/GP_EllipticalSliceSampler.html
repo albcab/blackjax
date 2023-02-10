@@ -142,6 +142,11 @@
    Use non-JAX log-prob functions?
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="howto_metropolis_within_gibbs.html">
+   Build a Metropolis-Within-Gibbs sampler?
+  </a>
+ </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
@@ -175,11 +180,6 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="SparseLogisticRegression.html">
-     Sparse logistic regression
-    </a>
-   </li>
-   <li class="toctree-l2">
     <a class="reference internal" href="TemperedSMC.html">
      Use Tempered SMC to Improve Exploration of MCMC Methods.
     </a>
@@ -205,28 +205,8 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="Pathfinder.html">
-     Pathfinder
-    </a>
-   </li>
-   <li class="toctree-l2">
     <a class="reference internal" href="RegimeSwitchingModel.html">
      Regime switching Hidden Markov model
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="HierarchicalBNN.html">
-     Hierarchical Bayesian Neural Networks
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="SGMCMC.html">
-     MNIST Digit Recognition With a 3-Layer Perceptron
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="contour_sgld.html">
-     Contour stochastic gradient Langevin dynamics
     </a>
    </li>
   </ul>
@@ -498,7 +478,7 @@ title="Source repository"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:absl:No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for more info.)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for more info.)
 </pre></div>
 </div>
 </div>
@@ -520,7 +500,7 @@ title="Source repository"
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/02e5661376a63c49e605cbffcc6d5dff1da6a013dd2eb2c4c50eabe2f6e65eb3.png" src="../_images/02e5661376a63c49e605cbffcc6d5dff1da6a013dd2eb2c4c50eabe2f6e65eb3.png" />
+<img alt="../_images/d429471778c43f06c8f1fb6f51b0d88d1f592da3c886d3664e01c9e03260ee88.png" src="../_images/d429471778c43f06c8f1fb6f51b0d88d1f592da3c886d3664e01c9e03260ee88.png" />
 </div>
 </div>
 <section id="sampling">
@@ -551,8 +531,8 @@ title="Source repository"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 8.73 s, sys: 249 ms, total: 8.98 s
-Wall time: 8.41 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 8.59 s, sys: 219 ms, total: 8.8 s
+Wall time: 8.31 s
 </pre></div>
 </div>
 </div>
@@ -565,14 +545,18 @@ Wall time: 8.41 s
 <span class="n">logdensity_fn</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">f</span><span class="p">:</span> <span class="n">loglikelihood_fn</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="o">-</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">jnp</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">f</span> <span class="o">@</span> <span class="n">invSigma</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
 <span class="n">warmup</span> <span class="o">=</span> <span class="n">window_adaptation</span><span class="p">(</span><span class="n">nuts</span><span class="p">,</span> <span class="n">logdensity_fn</span><span class="p">,</span> <span class="n">n_warm</span><span class="p">,</span> <span class="n">target_acceptance_rate</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
 <span class="n">key_warm</span><span class="p">,</span> <span class="n">key_sample</span> <span class="o">=</span> <span class="n">jrnd</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">jrnd</span><span class="o">.</span><span class="n">PRNGKey</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
-<span class="n">state</span><span class="p">,</span> <span class="n">kernel</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">warmup</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">key_warm</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+<span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">params</span><span class="p">),</span> <span class="n">_</span> <span class="o">=</span> <span class="n">warmup</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">key_warm</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+<span class="n">kernel</span> <span class="o">=</span> <span class="n">nuts</span><span class="p">(</span><span class="n">logdensity_fn</span><span class="p">,</span> <span class="o">**</span><span class="n">parameters</span><span class="p">)</span><span class="o">.</span><span class="n">step</span>
 <span class="n">states</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">inference_loop</span><span class="p">(</span><span class="n">key_sample</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">kernel</span><span class="p">,</span> <span class="n">n_iter</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 2min 2s, sys: 223 ms, total: 2min 2s
-Wall time: 2min 3s
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">File</span> <span class="o">&lt;</span><span class="n">timed</span> <span class="n">exec</span><span class="o">&gt;</span><span class="p">:</span><span class="mi">7</span>
+
+<span class="ne">NameError</span>: name &#39;parameters&#39; is not defined
 </pre></div>
 </div>
 </div>
@@ -589,7 +573,7 @@ Wall time: 2min 3s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean squared error for the mean vector 0.00018483595340512693 and covariance matrix 1.9054485278502398e-07
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean squared error for the mean vector 0.000144610385177657 and covariance matrix 1.8344444185913744e-07
 </pre></div>
 </div>
 </div>
@@ -622,7 +606,7 @@ Wall time: 2min 3s
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/5b4a2ffbcc79322c1f833f64c193ed54c78d6affb07d8c68a44e62cb15b827dc.png" src="../_images/5b4a2ffbcc79322c1f833f64c193ed54c78d6affb07d8c68a44e62cb15b827dc.png" />
+<img alt="../_images/e331c9889cfaa3cec8861033dc56ee49b90346c40546ec7ae7d9d825d902741a.png" src="../_images/e331c9889cfaa3cec8861033dc56ee49b90346c40546ec7ae7d9d825d902741a.png" />
 </div>
 </div>
 </section>
@@ -649,7 +633,7 @@ Wall time: 2min 3s
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/c7c23e37ca3418301b5cc69e938069660022f93e0abe88081b95fc5e5c5c6e58.png" src="../_images/c7c23e37ca3418301b5cc69e938069660022f93e0abe88081b95fc5e5c5c6e58.png" />
+<img alt="../_images/77ee595773a3fed8b9e45b757358598868b8a93a99695d3774c409113eba1d5b.png" src="../_images/77ee595773a3fed8b9e45b757358598868b8a93a99695d3774c409113eba1d5b.png" />
 </div>
 </div>
 <div class="cell tag_hide-input docutils container">
@@ -671,7 +655,7 @@ Wall time: 2min 3s
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/94ace3a1dfb0b065e768b23b79a795b3f89f5869ee41962e697994f2ede2ebf2.png" src="../_images/94ace3a1dfb0b065e768b23b79a795b3f89f5869ee41962e697994f2ede2ebf2.png" />
+<img alt="../_images/46e6150022a271738db96573c161a55ffaedc1ace62150cd6af07b2c52592bfd.png" src="../_images/46e6150022a271738db96573c161a55ffaedc1ace62150cd6af07b2c52592bfd.png" />
 </div>
 </div>
 </section>

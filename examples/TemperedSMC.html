@@ -39,7 +39,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Periodic Orbital MCMC" href="PeriodicOrbitalMCMC.html" />
-    <link rel="prev" title="Sparse logistic regression" href="SparseLogisticRegression.html" />
+    <link rel="prev" title="Bayesian Logistic Regression With Latent Gaussian Sampler" href="LogisticRegressionWithLatentGaussianSampler.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -142,6 +142,11 @@
    Use non-JAX log-prob functions?
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="howto_metropolis_within_gibbs.html">
+   Build a Metropolis-Within-Gibbs sampler?
+  </a>
+ </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
@@ -174,11 +179,6 @@
      Bayesian Logistic Regression With Latent Gaussian Sampler
     </a>
    </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="SparseLogisticRegression.html">
-     Sparse logistic regression
-    </a>
-   </li>
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
      Use Tempered SMC to Improve Exploration of MCMC Methods.
@@ -205,28 +205,8 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="Pathfinder.html">
-     Pathfinder
-    </a>
-   </li>
-   <li class="toctree-l2">
     <a class="reference internal" href="RegimeSwitchingModel.html">
      Regime switching Hidden Markov model
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="HierarchicalBNN.html">
-     Hierarchical Bayesian Neural Networks
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="SGMCMC.html">
-     MNIST Digit Recognition With a 3-Layer Perceptron
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="contour_sgld.html">
-     Contour stochastic gradient Langevin dynamics
     </a>
    </li>
   </ul>
@@ -600,10 +580,10 @@ $$</p>
 </div>
 </details>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f4aacc93f10&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f97581a88e0&gt;
 </pre></div>
 </div>
-<img alt="../_images/640d596490ecc3e66cd07e99ddb457e7257c486aa06a0846c30164d3aa2c71f8.png" src="../_images/640d596490ecc3e66cd07e99ddb457e7257c486aa06a0846c30164d3aa2c71f8.png" />
+<img alt="../_images/2e00a41288fabd005c10a4159fa891d29bb4eae070f8653acc2f5b391a45ff74.png" src="../_images/2e00a41288fabd005c10a4159fa891d29bb4eae070f8653acc2f5b391a45ff74.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -651,8 +631,8 @@ $$</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 1.25 s, sys: 4.21 ms, total: 1.25 s
-Wall time: 1.26 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 1.26 s, sys: 19.8 ms, total: 1.28 s
+Wall time: 1.28 s
 </pre></div>
 </div>
 </div>
@@ -672,7 +652,7 @@ Wall time: 1.26 s
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/c8fe16bcdf57dc59d18105690dd01ad3898efa0ed29ab3e843bfa60feb2b71a1.png" src="../_images/c8fe16bcdf57dc59d18105690dd01ad3898efa0ed29ab3e843bfa60feb2b71a1.png" />
+<img alt="../_images/67796b2b0cca050dbc6f60009080b2a4fb7b9f0aba85bab9794f03259d02cbde.png" src="../_images/67796b2b0cca050dbc6f60009080b2a4fb7b9f0aba85bab9794f03259d02cbde.png" />
 </div>
 </div>
 </section>
@@ -692,7 +672,7 @@ Wall time: 1.26 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 7.06 s, sys: 8.28 ms, total: 7.07 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 7.04 s, sys: 15.9 ms, total: 7.06 s
 Wall time: 7.06 s
 </pre></div>
 </div>
@@ -713,7 +693,7 @@ Wall time: 7.06 s
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/acc19b214fc7ab042065be4426807ba50984b3194ee3e8c5434cdc434f7700a3.png" src="../_images/acc19b214fc7ab042065be4426807ba50984b3194ee3e8c5434cdc434f7700a3.png" />
+<img alt="../_images/363e38880a3cb710ba659585277d366d85eeb26246550436dfc9a9edf6efd998.png" src="../_images/363e38880a3cb710ba659585277d366d85eeb26246550436dfc9a9edf6efd998.png" />
 </div>
 </div>
 </section>
@@ -763,11 +743,12 @@ Wall time: 7.06 s
 <span class="n">tempered</span> <span class="o">=</span> <span class="n">blackjax</span><span class="o">.</span><span class="n">adaptive_tempered_smc</span><span class="p">(</span>
     <span class="n">prior_log_prob</span><span class="p">,</span>
     <span class="n">loglikelihood</span><span class="p">,</span>
-    <span class="n">blackjax</span><span class="o">.</span><span class="n">hmc</span><span class="p">,</span>
+    <span class="n">blackjax</span><span class="o">.</span><span class="n">hmc</span><span class="o">.</span><span class="n">kernel</span><span class="p">(),</span>
+    <span class="n">blackjax</span><span class="o">.</span><span class="n">hmc</span><span class="o">.</span><span class="n">init</span><span class="p">,</span>
     <span class="n">hmc_parameters</span><span class="p">,</span>
     <span class="n">resampling</span><span class="o">.</span><span class="n">systematic</span><span class="p">,</span>
     <span class="mf">0.5</span><span class="p">,</span>
-    <span class="n">mcmc_iter</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">num_mcmc_steps</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
 <span class="p">)</span>
 
 <span class="n">initial_smc_state</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">multivariate_normal</span><span class="p">(</span>
@@ -781,9 +762,9 @@ Wall time: 7.06 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of steps in the adaptive algorithm:  9
-CPU times: user 2.8 s, sys: 51.8 ms, total: 2.85 s
-Wall time: 2.82 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of steps in the adaptive algorithm:  12
+CPU times: user 2.77 s, sys: 28.1 ms, total: 2.8 s
+Wall time: 2.75 s
 </pre></div>
 </div>
 </div>
@@ -803,7 +784,7 @@ Wall time: 2.82 s
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/349c92270f9d57e2c94f231c48dc6846bc465d8dd7644e3084b7462bf399af73.png" src="../_images/349c92270f9d57e2c94f231c48dc6846bc465d8dd7644e3084b7462bf399af73.png" />
+<img alt="../_images/38593d2cbb7b38ca923fc4d1cedcf4fcb0fa31c9a57545efff770936c0e0070b.png" src="../_images/38593d2cbb7b38ca923fc4d1cedcf4fcb0fa31c9a57545efff770936c0e0070b.png" />
 </div>
 </div>
 </section>
@@ -855,10 +836,10 @@ Wall time: 2.82 s
 </div>
 </details>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f4aac26ab20&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f97509d4790&gt;
 </pre></div>
 </div>
-<img alt="../_images/07fc13262f5bd947ec4683f6a29cd1acde81672d7a13207fc0ca239e6ad642d5.png" src="../_images/07fc13262f5bd947ec4683f6a29cd1acde81672d7a13207fc0ca239e6ad642d5.png" />
+<img alt="../_images/69b910a68f358121b8183c83377aa40a714328886f09a7979728e30ce068fcb0.png" src="../_images/69b910a68f358121b8183c83377aa40a714328886f09a7979728e30ce068fcb0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -903,8 +884,8 @@ Wall time: 2.82 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 987 ms, sys: 122 µs, total: 987 ms
-Wall time: 984 ms
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 847 ms, sys: 7.76 ms, total: 855 ms
+Wall time: 851 ms
 </pre></div>
 </div>
 </div>
@@ -925,7 +906,7 @@ Wall time: 984 ms
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/1d316fc8edf43a64daca63f99596f3a77d8217e7592bc75c1b4b53b6824d11c5.png" src="../_images/1d316fc8edf43a64daca63f99596f3a77d8217e7592bc75c1b4b53b6824d11c5.png" />
+<img alt="../_images/746ea9f6958fb8376a0791217cae672cb9e276c6603359e7861577d2cb442bca.png" src="../_images/746ea9f6958fb8376a0791217cae672cb9e276c6603359e7861577d2cb442bca.png" />
 </div>
 </div>
 </section>
@@ -945,8 +926,8 @@ Wall time: 984 ms
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 1.56 s, sys: 3.98 ms, total: 1.57 s
-Wall time: 1.57 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 1.5 s, sys: 28 ms, total: 1.53 s
+Wall time: 1.53 s
 </pre></div>
 </div>
 </div>
@@ -967,7 +948,7 @@ Wall time: 1.57 s
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/0ff7cc58b2e9ae769007feb9abcd62837f8ef9d37daefe1e87bdfa9a083bde4b.png" src="../_images/0ff7cc58b2e9ae769007feb9abcd62837f8ef9d37daefe1e87bdfa9a083bde4b.png" />
+<img alt="../_images/a9601768222e0c0c77770dc1ff7dd094dd33ea733252ec4c6f48e2e269aab611.png" src="../_images/a9601768222e0c0c77770dc1ff7dd094dd33ea733252ec4c6f48e2e269aab611.png" />
 </div>
 </div>
 </section>
@@ -1006,9 +987,11 @@ We correct the bias introduced by the (arbitrary) prior.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of steps in the adaptive algorithm:  8
-CPU times: user 2.84 s, sys: 32 ms, total: 2.88 s
-Wall time: 2.87 s
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">File</span> <span class="o">&lt;</span><span class="n">timed</span> <span class="n">exec</span><span class="o">&gt;</span><span class="p">:</span><span class="mi">7</span>
+
+<span class="ne">TypeError</span>: __new__() got an unexpected keyword argument &#39;mcmc_iter&#39;
 </pre></div>
 </div>
 </div>
@@ -1029,7 +1012,7 @@ Wall time: 2.87 s
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/549431f6067b20673da2020fdac595d610d8a1d660687e623f8cbfae718dbcc3.png" src="../_images/549431f6067b20673da2020fdac595d610d8a1d660687e623f8cbfae718dbcc3.png" />
+<img alt="../_images/fcebf51acefa1205211c4bb0e79dd3109063ceae27c4e6f6506642c621504810.png" src="../_images/fcebf51acefa1205211c4bb0e79dd3109063ceae27c4e6f6506642c621504810.png" />
 </div>
 </div>
 <p>The tempered SMC algorithm with the HMC kernel clearly outperfoms the HMC and NUTS kernels alone.</p>
@@ -1045,11 +1028,11 @@ Wall time: 2.87 s
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="SparseLogisticRegression.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="LogisticRegressionWithLatentGaussianSampler.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Sparse logistic regression</p>
+            <p class="prev-next-title">Bayesian Logistic Regression With Latent Gaussian Sampler</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="PeriodicOrbitalMCMC.html" title="next page">
