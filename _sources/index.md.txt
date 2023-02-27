@@ -86,6 +86,14 @@ with the relevant hardware acceleration support.
 ```{toctree}
 ---
 maxdepth: 1
+hidden:
+---
+Quickstart <examples/quickstart.md>
+```
+
+```{toctree}
+---
+maxdepth: 1
 caption: PPL INTEGRATION
 hidden:
 ---
@@ -114,19 +122,24 @@ maxdepth: 1
 caption: LEARN BY EXAMPLE
 hidden:
 ---
-examples
+The Sampling Book <https://blackjax-devs.github.io/sampling-book>
+```
+
+```{toctree}
+---
+hidden:
+caption: API
+maxdepth: 3
+---
+Sampling algorithms <autoapi/blackjax/kernels/index>
+Diagnostics <autoapi/blackjax/diagnostics/index>
+API Reference<autoapi/blackjax/index>
 ```
 
 ```{toctree}
 ---
 maxdepth: 1
-caption: API
 hidden:
 ---
-mcmc
-sgmcmc
-smc
-vi
-adaptation
-diagnostics
+Bibliography<bib.rst>
 ```
