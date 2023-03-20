@@ -57,6 +57,7 @@ Functions
    blackjax.mcmc.trajectory.dynamic_progressive_integration
    blackjax.mcmc.trajectory.dynamic_recursive_integration
    blackjax.mcmc.trajectory.dynamic_multiplicative_expansion
+   blackjax.mcmc.trajectory.hmc_energy
 
 
 
@@ -203,5 +204,8 @@ Functions
                               returned.
    :param rate: The rate of the geometrical expansion. Typically 2 in NUTS, this is why
                 the literature often refers to "tree doubling".
+
+
+.. py:function:: hmc_energy(kinetic_energy)
 
 

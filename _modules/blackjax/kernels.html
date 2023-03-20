@@ -173,14 +173,13 @@
 <li class="toctree-l3"><a class="reference internal" href="../../autoapi/blackjax/mcmc/ghmc/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">blackjax.mcmc.ghmc</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../autoapi/blackjax/mcmc/hmc/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">blackjax.mcmc.hmc</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../autoapi/blackjax/mcmc/integrators/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">blackjax.mcmc.integrators</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../autoapi/blackjax/mcmc/irmh/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">blackjax.mcmc.irmh</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../autoapi/blackjax/mcmc/mala/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">blackjax.mcmc.mala</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../autoapi/blackjax/mcmc/marginal_latent_gaussian/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">blackjax.mcmc.marginal_latent_gaussian</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../autoapi/blackjax/mcmc/metrics/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">blackjax.mcmc.metrics</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../autoapi/blackjax/mcmc/nuts/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">blackjax.mcmc.nuts</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../autoapi/blackjax/mcmc/periodic_orbital/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">blackjax.mcmc.periodic_orbital</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../autoapi/blackjax/mcmc/proposal/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">blackjax.mcmc.proposal</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../autoapi/blackjax/mcmc/rmh/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">blackjax.mcmc.rmh</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../autoapi/blackjax/mcmc/random_walk/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">blackjax.mcmc.random_walk</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../autoapi/blackjax/mcmc/termination/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">blackjax.mcmc.termination</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../autoapi/blackjax/mcmc/trajectory/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">blackjax.mcmc.trajectory</span></code></a></li>
 </ul>
@@ -352,6 +351,7 @@ document.write(`
 
 <span class="kn">import</span> <span class="nn">blackjax.adaptation</span> <span class="k">as</span> <span class="nn">adaptation</span>
 <span class="kn">import</span> <span class="nn">blackjax.mcmc</span> <span class="k">as</span> <span class="nn">mcmc</span>
+<span class="kn">import</span> <span class="nn">blackjax.mcmc.random_walk</span>
 <span class="kn">import</span> <span class="nn">blackjax.sgmcmc</span> <span class="k">as</span> <span class="nn">sgmcmc</span>
 <span class="kn">import</span> <span class="nn">blackjax.smc</span> <span class="k">as</span> <span class="nn">smc</span>
 <span class="kn">import</span> <span class="nn">blackjax.vi</span> <span class="k">as</span> <span class="nn">vi</span>
@@ -366,6 +366,7 @@ document.write(`
     <span class="s2">&quot;nuts&quot;</span><span class="p">,</span>
     <span class="s2">&quot;ghmc&quot;</span><span class="p">,</span>
     <span class="s2">&quot;orbital_hmc&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;additive_step_random_walk&quot;</span><span class="p">,</span>
     <span class="s2">&quot;rmh&quot;</span><span class="p">,</span>
     <span class="s2">&quot;sgld&quot;</span><span class="p">,</span>
     <span class="s2">&quot;sghmc&quot;</span><span class="p">,</span>
@@ -1289,17 +1290,86 @@ document.write(`
     <span class="k">return</span> <span class="n">AdaptationAlgorithm</span><span class="p">(</span><span class="n">run</span><span class="p">)</span>  <span class="c1"># type: ignore[arg-type]</span></div>
 
 
-<div class="viewcode-block" id="rmh"><a class="viewcode-back" href="../../autoapi/blackjax/kernels/index.html#blackjax.kernels.rmh">[docs]</a><span class="k">class</span> <span class="nc">rmh</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Implements the (basic) user interface for the gaussian random walk kernel</span>
+<div class="viewcode-block" id="additive_step_random_walk"><a class="viewcode-back" href="../../autoapi/blackjax/kernels/index.html#blackjax.kernels.additive_step_random_walk">[docs]</a><span class="k">class</span> <span class="nc">additive_step_random_walk</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Implements the user interface for the Additive Step RMH</span>
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
 
-<span class="sd">    A new Gaussian Random Walk kernel can be initialized and used with the following code:</span>
+<span class="sd">    A new kernel can be initialized and used with the following code:</span>
 
 <span class="sd">    .. code::</span>
 
-<span class="sd">        rmh = blackjax.rmh(logdensity_fn, sigma)</span>
+<span class="sd">        rw = blackjax.additive_step_random_walk(logdensity_fn, random_step)</span>
+<span class="sd">        state = rw.init(position)</span>
+<span class="sd">        new_state, info = rw.step(rng_key, state)</span>
+
+<span class="sd">    The specific case of a Gaussian `random_step` is already implemented, either with independent components</span>
+<span class="sd">    when `covariance_matrix` is a one dimensional array or with dependent components if a two dimensional array:</span>
+
+<span class="sd">    .. code::</span>
+
+<span class="sd">        rw_gaussian = blackjax.additive_step_random_walk.normal_random_walk(logdensity_fn, covariance_matrix)</span>
+<span class="sd">        state = rw_gaussian.init(position)</span>
+<span class="sd">        new_state, info = rw_gaussian.step(rng_key, state)</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    logdensity_fn</span>
+<span class="sd">        The log density probability density function from which we wish to sample.</span>
+<span class="sd">    random_step</span>
+<span class="sd">        A Callable that takes a random number generator and the current state and produces a step,</span>
+<span class="sd">        which will be added to the current position to obtain a new position. Must be symmetric</span>
+<span class="sd">        to maintain detailed balance. This means that P(step|position) = P(-step | position+step)</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    A ``MCMCSamplingAlgorithm``.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="additive_step_random_walk.init"><a class="viewcode-back" href="../../autoapi/blackjax/kernels/index.html#blackjax.kernels.additive_step_random_walk.init">[docs]</a>    <span class="n">init</span> <span class="o">=</span> <span class="nb">staticmethod</span><span class="p">(</span><span class="n">blackjax</span><span class="o">.</span><span class="n">mcmc</span><span class="o">.</span><span class="n">random_walk</span><span class="o">.</span><span class="n">init</span><span class="p">)</span></div>
+<div class="viewcode-block" id="additive_step_random_walk.build_kernel"><a class="viewcode-back" href="../../autoapi/blackjax/kernels/index.html#blackjax.kernels.additive_step_random_walk.build_kernel">[docs]</a>    <span class="n">build_kernel</span> <span class="o">=</span> <span class="nb">staticmethod</span><span class="p">(</span><span class="n">blackjax</span><span class="o">.</span><span class="n">mcmc</span><span class="o">.</span><span class="n">random_walk</span><span class="o">.</span><span class="n">build_additive_step</span><span class="p">)</span></div>
+
+    <span class="nd">@classmethod</span>
+<div class="viewcode-block" id="additive_step_random_walk.normal_random_walk"><a class="viewcode-back" href="../../autoapi/blackjax/kernels/index.html#blackjax.kernels.additive_step_random_walk.normal_random_walk">[docs]</a>    <span class="k">def</span> <span class="nf">normal_random_walk</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">logdensity_fn</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">sigma</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        logdensity_fn</span>
+<span class="sd">            The log density probability density function from which we wish to sample.</span>
+<span class="sd">        sigma</span>
+<span class="sd">            The value of the covariance matrix of the gaussian proposal distribution.</span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">             A ``MCMCSamplingAlgorithm``.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">logdensity_fn</span><span class="p">,</span> <span class="n">blackjax</span><span class="o">.</span><span class="n">mcmc</span><span class="o">.</span><span class="n">random_walk</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">sigma</span><span class="p">))</span></div>
+
+    <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span>  <span class="c1"># type: ignore[misc]</span>
+        <span class="bp">cls</span><span class="p">,</span> <span class="n">logdensity_fn</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">random_step</span><span class="p">:</span> <span class="n">Callable</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MCMCSamplingAlgorithm</span><span class="p">:</span>
+        <span class="n">kernel</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">build_kernel</span><span class="p">()</span>
+
+        <span class="k">def</span> <span class="nf">init_fn</span><span class="p">(</span><span class="n">position</span><span class="p">:</span> <span class="n">PyTree</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">position</span><span class="p">,</span> <span class="n">logdensity_fn</span><span class="p">)</span>
+
+        <span class="k">def</span> <span class="nf">step_fn</span><span class="p">(</span><span class="n">rng_key</span><span class="p">:</span> <span class="n">PRNGKey</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">kernel</span><span class="p">(</span><span class="n">rng_key</span><span class="p">,</span> <span class="n">random_step</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">logdensity_fn</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">MCMCSamplingAlgorithm</span><span class="p">(</span><span class="n">init_fn</span><span class="p">,</span> <span class="n">step_fn</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="rmh"><a class="viewcode-back" href="../../autoapi/blackjax/kernels/index.html#blackjax.kernels.rmh">[docs]</a><span class="k">class</span> <span class="nc">rmh</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Implements the user interface for the RMH.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+
+<span class="sd">    A new kernel can be initialized and used with the following code:</span>
+
+<span class="sd">    .. code::</span>
+
+<span class="sd">        rmh = blackjax.rmh(logdensity_fn, proposal_generator)</span>
 <span class="sd">        state = rmh.init(position)</span>
 <span class="sd">        new_state, info = rmh.step(rng_key, state)</span>
 
@@ -1314,34 +1384,39 @@ document.write(`
 <span class="sd">    ----------</span>
 <span class="sd">    logdensity_fn</span>
 <span class="sd">        The log density probability density function from which we wish to sample.</span>
-<span class="sd">    sigma</span>
-<span class="sd">        The value of the covariance matrix of the gaussian proposal distribution.</span>
+<span class="sd">    proposal_generator</span>
+<span class="sd">        A Callable that takes a random number generator and the current state and produces a new proposal.</span>
+<span class="sd">    proposal_logdensity_fn</span>
+<span class="sd">        The logdensity function associated to the proposal_generator. If the generator is non-symmetric,</span>
+<span class="sd">         P(x_t|x_t-1) is not equal to P(x_t-1|x_t), then this parameter must be not None in order to apply</span>
+<span class="sd">         the Metropolis-Hastings correction for detailed balance.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    A ``MCMCSamplingAlgorithm``.</span>
-
 <span class="sd">    &quot;&quot;&quot;</span>
 
-<div class="viewcode-block" id="rmh.init"><a class="viewcode-back" href="../../autoapi/blackjax/kernels/index.html#blackjax.kernels.rmh.init">[docs]</a>    <span class="n">init</span> <span class="o">=</span> <span class="nb">staticmethod</span><span class="p">(</span><span class="n">mcmc</span><span class="o">.</span><span class="n">rmh</span><span class="o">.</span><span class="n">init</span><span class="p">)</span></div>
-<div class="viewcode-block" id="rmh.kernel"><a class="viewcode-back" href="../../autoapi/blackjax/kernels/index.html#blackjax.kernels.rmh.kernel">[docs]</a>    <span class="n">kernel</span> <span class="o">=</span> <span class="nb">staticmethod</span><span class="p">(</span><span class="n">mcmc</span><span class="o">.</span><span class="n">rmh</span><span class="o">.</span><span class="n">kernel</span><span class="p">)</span></div>
+<div class="viewcode-block" id="rmh.init"><a class="viewcode-back" href="../../autoapi/blackjax/kernels/index.html#blackjax.kernels.rmh.init">[docs]</a>    <span class="n">init</span> <span class="o">=</span> <span class="nb">staticmethod</span><span class="p">(</span><span class="n">blackjax</span><span class="o">.</span><span class="n">mcmc</span><span class="o">.</span><span class="n">random_walk</span><span class="o">.</span><span class="n">init</span><span class="p">)</span></div>
+<div class="viewcode-block" id="rmh.build_kernel"><a class="viewcode-back" href="../../autoapi/blackjax/kernels/index.html#blackjax.kernels.rmh.build_kernel">[docs]</a>    <span class="n">build_kernel</span> <span class="o">=</span> <span class="nb">staticmethod</span><span class="p">(</span><span class="n">blackjax</span><span class="o">.</span><span class="n">mcmc</span><span class="o">.</span><span class="n">random_walk</span><span class="o">.</span><span class="n">build_rmh</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span>  <span class="c1"># type: ignore[misc]</span>
         <span class="bp">cls</span><span class="p">,</span>
         <span class="n">logdensity_fn</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span>
-        <span class="n">sigma</span><span class="p">:</span> <span class="n">Array</span><span class="p">,</span>
+        <span class="n">proposal_generator</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">PRNGKey</span><span class="p">,</span> <span class="n">PyTree</span><span class="p">],</span> <span class="n">PyTree</span><span class="p">],</span>
+        <span class="n">proposal_logdensity_fn</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">[[</span><span class="n">PyTree</span><span class="p">],</span> <span class="n">PyTree</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MCMCSamplingAlgorithm</span><span class="p">:</span>
-        <span class="n">step</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">kernel</span><span class="p">()</span>
+        <span class="n">kernel</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">build_kernel</span><span class="p">()</span>
 
         <span class="k">def</span> <span class="nf">init_fn</span><span class="p">(</span><span class="n">position</span><span class="p">:</span> <span class="n">PyTree</span><span class="p">):</span>
             <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">position</span><span class="p">,</span> <span class="n">logdensity_fn</span><span class="p">)</span>
 
         <span class="k">def</span> <span class="nf">step_fn</span><span class="p">(</span><span class="n">rng_key</span><span class="p">:</span> <span class="n">PRNGKey</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
-            <span class="k">return</span> <span class="n">step</span><span class="p">(</span>
+            <span class="k">return</span> <span class="n">kernel</span><span class="p">(</span>
                 <span class="n">rng_key</span><span class="p">,</span>
-                <span class="n">state</span><span class="p">,</span>
                 <span class="n">logdensity_fn</span><span class="p">,</span>
-                <span class="n">sigma</span><span class="p">,</span>
+                <span class="n">proposal_generator</span><span class="p">,</span>
+                <span class="n">state</span><span class="p">,</span>
+                <span class="n">proposal_logdensity_fn</span><span class="p">,</span>
             <span class="p">)</span>
 
         <span class="k">return</span> <span class="n">MCMCSamplingAlgorithm</span><span class="p">(</span><span class="n">init_fn</span><span class="p">,</span> <span class="n">step_fn</span><span class="p">)</span></div>
@@ -1382,21 +1457,21 @@ document.write(`
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-<div class="viewcode-block" id="irmh.init"><a class="viewcode-back" href="../../autoapi/blackjax/kernels/index.html#blackjax.kernels.irmh.init">[docs]</a>    <span class="n">init</span> <span class="o">=</span> <span class="nb">staticmethod</span><span class="p">(</span><span class="n">mcmc</span><span class="o">.</span><span class="n">rmh</span><span class="o">.</span><span class="n">init</span><span class="p">)</span></div>
-<div class="viewcode-block" id="irmh.kernel"><a class="viewcode-back" href="../../autoapi/blackjax/kernels/index.html#blackjax.kernels.irmh.kernel">[docs]</a>    <span class="n">kernel</span> <span class="o">=</span> <span class="nb">staticmethod</span><span class="p">(</span><span class="n">mcmc</span><span class="o">.</span><span class="n">irmh</span><span class="o">.</span><span class="n">kernel</span><span class="p">)</span></div>
+<div class="viewcode-block" id="irmh.init"><a class="viewcode-back" href="../../autoapi/blackjax/kernels/index.html#blackjax.kernels.irmh.init">[docs]</a>    <span class="n">init</span> <span class="o">=</span> <span class="nb">staticmethod</span><span class="p">(</span><span class="n">blackjax</span><span class="o">.</span><span class="n">mcmc</span><span class="o">.</span><span class="n">random_walk</span><span class="o">.</span><span class="n">init</span><span class="p">)</span></div>
+<div class="viewcode-block" id="irmh.build_kernel"><a class="viewcode-back" href="../../autoapi/blackjax/kernels/index.html#blackjax.kernels.irmh.build_kernel">[docs]</a>    <span class="n">build_kernel</span> <span class="o">=</span> <span class="nb">staticmethod</span><span class="p">(</span><span class="n">blackjax</span><span class="o">.</span><span class="n">mcmc</span><span class="o">.</span><span class="n">random_walk</span><span class="o">.</span><span class="n">build_irmh</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span>  <span class="c1"># type: ignore[misc]</span>
         <span class="bp">cls</span><span class="p">,</span>
         <span class="n">logdensity_fn</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span>
         <span class="n">proposal_distribution</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MCMCSamplingAlgorithm</span><span class="p">:</span>
-        <span class="n">step</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">kernel</span><span class="p">(</span><span class="n">proposal_distribution</span><span class="p">)</span>
+        <span class="n">kernel</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">build_kernel</span><span class="p">()</span>
 
         <span class="k">def</span> <span class="nf">init_fn</span><span class="p">(</span><span class="n">position</span><span class="p">:</span> <span class="n">PyTree</span><span class="p">):</span>
             <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">position</span><span class="p">,</span> <span class="n">logdensity_fn</span><span class="p">)</span>
 
         <span class="k">def</span> <span class="nf">step_fn</span><span class="p">(</span><span class="n">rng_key</span><span class="p">:</span> <span class="n">PRNGKey</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
-            <span class="k">return</span> <span class="n">step</span><span class="p">(</span><span class="n">rng_key</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">logdensity_fn</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">kernel</span><span class="p">(</span><span class="n">rng_key</span><span class="p">,</span> <span class="n">proposal_distribution</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">logdensity_fn</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">MCMCSamplingAlgorithm</span><span class="p">(</span><span class="n">init_fn</span><span class="p">,</span> <span class="n">step_fn</span><span class="p">)</span></div>
 

@@ -15,14 +15,13 @@ Submodules
    ghmc/index.rst
    hmc/index.rst
    integrators/index.rst
-   irmh/index.rst
    mala/index.rst
    marginal_latent_gaussian/index.rst
    metrics/index.rst
    nuts/index.rst
    periodic_orbital/index.rst
    proposal/index.rst
-   rmh/index.rst
+   random_walk/index.rst
    termination/index.rst
    trajectory/index.rst
 

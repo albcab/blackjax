@@ -36,6 +36,7 @@ Classes
 .. autoapisummary::
 
    blackjax.adaptive_tempered_smc
+   blackjax.additive_step_random_walk
    blackjax.csgld
    blackjax.elliptical_slice
    blackjax.ghmc
@@ -64,6 +65,7 @@ Functions
    blackjax.meads_adaptation
    blackjax.pathfinder_adaptation
    blackjax.window_adaptation
+
 
 
 

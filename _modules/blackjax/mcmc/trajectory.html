@@ -173,14 +173,13 @@
 <li class="toctree-l3"><a class="reference internal" href="../../../autoapi/blackjax/mcmc/ghmc/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">blackjax.mcmc.ghmc</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../autoapi/blackjax/mcmc/hmc/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">blackjax.mcmc.hmc</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../autoapi/blackjax/mcmc/integrators/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">blackjax.mcmc.integrators</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../autoapi/blackjax/mcmc/irmh/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">blackjax.mcmc.irmh</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../autoapi/blackjax/mcmc/mala/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">blackjax.mcmc.mala</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../autoapi/blackjax/mcmc/marginal_latent_gaussian/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">blackjax.mcmc.marginal_latent_gaussian</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../autoapi/blackjax/mcmc/metrics/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">blackjax.mcmc.metrics</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../autoapi/blackjax/mcmc/nuts/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">blackjax.mcmc.nuts</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../autoapi/blackjax/mcmc/periodic_orbital/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">blackjax.mcmc.periodic_orbital</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../autoapi/blackjax/mcmc/proposal/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">blackjax.mcmc.proposal</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../autoapi/blackjax/mcmc/rmh/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">blackjax.mcmc.rmh</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../autoapi/blackjax/mcmc/random_walk/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">blackjax.mcmc.random_walk</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../autoapi/blackjax/mcmc/termination/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">blackjax.mcmc.termination</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../autoapi/blackjax/mcmc/trajectory/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">blackjax.mcmc.trajectory</span></code></a></li>
 </ul>
@@ -496,7 +495,9 @@ document.write(`
 <span class="sd">        which we say a transition is divergent.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">_</span><span class="p">,</span> <span class="n">generate_proposal</span> <span class="o">=</span> <span class="n">proposal_generator</span><span class="p">(</span><span class="n">kinetic_energy</span><span class="p">,</span> <span class="n">divergence_threshold</span><span class="p">)</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">generate_proposal</span> <span class="o">=</span> <span class="n">proposal_generator</span><span class="p">(</span>
+        <span class="n">hmc_energy</span><span class="p">(</span><span class="n">kinetic_energy</span><span class="p">),</span> <span class="n">divergence_threshold</span>
+    <span class="p">)</span>
     <span class="n">sample_proposal</span> <span class="o">=</span> <span class="n">progressive_uniform_sampling</span>
 
     <span class="k">def</span> <span class="nf">integrate</span><span class="p">(</span>
@@ -654,7 +655,9 @@ document.write(`
 <span class="sd">        Bool to indicate whether to perform additional U turn check between two trajectory.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">_</span><span class="p">,</span> <span class="n">generate_proposal</span> <span class="o">=</span> <span class="n">proposal_generator</span><span class="p">(</span><span class="n">kinetic_energy</span><span class="p">,</span> <span class="n">divergence_threshold</span><span class="p">)</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">generate_proposal</span> <span class="o">=</span> <span class="n">proposal_generator</span><span class="p">(</span>
+        <span class="n">hmc_energy</span><span class="p">(</span><span class="n">kinetic_energy</span><span class="p">),</span> <span class="n">divergence_threshold</span>
+    <span class="p">)</span>
     <span class="n">sample_proposal</span> <span class="o">=</span> <span class="n">progressive_uniform_sampling</span>
 
     <span class="k">def</span> <span class="nf">buildtree_integrate</span><span class="p">(</span>
@@ -949,6 +952,13 @@ document.write(`
         <span class="k">return</span> <span class="n">expansion_state</span><span class="p">,</span> <span class="p">(</span><span class="n">is_diverging</span><span class="p">,</span> <span class="n">is_turning</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">expand</span></div>
+
+
+<div class="viewcode-block" id="hmc_energy"><a class="viewcode-back" href="../../../autoapi/blackjax/mcmc/trajectory/index.html#blackjax.mcmc.trajectory.hmc_energy">[docs]</a><span class="k">def</span> <span class="nf">hmc_energy</span><span class="p">(</span><span class="n">kinetic_energy</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">energy</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
+        <span class="k">return</span> <span class="o">-</span><span class="n">state</span><span class="o">.</span><span class="n">logdensity</span> <span class="o">+</span> <span class="n">kinetic_energy</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">momentum</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">energy</span></div>
 </pre></div>
 
                 </article>

@@ -177,14 +177,13 @@
 <li class="toctree-l3"><a class="reference internal" href="../mcmc/ghmc/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">blackjax.mcmc.ghmc</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../mcmc/hmc/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">blackjax.mcmc.hmc</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../mcmc/integrators/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">blackjax.mcmc.integrators</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../mcmc/irmh/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">blackjax.mcmc.irmh</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../mcmc/mala/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">blackjax.mcmc.mala</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../mcmc/marginal_latent_gaussian/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">blackjax.mcmc.marginal_latent_gaussian</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../mcmc/metrics/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">blackjax.mcmc.metrics</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../mcmc/nuts/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">blackjax.mcmc.nuts</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../mcmc/periodic_orbital/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">blackjax.mcmc.periodic_orbital</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../mcmc/proposal/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">blackjax.mcmc.proposal</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../mcmc/rmh/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">blackjax.mcmc.rmh</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mcmc/random_walk/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">blackjax.mcmc.random_walk</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../mcmc/termination/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">blackjax.mcmc.termination</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../mcmc/trajectory/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">blackjax.mcmc.trajectory</span></code></a></li>
 </ul>
@@ -375,14 +374,20 @@ document.write(`
 </li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#blackjax.kernels.window_adaptation"><code class="docutils literal notranslate"><span class="pre">window_adaptation()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#blackjax.kernels.meads_adaptation"><code class="docutils literal notranslate"><span class="pre">meads_adaptation()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#blackjax.kernels.additive_step_random_walk"><code class="docutils literal notranslate"><span class="pre">additive_step_random_walk</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#blackjax.kernels.additive_step_random_walk.init"><code class="docutils literal notranslate"><span class="pre">additive_step_random_walk.init</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#blackjax.kernels.additive_step_random_walk.build_kernel"><code class="docutils literal notranslate"><span class="pre">additive_step_random_walk.build_kernel</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#blackjax.kernels.additive_step_random_walk.normal_random_walk"><code class="docutils literal notranslate"><span class="pre">additive_step_random_walk.normal_random_walk()</span></code></a></li>
+</ul>
+</li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#blackjax.kernels.rmh"><code class="docutils literal notranslate"><span class="pre">rmh</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#blackjax.kernels.rmh.init"><code class="docutils literal notranslate"><span class="pre">rmh.init</span></code></a></li>
-<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#blackjax.kernels.rmh.kernel"><code class="docutils literal notranslate"><span class="pre">rmh.kernel</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#blackjax.kernels.rmh.build_kernel"><code class="docutils literal notranslate"><span class="pre">rmh.build_kernel</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#blackjax.kernels.irmh"><code class="docutils literal notranslate"><span class="pre">irmh</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#blackjax.kernels.irmh.init"><code class="docutils literal notranslate"><span class="pre">irmh.init</span></code></a></li>
-<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#blackjax.kernels.irmh.kernel"><code class="docutils literal notranslate"><span class="pre">irmh.kernel</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#blackjax.kernels.irmh.build_kernel"><code class="docutils literal notranslate"><span class="pre">irmh.build_kernel</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#blackjax.kernels.orbital_hmc"><code class="docutils literal notranslate"><span class="pre">orbital_hmc</span></code></a><ul class="nav section-nav flex-column">
@@ -453,14 +458,20 @@ document.write(`
 </li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#blackjax.kernels.window_adaptation">window_adaptation</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#blackjax.kernels.meads_adaptation">meads_adaptation</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#blackjax.kernels.additive_step_random_walk">additive_step_random_walk</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#blackjax.kernels.additive_step_random_walk.init">init</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#blackjax.kernels.additive_step_random_walk.build_kernel">build_kernel</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#blackjax.kernels.additive_step_random_walk.normal_random_walk">normal_random_walk</a></li>
+</ul>
+</li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#blackjax.kernels.rmh">rmh</a><ul class="nav section-nav flex-column">
 <li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#blackjax.kernels.rmh.init">init</a></li>
-<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#blackjax.kernels.rmh.kernel">kernel</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#blackjax.kernels.rmh.build_kernel">build_kernel</a></li>
 </ul>
 </li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#blackjax.kernels.irmh">irmh</a><ul class="nav section-nav flex-column">
 <li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#blackjax.kernels.irmh.init">init</a></li>
-<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#blackjax.kernels.irmh.kernel">kernel</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#blackjax.kernels.irmh.build_kernel">build_kernel</a></li>
 </ul>
 </li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#blackjax.kernels.orbital_hmc">orbital_hmc</a><ul class="nav section-nav flex-column">
@@ -541,25 +552,28 @@ document.write(`
 <tr class="row-odd"><td><p><a class="reference internal" href="#blackjax.kernels.csgld" title="blackjax.kernels.csgld"><code class="xref py py-obj docutils literal notranslate"><span class="pre">csgld</span></code></a></p></td>
 <td><p>Implements the (basic) user interface for the Contour SGLD kernel.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#blackjax.kernels.rmh" title="blackjax.kernels.rmh"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rmh</span></code></a></p></td>
-<td><p>Implements the (basic) user interface for the gaussian random walk kernel</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#blackjax.kernels.additive_step_random_walk" title="blackjax.kernels.additive_step_random_walk"><code class="xref py py-obj docutils literal notranslate"><span class="pre">additive_step_random_walk</span></code></a></p></td>
+<td><p>Implements the user interface for the Additive Step RMH</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#blackjax.kernels.irmh" title="blackjax.kernels.irmh"><code class="xref py py-obj docutils literal notranslate"><span class="pre">irmh</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#blackjax.kernels.rmh" title="blackjax.kernels.rmh"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rmh</span></code></a></p></td>
+<td><p>Implements the user interface for the RMH.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#blackjax.kernels.irmh" title="blackjax.kernels.irmh"><code class="xref py py-obj docutils literal notranslate"><span class="pre">irmh</span></code></a></p></td>
 <td><p>Implements the (basic) user interface for the independent RMH.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#blackjax.kernels.orbital_hmc" title="blackjax.kernels.orbital_hmc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">orbital_hmc</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#blackjax.kernels.orbital_hmc" title="blackjax.kernels.orbital_hmc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">orbital_hmc</span></code></a></p></td>
 <td><p>Implements the (basic) user interface for the Periodic orbital MCMC kernel.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#blackjax.kernels.elliptical_slice" title="blackjax.kernels.elliptical_slice"><code class="xref py py-obj docutils literal notranslate"><span class="pre">elliptical_slice</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#blackjax.kernels.elliptical_slice" title="blackjax.kernels.elliptical_slice"><code class="xref py py-obj docutils literal notranslate"><span class="pre">elliptical_slice</span></code></a></p></td>
 <td><p>Implements the (basic) user interface for the Elliptical Slice sampling kernel.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#blackjax.kernels.ghmc" title="blackjax.kernels.ghmc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ghmc</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#blackjax.kernels.ghmc" title="blackjax.kernels.ghmc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ghmc</span></code></a></p></td>
 <td><p>Implements the (basic) user interface for the Generalized HMC kernel.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#blackjax.kernels.pathfinder" title="blackjax.kernels.pathfinder"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pathfinder</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#blackjax.kernels.pathfinder" title="blackjax.kernels.pathfinder"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pathfinder</span></code></a></p></td>
 <td><p>Implements the (basic) user interface for the pathfinder kernel.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#blackjax.kernels.meanfield_vi" title="blackjax.kernels.meanfield_vi"><code class="xref py py-obj docutils literal notranslate"><span class="pre">meanfield_vi</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#blackjax.kernels.meanfield_vi" title="blackjax.kernels.meanfield_vi"><code class="xref py py-obj docutils literal notranslate"><span class="pre">meanfield_vi</span></code></a></p></td>
 <td><p>High-level implementation of Mean-Field Variational Inference.</p></td>
 </tr>
 </tbody>
@@ -1056,12 +1070,71 @@ on parallel computer architectures.</p>
 </dd></dl>
 
 <dl class="py class">
+<dt class="sig sig-object py" id="blackjax.kernels.additive_step_random_walk">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">additive_step_random_walk</span></span><a class="reference internal" href="../../../_modules/blackjax/kernels.html#additive_step_random_walk"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#blackjax.kernels.additive_step_random_walk" title="Permalink to this definition">#</a></dt>
+<dd><p>Implements the user interface for the Additive Step RMH</p>
+<p class="rubric">Examples</p>
+<p>A new kernel can be initialized and used with the following code:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">rw</span> <span class="o">=</span> <span class="n">blackjax</span><span class="o">.</span><span class="n">additive_step_random_walk</span><span class="p">(</span><span class="n">logdensity_fn</span><span class="p">,</span> <span class="n">random_step</span><span class="p">)</span>
+<span class="n">state</span> <span class="o">=</span> <span class="n">rw</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">position</span><span class="p">)</span>
+<span class="n">new_state</span><span class="p">,</span> <span class="n">info</span> <span class="o">=</span> <span class="n">rw</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">rng_key</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The specific case of a Gaussian <cite>random_step</cite> is already implemented, either with independent components
+when <cite>covariance_matrix</cite> is a one dimensional array or with dependent components if a two dimensional array:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">rw_gaussian</span> <span class="o">=</span> <span class="n">blackjax</span><span class="o">.</span><span class="n">additive_step_random_walk</span><span class="o">.</span><span class="n">normal_random_walk</span><span class="p">(</span><span class="n">logdensity_fn</span><span class="p">,</span> <span class="n">covariance_matrix</span><span class="p">)</span>
+<span class="n">state</span> <span class="o">=</span> <span class="n">rw_gaussian</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">position</span><span class="p">)</span>
+<span class="n">new_state</span><span class="p">,</span> <span class="n">info</span> <span class="o">=</span> <span class="n">rw_gaussian</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">rng_key</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>logdensity_fn</strong> – The log density probability density function from which we wish to sample.</p></li>
+<li><p><strong>random_step</strong> – A Callable that takes a random number generator and the current state and produces a step,
+which will be added to the current position to obtain a new position. Must be symmetric
+to maintain detailed balance. This means that P(step|position) = P(-step | position+step)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>A <code class="docutils literal notranslate"><span class="pre">MCMCSamplingAlgorithm</span></code>.</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="blackjax.kernels.additive_step_random_walk.init">
+<span class="sig-name descname"><span class="pre">init</span></span><a class="reference internal" href="../../../_modules/blackjax/kernels.html#additive_step_random_walk.init"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#blackjax.kernels.additive_step_random_walk.init" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="blackjax.kernels.additive_step_random_walk.build_kernel">
+<span class="sig-name descname"><span class="pre">build_kernel</span></span><a class="reference internal" href="../../../_modules/blackjax/kernels.html#additive_step_random_walk.build_kernel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#blackjax.kernels.additive_step_random_walk.build_kernel" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="blackjax.kernels.additive_step_random_walk.normal_random_walk">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">normal_random_walk</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">logdensity_fn</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/blackjax/kernels.html#additive_step_random_walk.normal_random_walk"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#blackjax.kernels.additive_step_random_walk.normal_random_walk" title="Permalink to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>logdensity_fn</strong> – The log density probability density function from which we wish to sample.</p></li>
+<li><p><strong>sigma</strong> – The value of the covariance matrix of the gaussian proposal distribution.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>A <code class="docutils literal notranslate"><span class="pre">MCMCSamplingAlgorithm</span></code>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="blackjax.kernels.rmh">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">rmh</span></span><a class="reference internal" href="../../../_modules/blackjax/kernels.html#rmh"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#blackjax.kernels.rmh" title="Permalink to this definition">#</a></dt>
-<dd><p>Implements the (basic) user interface for the gaussian random walk kernel</p>
+<dd><p>Implements the user interface for the RMH.</p>
 <p class="rubric">Examples</p>
-<p>A new Gaussian Random Walk kernel can be initialized and used with the following code:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">rmh</span> <span class="o">=</span> <span class="n">blackjax</span><span class="o">.</span><span class="n">rmh</span><span class="p">(</span><span class="n">logdensity_fn</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span>
+<p>A new kernel can be initialized and used with the following code:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">rmh</span> <span class="o">=</span> <span class="n">blackjax</span><span class="o">.</span><span class="n">rmh</span><span class="p">(</span><span class="n">logdensity_fn</span><span class="p">,</span> <span class="n">proposal_generator</span><span class="p">)</span>
 <span class="n">state</span> <span class="o">=</span> <span class="n">rmh</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">position</span><span class="p">)</span>
 <span class="n">new_state</span><span class="p">,</span> <span class="n">info</span> <span class="o">=</span> <span class="n">rmh</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">rng_key</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span>
 </pre></div>
@@ -1075,7 +1148,13 @@ on parallel computer architectures.</p>
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>logdensity_fn</strong> – The log density probability density function from which we wish to sample.</p></li>
-<li><p><strong>sigma</strong> – The value of the covariance matrix of the gaussian proposal distribution.</p></li>
+<li><p><strong>proposal_generator</strong> – A Callable that takes a random number generator and the current state and produces a new proposal.</p></li>
+<li><p><strong>proposal_logdensity_fn</strong> – <dl class="simple">
+<dt>The logdensity function associated to the proposal_generator. If the generator is non-symmetric,</dt><dd><p>P(x_t|x_t-1) is not equal to P(x_t-1|x_t), then this parameter must be not None in order to apply
+the Metropolis-Hastings correction for detailed balance.</p>
+</dd>
+</dl>
+</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
@@ -1088,8 +1167,8 @@ on parallel computer architectures.</p>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="blackjax.kernels.rmh.kernel">
-<span class="sig-name descname"><span class="pre">kernel</span></span><a class="reference internal" href="../../../_modules/blackjax/kernels.html#rmh.kernel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#blackjax.kernels.rmh.kernel" title="Permalink to this definition">#</a></dt>
+<dt class="sig sig-object py" id="blackjax.kernels.rmh.build_kernel">
+<span class="sig-name descname"><span class="pre">build_kernel</span></span><a class="reference internal" href="../../../_modules/blackjax/kernels.html#rmh.build_kernel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#blackjax.kernels.rmh.build_kernel" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -1128,8 +1207,8 @@ proposal is independent of the sampler’s current state.</p></li>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="blackjax.kernels.irmh.kernel">
-<span class="sig-name descname"><span class="pre">kernel</span></span><a class="reference internal" href="../../../_modules/blackjax/kernels.html#irmh.kernel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#blackjax.kernels.irmh.kernel" title="Permalink to this definition">#</a></dt>
+<dt class="sig sig-object py" id="blackjax.kernels.irmh.build_kernel">
+<span class="sig-name descname"><span class="pre">build_kernel</span></span><a class="reference internal" href="../../../_modules/blackjax/kernels.html#irmh.build_kernel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#blackjax.kernels.irmh.build_kernel" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -1463,14 +1542,20 @@ the distribution we want to sample from.</p></li>
 </li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#blackjax.kernels.window_adaptation"><code class="docutils literal notranslate"><span class="pre">window_adaptation()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#blackjax.kernels.meads_adaptation"><code class="docutils literal notranslate"><span class="pre">meads_adaptation()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#blackjax.kernels.additive_step_random_walk"><code class="docutils literal notranslate"><span class="pre">additive_step_random_walk</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#blackjax.kernels.additive_step_random_walk.init"><code class="docutils literal notranslate"><span class="pre">additive_step_random_walk.init</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#blackjax.kernels.additive_step_random_walk.build_kernel"><code class="docutils literal notranslate"><span class="pre">additive_step_random_walk.build_kernel</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#blackjax.kernels.additive_step_random_walk.normal_random_walk"><code class="docutils literal notranslate"><span class="pre">additive_step_random_walk.normal_random_walk()</span></code></a></li>
+</ul>
+</li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#blackjax.kernels.rmh"><code class="docutils literal notranslate"><span class="pre">rmh</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#blackjax.kernels.rmh.init"><code class="docutils literal notranslate"><span class="pre">rmh.init</span></code></a></li>
-<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#blackjax.kernels.rmh.kernel"><code class="docutils literal notranslate"><span class="pre">rmh.kernel</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#blackjax.kernels.rmh.build_kernel"><code class="docutils literal notranslate"><span class="pre">rmh.build_kernel</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#blackjax.kernels.irmh"><code class="docutils literal notranslate"><span class="pre">irmh</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#blackjax.kernels.irmh.init"><code class="docutils literal notranslate"><span class="pre">irmh.init</span></code></a></li>
-<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#blackjax.kernels.irmh.kernel"><code class="docutils literal notranslate"><span class="pre">irmh.kernel</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#blackjax.kernels.irmh.build_kernel"><code class="docutils literal notranslate"><span class="pre">irmh.build_kernel</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#blackjax.kernels.orbital_hmc"><code class="docutils literal notranslate"><span class="pre">orbital_hmc</span></code></a><ul class="nav section-nav flex-column">
@@ -1541,14 +1626,20 @@ the distribution we want to sample from.</p></li>
 </li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#blackjax.kernels.window_adaptation">window_adaptation</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#blackjax.kernels.meads_adaptation">meads_adaptation</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#blackjax.kernels.additive_step_random_walk">additive_step_random_walk</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#blackjax.kernels.additive_step_random_walk.init">init</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#blackjax.kernels.additive_step_random_walk.build_kernel">build_kernel</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#blackjax.kernels.additive_step_random_walk.normal_random_walk">normal_random_walk</a></li>
+</ul>
+</li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#blackjax.kernels.rmh">rmh</a><ul class="nav section-nav flex-column">
 <li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#blackjax.kernels.rmh.init">init</a></li>
-<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#blackjax.kernels.rmh.kernel">kernel</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#blackjax.kernels.rmh.build_kernel">build_kernel</a></li>
 </ul>
 </li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#blackjax.kernels.irmh">irmh</a><ul class="nav section-nav flex-column">
 <li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#blackjax.kernels.irmh.init">init</a></li>
-<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#blackjax.kernels.irmh.kernel">kernel</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#blackjax.kernels.irmh.build_kernel">build_kernel</a></li>
 </ul>
 </li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#blackjax.kernels.orbital_hmc">orbital_hmc</a><ul class="nav section-nav flex-column">
