@@ -22,7 +22,7 @@ from .smc.adaptive_tempered import adaptive_tempered_smc
 from .smc.tempered import tempered_smc
 from .vi.meanfield_vi import meanfield_vi
 from .vi.pathfinder import pathfinder
-from .vi.svgd import svgd
+from .vi.svgd import coin_svgd, svgd
 
 __all__ = [
     "__version__",
@@ -50,6 +50,7 @@ __all__ = [
     "meanfield_vi",  # variational inference
     "pathfinder",
     "svgd",
+    "coin_svgd",
     "ess",  # diagnostics
     "rhat",
 ]

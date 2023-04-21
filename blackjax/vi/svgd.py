@@ -7,9 +7,10 @@ import optax
 from jax.flatten_util import ravel_pytree
 
 from blackjax.base import SamplingAlgorithm
+from blackjax.optimizers import cocob
 from blackjax.types import ArrayLikeTree, ArrayTree
 
-__all__ = ["svgd", "rbf_kernel", "update_median_heuristic"]
+__all__ = ["svgd", "coin_svgd", "rbf_kernel", "update_median_heuristic"]
 
 
 class SVGDState(NamedTuple):
@@ -157,6 +158,54 @@ class svgd:
         def init_fn(
             initial_position: ArrayLikeTree,
             kernel_parameters: dict[str, Any] = {"length_scale": 1.0},
+        ):
+            return cls.init(initial_position, kernel_parameters, optimizer)
+
+        def step_fn(state, **grad_params):
+            state = kernel_(state, grad_logdensity_fn, kernel, **grad_params)
+            return update_kernel_parameters(state)
+
+        return SamplingAlgorithm(init_fn, step_fn)  # type: ignore[arg-type]
+
+
+class coin_svgd:
+    """Implements the (basic) user interface for the adaptive coin svgd algorithm.
+
+    See Algorithm 6 of :cite:p:`sharrock2023coin`.
+
+    Parameters
+    ----------
+    grad_logdensity_fn
+        gradient, or an estimate, of the target log density function to samples approximately from
+    kernel
+        positive semi definite kernel
+    update_kernel_parameters
+        function that updates the kernel parameters given the current state of the particles
+    alpha
+        parameter of the COCOB optimizer, see algorithm 2 of :cite:p:`orabona2017training`
+
+    Returns
+    -------
+    A ``MCMCSamplingAlgorithm``.
+    """
+
+    init = staticmethod(init)
+    build_kernel = staticmethod(build_kernel)
+
+    def __new__(
+        cls,
+        grad_logdensity_fn: Callable,
+        kernel: Callable = rbf_kernel,
+        update_kernel_parameters: Callable = update_median_heuristic,
+        *,
+        alpha: float = 100,
+    ):
+        optimizer = cocob.cocob(alpha)
+        kernel_ = cls.build_kernel(optimizer)
+
+        def init_fn(
+            initial_position: PyTree,
+            kernel_parameters: Dict[str, Any] = {"length_scale": 1.0},
         ):
             return cls.init(initial_position, kernel_parameters, optimizer)
 
