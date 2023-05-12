@@ -19,6 +19,7 @@ Classes
 
    blackjax.mcmc.elliptical_slice.EllipSliceState
    blackjax.mcmc.elliptical_slice.EllipSliceInfo
+   blackjax.mcmc.elliptical_slice.elliptical_slice
 
 
 
@@ -28,7 +29,7 @@ Functions
 .. autoapisummary::
 
    blackjax.mcmc.elliptical_slice.init
-   blackjax.mcmc.elliptical_slice.kernel
+   blackjax.mcmc.elliptical_slice.build_kernel
 
 
 
@@ -95,7 +96,7 @@ Functions
 .. py:function:: init(position: blackjax.types.PyTree, logdensity_fn: Callable)
 
 
-.. py:function:: kernel(cov_matrix: blackjax.types.Array, mean: blackjax.types.Array)
+.. py:function:: build_kernel(cov_matrix: blackjax.types.Array, mean: blackjax.types.Array)
 
    Build an Elliptical Slice sampling kernel :cite:p:`murray2010elliptical`.
 
@@ -105,5 +106,40 @@ Functions
    :returns: * *A kernel that takes a rng_key and a Pytree that contains the current state*
              * *of the chain and that returns a new state of the chain along with*
              * *information about the transition.*
+
+
+.. py:class:: elliptical_slice
+
+   Implements the (basic) user interface for the Elliptical Slice sampling kernel.
+
+   .. rubric:: Examples
+
+   A new Elliptical Slice sampling kernel can be initialized and used with the following code:
+
+   .. code::
+
+       ellip_slice = blackjax.elliptical_slice(loglikelihood_fn, cov_matrix)
+       state = ellip_slice.init(position)
+       new_state, info = ellip_slice.step(rng_key, state)
+
+   We can JIT-compile the step function for better performance
+
+   .. code::
+
+       step = jax.jit(ellip_slice.step)
+       new_state, info = step(rng_key, state)
+
+   :param loglikelihood_fn: Only the log likelihood function from the posterior distributon we wish to sample.
+   :param cov_matrix: The value of the covariance matrix of the gaussian prior distribution from the posterior we wish to sample.
+
+   :rtype: A ``MCMCSamplingAlgorithm``.
+
+   .. py:attribute:: init
+
+      
+
+   .. py:attribute:: build_kernel
+
+      
 
 

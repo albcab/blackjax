@@ -156,10 +156,9 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">API</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../../autoapi/blackjax/kernels/index.html">Sampling algorithms</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../autoapi/blackjax/diagnostics/index.html">Diagnostics</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../../autoapi/blackjax/index.html">API Reference</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../../autoapi/blackjax/adaptation/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">blackjax.adaptation</span></code></a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../autoapi/blackjax/adaptation/base/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">blackjax.adaptation.base</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../autoapi/blackjax/adaptation/mass_matrix/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">blackjax.adaptation.mass_matrix</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../autoapi/blackjax/adaptation/meads_adaptation/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">blackjax.adaptation.meads_adaptation</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../autoapi/blackjax/adaptation/pathfinder_adaptation/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">blackjax.adaptation.pathfinder_adaptation</span></code></a></li>
@@ -207,11 +206,8 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../../autoapi/blackjax/diagnostics/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">blackjax.diagnostics</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../autoapi/blackjax/kernels/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">blackjax.kernels</span></code></a></li>
 </ul>
 </li>
-</ul>
-<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../../bib.html">Bibliography</a></li>
 </ul>
 
@@ -414,11 +410,18 @@ document.write(`
         <span class="n">matmul</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">multiply</span>
 
     <span class="k">elif</span> <span class="n">ndim</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
-        <span class="n">tril_inv</span> <span class="o">=</span> <span class="n">jscipy</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">cholesky</span><span class="p">(</span><span class="n">inverse_mass_matrix</span><span class="p">)</span>
+        <span class="c1"># inverse mass matrix can be factored into L*L.T. We want the cholesky</span>
+        <span class="c1"># factor (inverse of L.T) of the mass matrix.</span>
+        <span class="n">L</span> <span class="o">=</span> <span class="n">jscipy</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">cholesky</span><span class="p">(</span><span class="n">inverse_mass_matrix</span><span class="p">,</span> <span class="n">lower</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="n">identity</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
         <span class="n">mass_matrix_sqrt</span> <span class="o">=</span> <span class="n">jscipy</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve_triangular</span><span class="p">(</span>
-            <span class="n">tril_inv</span><span class="p">,</span> <span class="n">identity</span><span class="p">,</span> <span class="n">lower</span><span class="o">=</span><span class="kc">True</span>
+            <span class="n">L</span><span class="p">,</span> <span class="n">identity</span><span class="p">,</span> <span class="n">lower</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">trans</span><span class="o">=</span><span class="kc">True</span>
         <span class="p">)</span>
+        <span class="c1"># Note that mass_matrix_sqrt is a upper triangular matrix here, with</span>
+        <span class="c1">#   jscipy.linalg.inv(mass_matrix_sqrt @ mass_matrix_sqrt.T) == inverse_mass_matrix</span>
+        <span class="c1"># An alternative is to compute directly the cholesky factor of the inverse mass matrix</span>
+        <span class="c1">#   mass_matrix_sqrt = jscipy.linalg.cholesky(jscipy.linalg.inv(inverse_mass_matrix), lower=True)</span>
+        <span class="c1"># which the result would instead be a lower triangular matrix.</span>
         <span class="n">matmul</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">matmul</span>
 
     <span class="k">else</span><span class="p">:</span>

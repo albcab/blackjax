@@ -52,7 +52,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'examples/howto_metropolis_within_gibbs';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="blackjax.kernels" href="../autoapi/blackjax/kernels/index.html" />
+    <link rel="next" title="blackjax" href="../autoapi/blackjax/index.html" />
     <link rel="prev" title="Use a logdensity function that is not compatible with JAX’s primitives" href="howto_other_frameworks.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -160,10 +160,9 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">API</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../autoapi/blackjax/kernels/index.html">Sampling algorithms</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../autoapi/blackjax/diagnostics/index.html">Diagnostics</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../autoapi/blackjax/index.html">API Reference</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../autoapi/blackjax/adaptation/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">blackjax.adaptation</span></code></a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/blackjax/adaptation/base/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">blackjax.adaptation.base</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../autoapi/blackjax/adaptation/mass_matrix/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">blackjax.adaptation.mass_matrix</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../autoapi/blackjax/adaptation/meads_adaptation/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">blackjax.adaptation.meads_adaptation</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../autoapi/blackjax/adaptation/pathfinder_adaptation/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">blackjax.adaptation.pathfinder_adaptation</span></code></a></li>
@@ -211,11 +210,8 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../autoapi/blackjax/diagnostics/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">blackjax.diagnostics</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../autoapi/blackjax/kernels/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">blackjax.kernels</span></code></a></li>
 </ul>
 </li>
-</ul>
-<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../bib.html">Bibliography</a></li>
 </ul>
 
@@ -421,7 +417,7 @@ $$</p>
 <li><p>Maintain separate MCMC kernels to update each component of <span class="math notranslate nohighlight">\(p(\xx, \yy)\)</span> while holding the other fixed.</p></li>
 <li><p>Apply the kernel updates correctly.</p></li>
 </ol>
-<p>The issue with (2) is that each kernel update for a given MCMC <code class="docutils literal notranslate"><span class="pre">Algorithm</span></code> in BlackJAX refers to an algorithm-specific <code class="docutils literal notranslate"><span class="pre">AlgorithmState</span></code>.  For example, <code class="docutils literal notranslate"><span class="pre">RMHState</span></code> is a <code class="docutils literal notranslate"><span class="pre">typing.NamedTuple</span></code> class containing elements <code class="docutils literal notranslate"><span class="pre">position</span></code> and <code class="docutils literal notranslate"><span class="pre">log_probability</span></code>.  In our MWG sampling problem at the beginning of step <span class="math notranslate nohighlight">\(t\)</span>, <code class="docutils literal notranslate"><span class="pre">RMHState.log_probability</span></code> will consist of <span class="math notranslate nohighlight">\(\log p(\xx_{t-1}, \yy_{t-1})\)</span>.  After updating <span class="math notranslate nohighlight">\(\xx\)</span>, it will consist of <span class="math notranslate nohighlight">\(\log p(\xx_{t}, \yy_{t-1})\)</span>.  This happens automatically when we call <code class="docutils literal notranslate"><span class="pre">blackjax.mcmc.rmh.kernel()</span></code>.  However, after updating <span class="math notranslate nohighlight">\(\yy\)</span> (via HMC), we must manually update <code class="docutils literal notranslate"><span class="pre">RMHState.log_probability</span></code> to consist of <span class="math notranslate nohighlight">\(\log p(\xx_{t}, \yy_{t})\)</span>.</p>
+<p>The issue with (2) is that each kernel update for a given MCMC <code class="docutils literal notranslate"><span class="pre">Algorithm</span></code> in BlackJAX refers to an algorithm-specific <code class="docutils literal notranslate"><span class="pre">AlgorithmState</span></code>.  For example, <code class="docutils literal notranslate"><span class="pre">RMHState</span></code> is a <code class="docutils literal notranslate"><span class="pre">typing.NamedTuple</span></code> class containing elements <code class="docutils literal notranslate"><span class="pre">position</span></code> and <code class="docutils literal notranslate"><span class="pre">log_probability</span></code>.  In our MWG sampling problem at the beginning of step <span class="math notranslate nohighlight">\(t\)</span>, <code class="docutils literal notranslate"><span class="pre">RMHState.log_probability</span></code> will consist of <span class="math notranslate nohighlight">\(\log p(\xx_{t-1}, \yy_{t-1})\)</span>.  After updating <span class="math notranslate nohighlight">\(\xx\)</span>, it will consist of <span class="math notranslate nohighlight">\(\log p(\xx_{t}, \yy_{t-1})\)</span>.  This happens automatically when we call <code class="docutils literal notranslate"><span class="pre">blackjax.mcmc.rmh.build_kernel()</span></code>.  However, after updating <span class="math notranslate nohighlight">\(\yy\)</span> (via HMC), we must manually update <code class="docutils literal notranslate"><span class="pre">RMHState.log_probability</span></code> to consist of <span class="math notranslate nohighlight">\(\log p(\xx_{t}, \yy_{t})\)</span>.</p>
 <p>A general way of performing this manual update is to use the <code class="docutils literal notranslate"><span class="pre">blackjax.mcmc.algorithm.init()</span></code> function of the given component’s MCMC algorithm to update the <code class="docutils literal notranslate"><span class="pre">AlgorithmState</span></code>.  This function has arguments <code class="docutils literal notranslate"><span class="pre">position</span></code> and <code class="docutils literal notranslate"><span class="pre">logdensity_fn</span></code>.  For example with the HMC component, after obtaining <span class="math notranslate nohighlight">\(\xx_t\)</span> but before drawing <span class="math notranslate nohighlight">\(\yy_t\)</span>, the <code class="docutils literal notranslate"><span class="pre">position</span></code> would be <span class="math notranslate nohighlight">\(\yy_{t-1}\)</span> and the <code class="docutils literal notranslate"><span class="pre">logdensity_fn</span></code> function would be <span class="math notranslate nohighlight">\(\log p(\xx_t, \cdot )\)</span>.</p>
 <p>Using this approach, we now are now ready to implement the Gibbs sampling kernel in the code below.</p>
 <section id="construct-the-mwg-kernel">
@@ -433,8 +429,8 @@ $$</p>
 <span class="n">mwg_init_y</span> <span class="o">=</span> <span class="n">blackjax</span><span class="o">.</span><span class="n">mcmc</span><span class="o">.</span><span class="n">hmc</span><span class="o">.</span><span class="n">init</span>
 
 <span class="c1"># MCMC updaters</span>
-<span class="n">mwg_step_fn_x</span> <span class="o">=</span> <span class="n">blackjax</span><span class="o">.</span><span class="n">mcmc</span><span class="o">.</span><span class="n">rmh</span><span class="o">.</span><span class="n">kernel</span><span class="p">()</span>
-<span class="n">mwg_step_fn_y</span> <span class="o">=</span> <span class="n">blackjax</span><span class="o">.</span><span class="n">mcmc</span><span class="o">.</span><span class="n">hmc</span><span class="o">.</span><span class="n">kernel</span><span class="p">()</span>  <span class="c1"># default integrator, etc.</span>
+<span class="n">mwg_step_fn_x</span> <span class="o">=</span> <span class="n">blackjax</span><span class="o">.</span><span class="n">mcmc</span><span class="o">.</span><span class="n">rmh</span><span class="o">.</span><span class="n">build_kernel</span><span class="p">()</span>
+<span class="n">mwg_step_fn_y</span> <span class="o">=</span> <span class="n">blackjax</span><span class="o">.</span><span class="n">mcmc</span><span class="o">.</span><span class="n">hmc</span><span class="o">.</span><span class="n">build_kernel</span><span class="p">()</span>  <span class="c1"># default integrator, etc.</span>
 
 
 <span class="k">def</span> <span class="nf">mwg_kernel</span><span class="p">(</span><span class="n">rng_key</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
@@ -763,11 +759,11 @@ $$</p>
       </div>
     </a>
     <a class="right-next"
-       href="../autoapi/blackjax/kernels/index.html"
+       href="../autoapi/blackjax/index.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><code class="xref py py-mod docutils literal notranslate"><span class="pre">blackjax.kernels</span></code></p>
+        <p class="prev-next-title"><code class="xref py py-mod docutils literal notranslate"><span class="pre">blackjax</span></code></p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
