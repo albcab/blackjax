@@ -207,6 +207,7 @@
 <li class="toctree-l2 has-children"><a class="reference internal" href="../autoapi/blackjax/vi/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">blackjax.vi</span></code></a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../autoapi/blackjax/vi/meanfield_vi/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">blackjax.vi.meanfield_vi</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../autoapi/blackjax/vi/pathfinder/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">blackjax.vi.pathfinder</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/blackjax/vi/svgd/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">blackjax.vi.svgd</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../autoapi/blackjax/diagnostics/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">blackjax.diagnostics</span></code></a></li>
@@ -387,58 +388,6 @@ document.write(`
   from .autonotebook import tqdm as notebook_tqdm
 </pre></div>
 </div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ImportError</span><span class="g g-Whitespace">                               </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">numpyro</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">numpyro.distributions</span> <span class="k">as</span> <span class="nn">dist</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">from</span> <span class="nn">numpyro.infer.reparam</span> <span class="kn">import</span> <span class="n">TransformReparam</span>
-
-<span class="n">File</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.9.16</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.9</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">numpyro</span><span class="o">/</span><span class="fm">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">6</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># Copyright Contributors to the Pyro project.</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="c1"># SPDX-License-Identifier: Apache-2.0</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">import</span> <span class="nn">logging</span>
-<span class="ne">----&gt; </span><span class="mi">6</span> <span class="kn">from</span> <span class="nn">numpyro</span> <span class="kn">import</span> <span class="n">compat</span><span class="p">,</span> <span class="n">diagnostics</span><span class="p">,</span> <span class="n">distributions</span><span class="p">,</span> <span class="n">handlers</span><span class="p">,</span> <span class="n">infer</span><span class="p">,</span> <span class="n">ops</span><span class="p">,</span> <span class="n">optim</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="kn">from</span> <span class="nn">numpyro.distributions.distribution</span> <span class="kn">import</span> <span class="n">enable_validation</span><span class="p">,</span> <span class="n">validation_enabled</span>
-<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="kn">from</span> <span class="nn">numpyro.infer.inspect</span> <span class="kn">import</span> <span class="n">render_model</span>
-
-<span class="n">File</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.9.16</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.9</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">numpyro</span><span class="o">/</span><span class="n">infer</span><span class="o">/</span><span class="fm">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">5</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># Copyright Contributors to the Pyro project.</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="c1"># SPDX-License-Identifier: Apache-2.0</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">from</span> <span class="nn">numpyro.infer.barker</span> <span class="kn">import</span> <span class="n">BarkerMH</span>
-<span class="ne">----&gt; </span><span class="mi">5</span> <span class="kn">from</span> <span class="nn">numpyro.infer.elbo</span> <span class="kn">import</span> <span class="p">(</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span>     <span class="n">ELBO</span><span class="p">,</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span>     <span class="n">RenyiELBO</span><span class="p">,</span>
-<span class="g g-Whitespace">      </span><span class="mi">8</span>     <span class="n">Trace_ELBO</span><span class="p">,</span>
-<span class="g g-Whitespace">      </span><span class="mi">9</span>     <span class="n">TraceEnum_ELBO</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">10</span>     <span class="n">TraceGraph_ELBO</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">11</span>     <span class="n">TraceMeanField_ELBO</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="kn">from</span> <span class="nn">numpyro.infer.hmc</span> <span class="kn">import</span> <span class="n">HMC</span><span class="p">,</span> <span class="n">NUTS</span>
-<span class="g g-Whitespace">     </span><span class="mi">14</span> <span class="kn">from</span> <span class="nn">numpyro.infer.hmc_gibbs</span> <span class="kn">import</span> <span class="n">HMCECS</span><span class="p">,</span> <span class="n">DiscreteHMCGibbs</span><span class="p">,</span> <span class="n">HMCGibbs</span>
-
-<span class="n">File</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.9.16</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.9</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">numpyro</span><span class="o">/</span><span class="n">infer</span><span class="o">/</span><span class="n">elbo</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">24</span>
-<span class="g g-Whitespace">     </span><span class="mi">17</span> <span class="kn">from</span> <span class="nn">numpyro.handlers</span> <span class="kn">import</span> <span class="n">replay</span><span class="p">,</span> <span class="n">seed</span><span class="p">,</span> <span class="n">substitute</span><span class="p">,</span> <span class="n">trace</span>
-<span class="g g-Whitespace">     </span><span class="mi">18</span> <span class="kn">from</span> <span class="nn">numpyro.infer.util</span> <span class="kn">import</span> <span class="p">(</span>
-<span class="g g-Whitespace">     </span><span class="mi">19</span>     <span class="n">_without_rsample_stop_gradient</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">20</span>     <span class="n">get_importance_trace</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">21</span>     <span class="n">is_identically_one</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">22</span>     <span class="n">log_density</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">23</span> <span class="p">)</span>
-<span class="ne">---&gt; </span><span class="mi">24</span> <span class="kn">from</span> <span class="nn">numpyro.ops.provenance</span> <span class="kn">import</span> <span class="n">eval_provenance</span>
-<span class="g g-Whitespace">     </span><span class="mi">25</span> <span class="kn">from</span> <span class="nn">numpyro.util</span> <span class="kn">import</span> <span class="n">_validate_model</span><span class="p">,</span> <span class="n">check_model_guide_match</span><span class="p">,</span> <span class="n">find_stack_level</span>
-<span class="g g-Whitespace">     </span><span class="mi">28</span> <span class="k">class</span> <span class="nc">ELBO</span><span class="p">:</span>
-
-<span class="n">File</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.9.16</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.9</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">numpyro</span><span class="o">/</span><span class="n">ops</span><span class="o">/</span><span class="n">provenance</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">10</span>
-<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="kn">from</span> <span class="nn">jax.interpreters.partial_eval</span> <span class="kn">import</span> <span class="n">trace_to_jaxpr_dynamic</span>
-<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="kn">from</span> <span class="nn">jax.interpreters.pxla</span> <span class="kn">import</span> <span class="n">xla_pmap_p</span>
-<span class="ne">---&gt; </span><span class="mi">10</span> <span class="kn">from</span> <span class="nn">jax.interpreters.xla</span> <span class="kn">import</span> <span class="n">xla_call_p</span>
-<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="kn">import</span> <span class="nn">jax.linear_util</span> <span class="k">as</span> <span class="nn">lu</span>
-<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
-
-<span class="ne">ImportError</span>: cannot import name &#39;xla_call_p&#39; from &#39;jax.interpreters.xla&#39; (/opt/hostedtoolcache/Python/3.9.16/x64/lib/python3.9/site-packages/jax/interpreters/xla.py)
-</pre></div>
-</div>
 </div>
 </details>
 </div>
@@ -460,6 +409,11 @@ document.write(`
     <span class="n">model_args</span><span class="o">=</span><span class="p">(</span><span class="n">J</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span>
     <span class="n">dynamic_args</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for more info.)
 </pre></div>
 </div>
 </div>
@@ -542,6 +496,12 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>\Average acceptance rate: 0.96
+There were 0.00% divergent transitions
+</pre></div>
+</div>
+</div>
 </details>
 </div>
 <p>Finally let us now plot the distribution of the parameters. Note that since we use a transformed variable, Numpyro does not output the school treatment effect directly:</p>
@@ -568,6 +528,9 @@ document.write(`
 </div>
 </div>
 </details>
+<div class="cell_output docutils container">
+<img alt="../_images/7a29922c5eec0544825afc78b5fbfd948718bc53e2e74a5abc38c18aad44822d.png" src="../_images/7a29922c5eec0544825afc78b5fbfd948718bc53e2e74a5abc38c18aad44822d.png" />
+</div>
 </div>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
@@ -591,6 +554,9 @@ document.write(`
 </div>
 </div>
 </details>
+<div class="cell_output docutils container">
+<img alt="../_images/8254ffdbbdbe859947800576f849a0d43d76f05413c537e94de912c88e10a964.png" src="../_images/8254ffdbbdbe859947800576f849a0d43d76f05413c537e94de912c88e10a964.png" />
+</div>
 </div>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
@@ -607,6 +573,18 @@ document.write(`
 </div>
 </div>
 </details>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Relative treatment effect for school 0: 0.32
+Relative treatment effect for school 1: 0.10
+Relative treatment effect for school 2: -0.08
+Relative treatment effect for school 3: 0.11
+Relative treatment effect for school 4: -0.18
+Relative treatment effect for school 5: -0.07
+Relative treatment effect for school 6: 0.40
+Relative treatment effect for school 7: 0.06
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 
