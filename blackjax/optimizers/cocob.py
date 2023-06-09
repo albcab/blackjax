@@ -39,10 +39,13 @@ def cocob(alpha: float = 100, eps: float = 1e-8):
         init_adapt = jax.tree_util.tree_map(
             lambda p: jnp.zeros(p.shape), initial_particles
         )
+        init_scale = jax.tree_util.tree_map(
+            lambda p: eps * jnp.ones(p.shape), initial_particles
+        )
         return COCOBOptimizer(
             initial_particles,
             init_adapt,
-            init_adapt,
+            init_scale,
             init_adapt,
             init_adapt,
         )
@@ -69,7 +72,7 @@ def cocob(alpha: float = 100, eps: float = 1e-8):
 
         update = jax.tree_util.tree_map(
             lambda p, p0, C, L, G, R: -p
-            + (p0 + C / (L * jnp.maximum(G + L, alpha * L) + eps) * (L + R)),
+            + (p0 + C / (L * jnp.maximum(G + L, alpha * L)) * (L + R)),
             particles,
             init_particles,
             cumulative_gradients,
