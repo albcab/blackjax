@@ -31,7 +31,7 @@ Functions
 
 
 
-.. py:function:: init(position: blackjax.types.PyTree) -> blackjax.types.PyTree
+.. py:function:: init(position: blackjax.types.ArrayLikeTree) -> blackjax.types.ArrayLikeTree
 
 
 .. py:function:: build_kernel(alpha: float = 0.01, beta: float = 0) -> Callable
@@ -40,6 +40,7 @@ Functions
 
 
 .. py:class:: sghmc
+
 
    Implements the (basic) user interface for the SGHMC kernel.
 
@@ -83,7 +84,7 @@ Functions
    :param grad_estimator: A function that takes a position, a batch of data and returns an estimation
                           of the gradient of the log-density at this position.
 
-   :rtype: A ``MCMCSamplingAlgorithm``.
+   :rtype: A ``SamplingAlgorithm``.
 
    .. py:attribute:: init
 

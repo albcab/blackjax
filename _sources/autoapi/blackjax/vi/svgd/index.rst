@@ -40,6 +40,7 @@ Functions
 
 .. py:class:: svgd
 
+
    Implements the (basic) user interface for the svgd algorithm.
 
    :param grad_logdensity_fn: gradient, or an estimate, of the target log density function to samples approximately from
@@ -47,7 +48,7 @@ Functions
    :param kernel: positive semi definite kernel
    :param update_kernel_parameters: function that updates the kernel parameters given the current state of the particles
 
-   :rtype: A ``MCMCSamplingAlgorithm``.
+   :rtype: A ``SamplingAlgorithm``.
 
    .. py:attribute:: init
 

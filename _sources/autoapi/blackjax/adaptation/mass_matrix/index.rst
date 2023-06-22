@@ -40,6 +40,7 @@ Functions
 
 
 
+
    State carried through the Welford algorithm.
 
    mean
@@ -72,6 +73,7 @@ Functions
 
 
 
+
    State carried through the mass matrix adaptation.
 
    inverse_mass_matrix
@@ -91,7 +93,7 @@ Functions
       
 
 
-.. py:function:: mass_matrix_adaptation(is_diagonal_matrix: bool = True) -> Tuple[Callable, Callable, Callable]
+.. py:function:: mass_matrix_adaptation(is_diagonal_matrix: bool = True) -> tuple[Callable, Callable, Callable]
 
    Adapts the values in the mass matrix by computing the covariance
    between parameters.
@@ -105,7 +107,7 @@ Functions
                state.
 
 
-.. py:function:: welford_algorithm(is_diagonal_matrix: bool) -> Tuple[Callable, Callable, Callable]
+.. py:function:: welford_algorithm(is_diagonal_matrix: bool) -> tuple[Callable, Callable, Callable]
 
    Welford's online estimator of covariance.
 

@@ -65,6 +65,7 @@ Functions
 
 
 
+
    .. py:attribute:: leftmost_state
       :type: blackjax.mcmc.integrators.IntegratorState
 
@@ -76,7 +77,7 @@ Functions
       
 
    .. py:attribute:: momentum_sum
-      :type: blackjax.types.PyTree
+      :type: blackjax.types.ArrayTree
 
       
 
@@ -91,7 +92,7 @@ Functions
    Append a state to the (right of the) trajectory to form a new trajectory.
 
 
-.. py:function:: reorder_trajectories(direction: int, trajectory: Trajectory, new_trajectory: Trajectory) -> Tuple[Trajectory, Trajectory]
+.. py:function:: reorder_trajectories(direction: int, trajectory: Trajectory, new_trajectory: Trajectory) -> tuple[Trajectory, Trajectory]
 
    Order the two trajectories depending on the direction.
 
@@ -105,6 +106,7 @@ Functions
 
 
 .. py:class:: DynamicIntegrationState
+
 
 
 
@@ -160,6 +162,7 @@ Functions
 
 
 .. py:class:: DynamicExpansionState
+
 
 
 

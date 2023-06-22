@@ -10,20 +10,27 @@
    with simpler versions of the algorithms, but in all cases they are particular instantiations
    of the Random Walk Rosenbluth-Metropolis-Hastings.
 
-   Let's note x_{t-1} to the previous position and x_t to the newly sampled one.
+   Let's note $x_{t-1}$ to the previous position and $x_t$ to the newly sampled one.
 
    The variants offered are:
 
    1. Proposal distribution as addition of random noice from previous position. This means
-   x_t = x_{t-1} + step. Function: `additive_step`
+      $x_t = x_{t-1} + step$.
 
-   2. Independent proposal distribution: P(x_t) doesn't depend on x_{t_1}. Function: `irmh`
+       Function: `additive_step`
 
-   3. Proposal distribution using a symmetric function. That means P(x_t|x_{t-1}) = P(x_{t-1}|x_t).
-    Function: `rmh` without proposal_logdensity_fn. See 'Metropolis Algorithm' in [1]
+   2. Independent proposal distribution: $P(x_t)$ doesn't depend on $x_{t_1}$.
 
-   4. Asymmetric proposal distribution. Function: `rmh` with proposal_logdensity_fn.
-    See 'Metropolis-Hastings' Algorithm in [1]
+       Function: `irmh`
+
+   3. Proposal distribution using a symmetric function. That means $P(x_t|x_{t-1}) = P(x_{t-1}|x_t)$.
+      See 'Metropolis Algorithm' in [1].
+
+       Function: `rmh` without proposal_logdensity_fn.
+
+   4. Asymmetric proposal distribution. See 'Metropolis-Hastings' Algorithm in [1].
+
+       Function: `rmh` with proposal_logdensity_fn.
 
    Reference: :cite:p:`gelman2014bayesian` Section 11.2
 
@@ -95,6 +102,7 @@ Functions
 
 
 
+
    State of the RW chain.
 
    position
@@ -104,7 +112,7 @@ Functions
 
 
    .. py:attribute:: position
-      :type: blackjax.types.PyTree
+      :type: blackjax.types.ArrayTree
 
       
 
@@ -115,6 +123,7 @@ Functions
 
 
 .. py:class:: RWInfo
+
 
 
 
@@ -160,6 +169,7 @@ Functions
 
 .. py:class:: additive_step_random_walk
 
+
    Implements the user interface for the Additive Step RMH
 
    .. rubric:: Examples
@@ -186,7 +196,7 @@ Functions
                        which will be added to the current position to obtain a new position. Must be symmetric
                        to maintain detailed balance. This means that P(step|position) = P(-step | position+step)
 
-   :rtype: A ``MCMCSamplingAlgorithm``.
+   :rtype: A ``SamplingAlgorithm``.
 
    .. py:attribute:: init
 
@@ -202,7 +212,7 @@ Functions
       :param logdensity_fn: The log density probability density function from which we wish to sample.
       :param sigma: The value of the covariance matrix of the gaussian proposal distribution.
 
-      :rtype: A ``MCMCSamplingAlgorithm``.
+      :rtype: A ``SamplingAlgorithm``.
 
 
 
@@ -217,6 +227,7 @@ Functions
 
 
 .. py:class:: irmh
+
 
    Implements the (basic) user interface for the independent RMH.
 
@@ -241,7 +252,7 @@ Functions
    :param proposal_distribution: A Callable that takes a random number generator and produces a new proposal. The
                                  proposal is independent of the sampler's current state.
 
-   :rtype: A ``MCMCSamplingAlgorithm``.
+   :rtype: A ``SamplingAlgorithm``.
 
    .. py:attribute:: init
 
@@ -255,12 +266,14 @@ Functions
 .. py:function:: build_rmh()
 
    Build a Rosenbluth-Metropolis-Hastings kernel.
+
    :returns: * *A kernel that takes a rng_key and a Pytree that contains the current state*
              * *of the chain and that returns a new state of the chain along with*
              * *information about the transition.*
 
 
 .. py:class:: rmh
+
 
    Implements the user interface for the RMH.
 
@@ -288,7 +301,7 @@ Functions
                                    P(x_t|x_t-1) is not equal to P(x_t-1|x_t), then this parameter must be not None in order to apply
                                    the Metropolis-Hastings correction for detailed balance.
 
-   :rtype: A ``MCMCSamplingAlgorithm``.
+   :rtype: A ``SamplingAlgorithm``.
 
    .. py:attribute:: init
 

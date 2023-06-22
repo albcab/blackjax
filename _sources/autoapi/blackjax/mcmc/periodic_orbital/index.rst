@@ -36,6 +36,7 @@ Functions
 
 
 
+
    State of the periodic orbital algorithm.
 
    The periodic orbital algorithm takes one orbit with weights,
@@ -58,7 +59,7 @@ Functions
        function for each point in the orbit.
 
    .. py:attribute:: positions
-      :type: blackjax.types.PyTree
+      :type: blackjax.types.ArrayTree
 
       
 
@@ -78,12 +79,12 @@ Functions
       
 
    .. py:attribute:: logdensities_grad
-      :type: blackjax.types.PyTree
+      :type: blackjax.types.ArrayTree
 
       
 
 
-.. py:function:: init(position: blackjax.types.PyTree, logdensity_fn: Callable, period: int) -> PeriodicOrbitalState
+.. py:function:: init(position: blackjax.types.ArrayLikeTree, logdensity_fn: Callable, period: int) -> PeriodicOrbitalState
 
    Create a periodic orbital state from a position.
 
@@ -112,6 +113,7 @@ Functions
 
 
 .. py:class:: orbital_hmc
+
 
    Implements the (basic) user interface for the Periodic orbital MCMC kernel.
 
@@ -144,7 +146,7 @@ Functions
    :param period: The number of steps used to build the orbit.
    :param bijection: (algorithm parameter) The symplectic integrator to use to build the orbit.
 
-   :rtype: A ``MCMCSamplingAlgorithm``.
+   :rtype: A ``SamplingAlgorithm``.
 
    .. py:attribute:: init
 

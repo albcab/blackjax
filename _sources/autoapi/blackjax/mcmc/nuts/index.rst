@@ -47,6 +47,7 @@ Attributes
 
 
 
+
    Additional information on the NUTS transition.
 
    This additional information can be used for debugging or computing
@@ -76,7 +77,7 @@ Attributes
 
 
    .. py:attribute:: momentum
-      :type: blackjax.types.PyTree
+      :type: blackjax.types.ArrayTree
 
       
 
@@ -155,6 +156,7 @@ Attributes
 
 .. py:class:: nuts
 
+
    Implements the (basic) user interface for the nuts kernel.
 
    .. rubric:: Examples
@@ -195,7 +197,7 @@ Attributes
                                 commonly found in other libraries, and yet is arbitrary.
    :param integrator: (algorithm parameter) The symplectic integrator to use to integrate the trajectory.
 
-   :rtype: A ``MCMCSamplingAlgorithm``.
+   :rtype: A ``SamplingAlgorithm``.
 
    .. py:attribute:: init
 

@@ -29,6 +29,7 @@ Functions
 
 
 
+
    State carried through the dual averaging procedure.
 
    log_x
@@ -75,7 +76,7 @@ Functions
       
 
 
-.. py:function:: dual_averaging(t0: int = 10, gamma: float = 0.05, kappa: float = 0.75) -> Tuple[Callable, Callable, Callable]
+.. py:function:: dual_averaging(t0: int = 10, gamma: float = 0.05, kappa: float = 0.75) -> tuple[Callable, Callable, Callable]
 
    Find the state that minimizes an objective function using a primal-dual
    subgradient method.

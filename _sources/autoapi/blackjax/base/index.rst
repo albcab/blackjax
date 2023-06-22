@@ -16,7 +16,7 @@ Classes
 
    blackjax.base.InitFn
    blackjax.base.UpdateFn
-   blackjax.base.MCMCSamplingAlgorithm
+   blackjax.base.SamplingAlgorithm
    blackjax.base.VIAlgorithm
    blackjax.base.RunFn
    blackjax.base.AdaptationAlgorithm
@@ -50,6 +50,7 @@ Attributes
 
 
 
+
    A `Callable` used to initialize the kernel state.
 
    Sampling algorithms often need to carry over some informations between
@@ -63,6 +64,7 @@ Attributes
 
 
 .. py:class:: UpdateFn
+
 
 
 
@@ -80,7 +82,8 @@ Attributes
 
 
 
-.. py:class:: MCMCSamplingAlgorithm
+.. py:class:: SamplingAlgorithm
+
 
 
 
@@ -121,6 +124,7 @@ Attributes
 
 
 
+
    A pair of functions that represents a Variational Inference algorithm.
 
    Blackjax variational inference algorithms are implemented as a pair of pure
@@ -157,10 +161,12 @@ Attributes
 
 
 
+
    A `Callable` used to run the adaptation procedure.
 
 
 .. py:class:: AdaptationAlgorithm
+
 
 
 

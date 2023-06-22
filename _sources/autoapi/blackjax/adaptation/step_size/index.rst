@@ -35,6 +35,7 @@ Functions
 
 
 
+
    State carried through the dual averaging procedure.
 
    log_step_size
@@ -81,7 +82,7 @@ Functions
       
 
 
-.. py:function:: dual_averaging_adaptation(target: float, t0: int = 10, gamma: float = 0.05, kappa: float = 0.75) -> Tuple[Callable, Callable, Callable]
+.. py:function:: dual_averaging_adaptation(target: float, t0: int = 10, gamma: float = 0.05, kappa: float = 0.75) -> tuple[Callable, Callable, Callable]
 
    Tune the step size in order to achieve a desired target acceptance rate.
 
@@ -117,7 +118,7 @@ Functions
    :param kappa: Controls the weights of past steps in the current update. The scheme will
                  quickly forget earlier step for a small value of `kappa`. Introduced
                  in :cite:p:`hoffman2014no`, with a recommended value of .75
-   :type kappa: float in ]0.5, 1]
+   :type kappa: float in [0.5, 1]
    :param target: Target acceptance rate.
 
    :returns: * *init* -- A function that initializes the state of the dual averaging scheme.

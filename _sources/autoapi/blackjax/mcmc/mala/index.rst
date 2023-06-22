@@ -37,6 +37,7 @@ Functions
 
 
 
+
    State of the MALA algorithm.
 
    The MALA algorithm takes one position of the chain and returns another
@@ -46,7 +47,7 @@ Functions
 
 
    .. py:attribute:: position
-      :type: blackjax.types.PyTree
+      :type: blackjax.types.ArrayTree
 
       
 
@@ -56,12 +57,13 @@ Functions
       
 
    .. py:attribute:: logdensity_grad
-      :type: blackjax.types.PyTree
+      :type: blackjax.types.ArrayTree
 
       
 
 
 .. py:class:: MALAInfo
+
 
 
 
@@ -88,7 +90,7 @@ Functions
       
 
 
-.. py:function:: init(position: blackjax.types.PyTree, logdensity_fn: Callable) -> MALAState
+.. py:function:: init(position: blackjax.types.ArrayLikeTree, logdensity_fn: Callable) -> MALAState
 
 
 .. py:function:: build_kernel()
@@ -101,6 +103,7 @@ Functions
 
 
 .. py:class:: mala
+
 
    Implements the (basic) user interface for the MALA kernel.
 
@@ -140,7 +143,7 @@ Functions
    :param logdensity_fn: The log-density function we wish to draw samples from.
    :param step_size: The value to use for the step size in the symplectic integrator.
 
-   :rtype: A ``MCMCSamplingAlgorithm``.
+   :rtype: A ``SamplingAlgorithm``.
 
    .. py:attribute:: init
 

@@ -36,6 +36,7 @@ Functions
 
 
 
+
    State of the RMH chain.
 
    x
@@ -47,6 +48,7 @@ Functions
    U_x
        Auxiliary attributes
    U_grad_x
+       Gradient of the auxiliary attributes
 
 
    .. py:attribute:: position
@@ -76,6 +78,7 @@ Functions
 
 
 .. py:class:: MarginalInfo
+
 
 
 
@@ -122,6 +125,7 @@ Functions
 
 .. py:class:: mgrad_gaussian
 
+
    Implements the marginal sampler for latent Gaussian model of :cite:p:`titsias2018auxiliary`.
 
    It uses a first order approximation to the log_likelihood of a model with Gaussian prior.
@@ -151,6 +155,6 @@ Functions
    :param mean: Mean of the prior Gaussian density. Default is zero.
    :type mean: optional
 
-   :rtype: A ``MCMCSamplingAlgorithm``.
+   :rtype: A ``SamplingAlgorithm``.
 
 

@@ -347,20 +347,27 @@ document.write(`
 <span class="sd">with simpler versions of the algorithms, but in all cases they are particular instantiations</span>
 <span class="sd">of the Random Walk Rosenbluth-Metropolis-Hastings.</span>
 
-<span class="sd">Let&#39;s note x_{t-1} to the previous position and x_t to the newly sampled one.</span>
+<span class="sd">Let&#39;s note $x_{t-1}$ to the previous position and $x_t$ to the newly sampled one.</span>
 
 <span class="sd">The variants offered are:</span>
 
 <span class="sd">1. Proposal distribution as addition of random noice from previous position. This means</span>
-<span class="sd">x_t = x_{t-1} + step. Function: `additive_step`</span>
+<span class="sd">   $x_t = x_{t-1} + step$.</span>
 
-<span class="sd">2. Independent proposal distribution: P(x_t) doesn&#39;t depend on x_{t_1}. Function: `irmh`</span>
+<span class="sd">    Function: `additive_step`</span>
 
-<span class="sd">3. Proposal distribution using a symmetric function. That means P(x_t|x_{t-1}) = P(x_{t-1}|x_t).</span>
-<span class="sd"> Function: `rmh` without proposal_logdensity_fn. See &#39;Metropolis Algorithm&#39; in [1]</span>
+<span class="sd">2. Independent proposal distribution: $P(x_t)$ doesn&#39;t depend on $x_{t_1}$.</span>
 
-<span class="sd">4. Asymmetric proposal distribution. Function: `rmh` with proposal_logdensity_fn.</span>
-<span class="sd"> See &#39;Metropolis-Hastings&#39; Algorithm in [1]</span>
+<span class="sd">    Function: `irmh`</span>
+
+<span class="sd">3. Proposal distribution using a symmetric function. That means $P(x_t|x_{t-1}) = P(x_{t-1}|x_t)$.</span>
+<span class="sd">   See &#39;Metropolis Algorithm&#39; in [1].</span>
+
+<span class="sd">    Function: `rmh` without proposal_logdensity_fn.</span>
+
+<span class="sd">4. Asymmetric proposal distribution. See &#39;Metropolis-Hastings&#39; Algorithm in [1].</span>
+
+<span class="sd">    Function: `rmh` with proposal_logdensity_fn.</span>
 
 <span class="sd">Reference: :cite:p:`gelman2014bayesian` Section 11.2</span>
 
@@ -382,15 +389,15 @@ document.write(`
 <span class="sd">        new_state, info = step(rng_key, state)</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">NamedTuple</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">NamedTuple</span><span class="p">,</span> <span class="n">Optional</span>
 
 <span class="kn">import</span> <span class="nn">jax</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">jax</span> <span class="kn">import</span> <span class="n">numpy</span> <span class="k">as</span> <span class="n">jnp</span>
 
-<span class="kn">from</span> <span class="nn">blackjax.base</span> <span class="kn">import</span> <span class="n">MCMCSamplingAlgorithm</span>
+<span class="kn">from</span> <span class="nn">blackjax.base</span> <span class="kn">import</span> <span class="n">SamplingAlgorithm</span>
 <span class="kn">from</span> <span class="nn">blackjax.mcmc</span> <span class="kn">import</span> <span class="n">proposal</span>
-<span class="kn">from</span> <span class="nn">blackjax.types</span> <span class="kn">import</span> <span class="n">Array</span><span class="p">,</span> <span class="n">PRNGKey</span><span class="p">,</span> <span class="n">PyTree</span>
+<span class="kn">from</span> <span class="nn">blackjax.types</span> <span class="kn">import</span> <span class="n">Array</span><span class="p">,</span> <span class="n">ArrayLikeTree</span><span class="p">,</span> <span class="n">ArrayTree</span><span class="p">,</span> <span class="n">PRNGKey</span>
 <span class="kn">from</span> <span class="nn">blackjax.util</span> <span class="kn">import</span> <span class="n">generate_gaussian_noise</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
@@ -424,7 +431,7 @@ document.write(`
     <span class="k">if</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndim</span><span class="p">(</span><span class="n">sigma</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;sigma must be a vector or a matrix.&quot;</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">propose</span><span class="p">(</span><span class="n">rng_key</span><span class="p">:</span> <span class="n">PRNGKey</span><span class="p">,</span> <span class="n">position</span><span class="p">:</span> <span class="n">PyTree</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PyTree</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">propose</span><span class="p">(</span><span class="n">rng_key</span><span class="p">:</span> <span class="n">PRNGKey</span><span class="p">,</span> <span class="n">position</span><span class="p">:</span> <span class="n">ArrayLikeTree</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ArrayTree</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">generate_gaussian_noise</span><span class="p">(</span><span class="n">rng_key</span><span class="p">,</span> <span class="n">position</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">sigma</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">propose</span></div>
@@ -440,7 +447,7 @@ document.write(`
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-<div class="viewcode-block" id="RWState.position"><a class="viewcode-back" href="../../../autoapi/blackjax/mcmc/random_walk/index.html#blackjax.mcmc.random_walk.RWState.position">[docs]</a>    <span class="n">position</span><span class="p">:</span> <span class="n">PyTree</span></div>
+<div class="viewcode-block" id="RWState.position"><a class="viewcode-back" href="../../../autoapi/blackjax/mcmc/random_walk/index.html#blackjax.mcmc.random_walk.RWState.position">[docs]</a>    <span class="n">position</span><span class="p">:</span> <span class="n">ArrayTree</span></div>
 <div class="viewcode-block" id="RWState.logdensity"><a class="viewcode-back" href="../../../autoapi/blackjax/mcmc/random_walk/index.html#blackjax.mcmc.random_walk.RWState.logdensity">[docs]</a>    <span class="n">logdensity</span><span class="p">:</span> <span class="nb">float</span></div></div>
 
 
@@ -466,7 +473,7 @@ document.write(`
 <div class="viewcode-block" id="RWInfo.proposal"><a class="viewcode-back" href="../../../autoapi/blackjax/mcmc/random_walk/index.html#blackjax.mcmc.random_walk.RWInfo.proposal">[docs]</a>    <span class="n">proposal</span><span class="p">:</span> <span class="n">RWState</span></div></div>
 
 
-<span class="k">def</span> <span class="nf">init</span><span class="p">(</span><span class="n">position</span><span class="p">:</span> <span class="n">PyTree</span><span class="p">,</span> <span class="n">logdensity_fn</span><span class="p">:</span> <span class="n">Callable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RWState</span><span class="p">:</span>
+<span class="k">def</span> <span class="nf">init</span><span class="p">(</span><span class="n">position</span><span class="p">:</span> <span class="n">ArrayLikeTree</span><span class="p">,</span> <span class="n">logdensity_fn</span><span class="p">:</span> <span class="n">Callable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RWState</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a chain state from a position.</span>
 
 <span class="sd">    Parameters</span>
@@ -493,7 +500,7 @@ document.write(`
 
     <span class="k">def</span> <span class="nf">kernel</span><span class="p">(</span>
         <span class="n">rng_key</span><span class="p">:</span> <span class="n">PRNGKey</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="n">RWState</span><span class="p">,</span> <span class="n">logdensity_fn</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">random_step</span><span class="p">:</span> <span class="n">Callable</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">RWState</span><span class="p">,</span> <span class="n">RWInfo</span><span class="p">]:</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">RWState</span><span class="p">,</span> <span class="n">RWInfo</span><span class="p">]:</span>
         <span class="k">def</span> <span class="nf">proposal_generator</span><span class="p">(</span><span class="n">key_proposal</span><span class="p">,</span> <span class="n">position</span><span class="p">):</span>
             <span class="n">move_proposal</span> <span class="o">=</span> <span class="n">random_step</span><span class="p">(</span><span class="n">key_proposal</span><span class="p">,</span> <span class="n">position</span><span class="p">)</span>
             <span class="n">new_position</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">tree_util</span><span class="o">.</span><span class="n">tree_map</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">add</span><span class="p">,</span> <span class="n">position</span><span class="p">,</span> <span class="n">move_proposal</span><span class="p">)</span>
@@ -539,7 +546,7 @@ document.write(`
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-<span class="sd">    A ``MCMCSamplingAlgorithm``.</span>
+<span class="sd">    A ``SamplingAlgorithm``.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="additive_step_random_walk.init"><a class="viewcode-back" href="../../../autoapi/blackjax/mcmc/random_walk/index.html#blackjax.mcmc.random_walk.additive_step_random_walk.init">[docs]</a>    <span class="n">init</span> <span class="o">=</span> <span class="nb">staticmethod</span><span class="p">(</span><span class="n">init</span><span class="p">)</span></div>
@@ -554,24 +561,25 @@ document.write(`
 <span class="sd">            The log density probability density function from which we wish to sample.</span>
 <span class="sd">        sigma</span>
 <span class="sd">            The value of the covariance matrix of the gaussian proposal distribution.</span>
+
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
-<span class="sd">             A ``MCMCSamplingAlgorithm``.</span>
+<span class="sd">             A ``SamplingAlgorithm``.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">logdensity_fn</span><span class="p">,</span> <span class="n">normal</span><span class="p">(</span><span class="n">sigma</span><span class="p">))</span></div>
 
     <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span>  <span class="c1"># type: ignore[misc]</span>
         <span class="bp">cls</span><span class="p">,</span> <span class="n">logdensity_fn</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">random_step</span><span class="p">:</span> <span class="n">Callable</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MCMCSamplingAlgorithm</span><span class="p">:</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SamplingAlgorithm</span><span class="p">:</span>
         <span class="n">kernel</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">build_kernel</span><span class="p">()</span>
 
-        <span class="k">def</span> <span class="nf">init_fn</span><span class="p">(</span><span class="n">position</span><span class="p">:</span> <span class="n">PyTree</span><span class="p">):</span>
+        <span class="k">def</span> <span class="nf">init_fn</span><span class="p">(</span><span class="n">position</span><span class="p">:</span> <span class="n">ArrayLikeTree</span><span class="p">):</span>
             <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">position</span><span class="p">,</span> <span class="n">logdensity_fn</span><span class="p">)</span>
 
         <span class="k">def</span> <span class="nf">step_fn</span><span class="p">(</span><span class="n">rng_key</span><span class="p">:</span> <span class="n">PRNGKey</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
             <span class="k">return</span> <span class="n">kernel</span><span class="p">(</span><span class="n">rng_key</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">logdensity_fn</span><span class="p">,</span> <span class="n">random_step</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="n">MCMCSamplingAlgorithm</span><span class="p">(</span><span class="n">init_fn</span><span class="p">,</span> <span class="n">step_fn</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">SamplingAlgorithm</span><span class="p">(</span><span class="n">init_fn</span><span class="p">,</span> <span class="n">step_fn</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="build_irmh"><a class="viewcode-back" href="../../../autoapi/blackjax/mcmc/random_walk/index.html#blackjax.mcmc.random_walk.build_irmh">[docs]</a><span class="k">def</span> <span class="nf">build_irmh</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
@@ -592,8 +600,9 @@ document.write(`
         <span class="n">state</span><span class="p">:</span> <span class="n">RWState</span><span class="p">,</span>
         <span class="n">logdensity_fn</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span>
         <span class="n">proposal_distribution</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">RWState</span><span class="p">,</span> <span class="n">RWInfo</span><span class="p">]:</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">RWState</span><span class="p">,</span> <span class="n">RWInfo</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        proposal_distribution</span>
@@ -601,7 +610,8 @@ document.write(`
 <span class="sd">            domain of the target distribution.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="k">def</span> <span class="nf">proposal_generator</span><span class="p">(</span><span class="n">rng_key</span><span class="p">:</span> <span class="n">PRNGKey</span><span class="p">,</span> <span class="n">position</span><span class="p">:</span> <span class="n">PyTree</span><span class="p">):</span>
+        <span class="k">def</span> <span class="nf">proposal_generator</span><span class="p">(</span><span class="n">rng_key</span><span class="p">:</span> <span class="n">PRNGKey</span><span class="p">,</span> <span class="n">position</span><span class="p">:</span> <span class="n">ArrayTree</span><span class="p">):</span>
+            <span class="k">del</span> <span class="n">position</span>
             <span class="k">return</span> <span class="n">proposal_distribution</span><span class="p">(</span><span class="n">rng_key</span><span class="p">)</span>
 
         <span class="n">inner_kernel</span> <span class="o">=</span> <span class="n">build_rmh</span><span class="p">()</span>
@@ -641,7 +651,7 @@ document.write(`
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-<span class="sd">    A ``MCMCSamplingAlgorithm``.</span>
+<span class="sd">    A ``SamplingAlgorithm``.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -652,20 +662,21 @@ document.write(`
         <span class="bp">cls</span><span class="p">,</span>
         <span class="n">logdensity_fn</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span>
         <span class="n">proposal_distribution</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MCMCSamplingAlgorithm</span><span class="p">:</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SamplingAlgorithm</span><span class="p">:</span>
         <span class="n">kernel</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">build_kernel</span><span class="p">()</span>
 
-        <span class="k">def</span> <span class="nf">init_fn</span><span class="p">(</span><span class="n">position</span><span class="p">:</span> <span class="n">PyTree</span><span class="p">):</span>
+        <span class="k">def</span> <span class="nf">init_fn</span><span class="p">(</span><span class="n">position</span><span class="p">:</span> <span class="n">ArrayLikeTree</span><span class="p">):</span>
             <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">position</span><span class="p">,</span> <span class="n">logdensity_fn</span><span class="p">)</span>
 
         <span class="k">def</span> <span class="nf">step_fn</span><span class="p">(</span><span class="n">rng_key</span><span class="p">:</span> <span class="n">PRNGKey</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
             <span class="k">return</span> <span class="n">kernel</span><span class="p">(</span><span class="n">rng_key</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">logdensity_fn</span><span class="p">,</span> <span class="n">proposal_distribution</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="n">MCMCSamplingAlgorithm</span><span class="p">(</span><span class="n">init_fn</span><span class="p">,</span> <span class="n">step_fn</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">SamplingAlgorithm</span><span class="p">(</span><span class="n">init_fn</span><span class="p">,</span> <span class="n">step_fn</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="build_rmh"><a class="viewcode-back" href="../../../autoapi/blackjax/mcmc/random_walk/index.html#blackjax.mcmc.random_walk.build_rmh">[docs]</a><span class="k">def</span> <span class="nf">build_rmh</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Build a Rosenbluth-Metropolis-Hastings kernel.</span>
+
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    A kernel that takes a rng_key and a Pytree that contains the current state</span>
@@ -680,7 +691,7 @@ document.write(`
         <span class="n">logdensity_fn</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span>
         <span class="n">transition_generator</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span>
         <span class="n">proposal_logdensity_fn</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">RWState</span><span class="p">,</span> <span class="n">RWInfo</span><span class="p">]:</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">RWState</span><span class="p">,</span> <span class="n">RWInfo</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Move the chain by one step using the Rosenbluth Metropolis Hastings</span>
 <span class="sd">        algorithm.</span>
 
@@ -756,7 +767,7 @@ document.write(`
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-<span class="sd">    A ``MCMCSamplingAlgorithm``.</span>
+<span class="sd">    A ``SamplingAlgorithm``.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="rmh.init"><a class="viewcode-back" href="../../../autoapi/blackjax/mcmc/random_walk/index.html#blackjax.mcmc.random_walk.rmh.init">[docs]</a>    <span class="n">init</span> <span class="o">=</span> <span class="nb">staticmethod</span><span class="p">(</span><span class="n">init</span><span class="p">)</span></div>
@@ -765,12 +776,12 @@ document.write(`
     <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span>  <span class="c1"># type: ignore[misc]</span>
         <span class="bp">cls</span><span class="p">,</span>
         <span class="n">logdensity_fn</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span>
-        <span class="n">proposal_generator</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">PRNGKey</span><span class="p">,</span> <span class="n">PyTree</span><span class="p">],</span> <span class="n">PyTree</span><span class="p">],</span>
-        <span class="n">proposal_logdensity_fn</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">[[</span><span class="n">PyTree</span><span class="p">],</span> <span class="n">PyTree</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MCMCSamplingAlgorithm</span><span class="p">:</span>
+        <span class="n">proposal_generator</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">PRNGKey</span><span class="p">,</span> <span class="n">ArrayLikeTree</span><span class="p">],</span> <span class="n">ArrayTree</span><span class="p">],</span>
+        <span class="n">proposal_logdensity_fn</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">[[</span><span class="n">ArrayLikeTree</span><span class="p">],</span> <span class="n">ArrayTree</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SamplingAlgorithm</span><span class="p">:</span>
         <span class="n">kernel</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">build_kernel</span><span class="p">()</span>
 
-        <span class="k">def</span> <span class="nf">init_fn</span><span class="p">(</span><span class="n">position</span><span class="p">:</span> <span class="n">PyTree</span><span class="p">):</span>
+        <span class="k">def</span> <span class="nf">init_fn</span><span class="p">(</span><span class="n">position</span><span class="p">:</span> <span class="n">ArrayLikeTree</span><span class="p">):</span>
             <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">position</span><span class="p">,</span> <span class="n">logdensity_fn</span><span class="p">)</span>
 
         <span class="k">def</span> <span class="nf">step_fn</span><span class="p">(</span><span class="n">rng_key</span><span class="p">:</span> <span class="n">PRNGKey</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
@@ -782,7 +793,7 @@ document.write(`
                 <span class="n">proposal_logdensity_fn</span><span class="p">,</span>
             <span class="p">)</span>
 
-        <span class="k">return</span> <span class="n">MCMCSamplingAlgorithm</span><span class="p">(</span><span class="n">init_fn</span><span class="p">,</span> <span class="n">step_fn</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">SamplingAlgorithm</span><span class="p">(</span><span class="n">init_fn</span><span class="p">,</span> <span class="n">step_fn</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="build_rmh_transition_energy"><a class="viewcode-back" href="../../../autoapi/blackjax/mcmc/random_walk/index.html#blackjax.mcmc.random_walk.build_rmh_transition_energy">[docs]</a><span class="k">def</span> <span class="nf">build_rmh_transition_energy</span><span class="p">(</span><span class="n">proposal_logdensity_fn</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
@@ -811,7 +822,7 @@ document.write(`
         <span class="n">new_position</span> <span class="o">=</span> <span class="n">transition_distribution</span><span class="p">(</span><span class="n">rng_key</span><span class="p">,</span> <span class="n">position</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">RWState</span><span class="p">(</span><span class="n">new_position</span><span class="p">,</span> <span class="n">logdensity_fn</span><span class="p">(</span><span class="n">new_position</span><span class="p">))</span>
 
-    <span class="k">def</span> <span class="nf">generate</span><span class="p">(</span><span class="n">rng_key</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="n">RWState</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">RWState</span><span class="p">,</span> <span class="nb">bool</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+    <span class="k">def</span> <span class="nf">generate</span><span class="p">(</span><span class="n">rng_key</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="n">RWState</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">RWState</span><span class="p">,</span> <span class="nb">bool</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
         <span class="n">key_proposal</span><span class="p">,</span> <span class="n">key_accept</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">rng_key</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
         <span class="n">end_state</span> <span class="o">=</span> <span class="n">build_trajectory</span><span class="p">(</span><span class="n">key_proposal</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span>
         <span class="n">new_proposal</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">generate_proposal</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">end_state</span><span class="p">)</span>

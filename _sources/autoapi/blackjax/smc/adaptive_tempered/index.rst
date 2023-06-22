@@ -57,6 +57,7 @@ Functions
 
 .. py:class:: adaptive_tempered_smc
 
+
    Implements the (basic) user interface for the Adaptive Tempered SMC kernel.
 
    :param logprior_fn: The log-prior function of the model we wish to draw samples from.
@@ -70,7 +71,7 @@ Functions
                        of effective samples.
    :param num_mcmc_steps: The number of times the MCMC kernel is applied to the particles per step.
 
-   :rtype: A ``MCMCSamplingAlgorithm``.
+   :rtype: A ``SamplingAlgorithm``.
 
    .. py:attribute:: init
 
