@@ -204,8 +204,8 @@ class coin_svgd:
         kernel_ = cls.build_kernel(optimizer)
 
         def init_fn(
-            initial_position: PyTree,
-            kernel_parameters: Dict[str, Any] = {"length_scale": 1.0},
+            initial_position: ArrayLikeTree,
+            kernel_parameters: dict[str, Any] = {"length_scale": 1.0},
         ):
             return cls.init(initial_position, kernel_parameters, optimizer)
 

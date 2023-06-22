@@ -4,15 +4,15 @@ import jax
 import jax.numpy as jnp
 import optax
 
-from blackjax.types import PyTree
+from blackjax.types import ArrayLikeTree, ArrayTree
 
 
 class COCOBOptimizer(NamedTuple):
-    init_particles: PyTree
-    cumulative_gradients: PyTree
-    scale: PyTree
-    subgradients: PyTree
-    reward: PyTree
+    init_particles: ArrayTree
+    cumulative_gradients: ArrayTree
+    scale: ArrayTree
+    subgradients: ArrayTree
+    reward: ArrayTree
 
 
 def cocob(alpha: float = 100, eps: float = 1e-8):
@@ -35,7 +35,7 @@ def cocob(alpha: float = 100, eps: float = 1e-8):
     an optax optimizer and is designed to work with the updating of particles in blackjax.vi.svgd
     """
 
-    def init_fn(initial_particles: PyTree):
+    def init_fn(initial_particles: ArrayLikeTree):
         init_adapt = jax.tree_util.tree_map(
             lambda p: jnp.zeros(p.shape), initial_particles
         )
@@ -50,7 +50,9 @@ def cocob(alpha: float = 100, eps: float = 1e-8):
             init_adapt,
         )
 
-    def update_fn(gradient: PyTree, opt_state: COCOBOptimizer, particles: PyTree):
+    def update_fn(
+        gradient: ArrayLikeTree, opt_state: COCOBOptimizer, particles: ArrayLikeTree
+    ):
         init_particles, cumulative_gradients, scale, subgradients, reward = opt_state
 
         scale = jax.tree_util.tree_map(
